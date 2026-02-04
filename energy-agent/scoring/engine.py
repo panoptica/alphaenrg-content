@@ -295,9 +295,25 @@ class ScoringEngine:
         +1: Just filed, early
         +0: Old, ignored
         """
-        # For now, default to 1 (new filing)
-        # Will enhance when we add citation/stock data
+        attention = 0
         
+        # Check for OSINT attention multiplier (from Reddit/news)
+        entities = signal.get('entities', {})
+        osint_multiplier = entities.get('attention_multiplier', 1.0)
+        if osint_multiplier > 1.5:
+            attention += 1.5
+        elif osint_multiplier > 1.0:
+            attention += 0.5
+        
+        # Check for Reddit-specific metrics
+        reddit_score = entities.get('reddit_score', 0)
+        num_comments = entities.get('num_comments', 0)
+        if reddit_score > 100 or num_comments > 50:
+            attention += 1.0
+        elif reddit_score > 50 or num_comments > 20:
+            attention += 0.5
+        
+        # Recency bonus
         signal_date = signal.get('date')
         if signal_date:
             if isinstance(signal_date, str):
@@ -309,13 +325,13 @@ class ScoringEngine:
             days_old = (datetime.now() - signal_date).days
             
             if days_old <= 7:
-                return 1  # Fresh
+                attention += 0.5  # Fresh
             elif days_old <= 30:
-                return 0.5
-            else:
-                return 0  # Old
+                attention += 0.25
+        else:
+            attention += 0.5  # Default for new signals
         
-        return 1  # Default for new signals
+        return min(attention, 3.0)  # Cap at 3
 
 
 def score_signals(signals: List[Dict], engine: ScoringEngine = None) -> List[Dict]:
