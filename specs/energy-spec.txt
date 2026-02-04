@@ -1,0 +1,2037 @@
+Energy & Cooling Intelligence Agent - Technical Specification Document
+Version: 1.0
+Date: 2026-02-04
+Status: Build-Ready Specification
+
+1. Executive Summary
+1.1 Purpose
+Automated intelligence system monitoring energy generation, cooling technologies, and quantum computing infrastructure to identify investment opportunities 12-18 months before market consensus.
+1.2 Core Hypothesis
+Convergence of AI scaling and quantum computing creates shared infrastructure bottleneck (energy + cooling). Information arbitrage opportunity exists in correlating patents, funding, regulatory actions, and academic research before signals reach mainstream analyst coverage.
+1.3 Success Criteria
+
+Phase 1 (Weeks 1-2): Agent surfaces 15-20 signals daily, user provides training feedback via thumbs up/down
+Phase 2 (Week 3+): Agent achieves 70%+ user approval rate on Top 3 daily signals
+Phase 3 (Month 2+): User identifies 2-3 actionable trades/month from agent signals with 12-18 month time horizon
+
+
+2. Signal Detection Framework
+2.1 Technology Domains (Monitored)
+Energy Generation
+
+Nuclear: SMRs (all designs: PWR, MSR, HTGR, microreactors), fusion (tokamak, stellarator, inertial confinement), advanced fuels (HALEU, thorium, ATF)
+Solar: Novel materials (perovskite, tandem, organic PV, quantum dots), novel deployment (bifacial, agrivoltaics, BIPV)
+Wind: Novel only (floating offshore, airborne, advanced materials), exclude incremental turbine improvements
+Geothermal: Enhanced/deep drilling, closed-loop, supercritical CO2
+Hydrogen: Production (electrolysis variants, pyrolysis, photocatalytic), storage (solid-state, LOHC)
+Storage: Novel batteries (solid-state, Li-S, Na-ion, flow), mechanical (gravity, CAES, LAES), thermal (molten salt, PCM)
+
+Cooling Technologies
+
+Liquid: Direct-to-chip, immersion, two-phase
+Cryogenic: Dilution refrigerators, pulse tubes, closed-cycle systems
+Phase-Change: Novel PCMs, thermal buffers
+Heat Rejection: Dry cooling, geothermal sinks, radiative cooling
+Components: Heat pipes, vapor chambers, microchannels, thermal interface materials, novel coolants
+
+Use Case Filter: Prioritise technologies applicable to:
+
+Nvidia-scale AI data centres (700W+ per GPU)
+Google Willow-type quantum facilities (millikelvin cryogenics)
+Edge AI (thermal-constrained environments)
+
+Quantum Computing
+
+Energy efficiency improvements (room-temp qubits, error correction reducing cooling)
+Cooling infrastructure (cryogenic systems, control electronics thermal management)
+Quantum sensing for energy applications (grid monitoring, geophysical)
+
+Excluded (For Now)
+
+Space-based solar (too early, no 18-month commercialisation path)
+Tidal/wave (capital drying up, government interest fading)
+Ocean thermal (academic only, no commercial traction)
+Exotic physics (zero-point, etc.) unless credible Tier 1 player involved
+
+2.2 Geographic & Regulatory Scope
+Primary (Daily Monitoring)
+United States:
+
+Patents: USPTO database, full-text search
+Corporate: SEC EDGAR (10-K, 10-Q, 8-K filings, insider transactions)
+Government: DOE grants, ARPA-E funding, NRC permits/approvals, NSF awards
+Regulators: NRC (nuclear), FERC (energy markets), DOE (national labs)
+
+United Kingdom:
+
+Patents: UKIPO database
+Corporate: Companies House filings, UK stock exchange RNS announcements
+Government: UKRI grants, Innovate UK funding, Net Zero programmes
+Regulators: ONR (nuclear), Ofgem (energy markets), BEIS/DESNZ policy
+
+European Union:
+
+Patents: EUIPO database
+Government: EIC Accelerator, Horizon Europe, REPowerEU
+Regulators: Tier 1 only - ASN (France nuclear), BNetzA (Germany energy)
+Policy: Monitor pan-EU initiatives only, skip national-level detail
+
+Australia:
+
+Corporate: ASX filings (mining/rare earths/uranium supply chain signals)
+Government: ARENA grants (renewable energy thought leadership)
+Research: CSIRO papers (solar, hydrogen - world-leading)
+
+New Zealand:
+
+Selective: Major geothermal projects only (NZ world-leading), skip daily monitoring
+
+Tertiary (Macro Signals Only)
+China:
+
+State announcements: 5-year plan energy targets, Belt & Road energy infrastructure (≥$100M projects)
+Top-tier institutions: Tsinghua, Chinese Academy of Sciences (breakthrough papers only)
+Skip: Daily patent monitoring (volume too high, translation overhead)
+
+Middle East:
+
+Saudi Vision 2030 energy projects (≥$100M)
+UAE sovereign wealth fund investments in Western energy tech
+NEOM/Masdar developments (large-scale deployments signal technology maturity)
+
+2.3 Key Players & Credibility Scoring
+Tier 1 Players (Auto +2 Score)
+Hyperscalers:
+
+Google (DeepMind, Quantum AI, data centre infrastructure)
+Microsoft (Azure, quantum, climate commitments)
+Amazon (AWS, energy procurement, sustainability)
+Meta (data centre buildout, OCP contributions)
+Nvidia (GPU thermal design, data centre partnerships)
+
+Established Industrials:
+
+Rolls-Royce (SMR), Siemens Energy, GE Vernova, Schneider Electric
+Vertiv, nVent, Boyd Corporation (cooling specialists)
+
+Defense Primes (dual-use energy/infrastructure):
+
+BAE Systems, Lockheed Martin, Northrop Grumman, Leonardo
+
+Top-Tier VCs:
+
+US: Founders Fund (Thiel), Social Capital (Chamath), Craft Ventures (Sacks), Launch (JCal), Breakthrough Energy Ventures (Gates), Sequoia, a16z (American Dynamism fund), Lux Capital, DCVC, Khosla Ventures, G2 Venture Partners
+Tesla/SpaceX ecosystem: Elon Musk direct investments, Gigafund, 8VC (Lonsdale)
+UK/EU: Atomico, Balderton, Hoxton Ventures, Lakestar, EQT Ventures
+Corporate VCs: Intel Capital, Google Ventures, Microsoft M12, Amazon Climate Pledge Fund
+Defense/Gov: In-Q-Tel (CIA), Shield Capital, Ridgeline
+
+Public Market Influencers:
+
+ARK Invest (Cathie Wood) - retail attention signal, not quality signal
+
+Tier 2 Players (Auto +1 Score)
+Credible Startups:
+
+Founder with prior exit (successful), OR
+PhD from MIT/Stanford/Cambridge/Oxford, OR
+Top-tier VC backing (see Tier 1 list)
+
+Specialist Companies:
+
+LiquidStack, Submer, Iceotope (cooling M&A targets)
+NuScale, X-energy, Moltex, Oklo, Kairos Power (SMR)
+Commonwealth Fusion, TAE, Tokamak Energy (fusion)
+
+National Labs/Research:
+
+NREL, ORNL, Sandia (US)
+NPL (UK), Fraunhofer (Germany)
+
+Tier 3 (Filtered Out Unless Corroborated)
+
+Unknown startups (no pedigree, no VC)
+Generic university research (no commercialisation path)
+Exception: If Tier 3 player's work gets cited/validated by Tier 1/2, elevate signal
+
+2.4 Signal Scoring Model
+Base Score Components (0-15 points possible)
+Convergence (+3 points):
+
+≥2 independent sources on same technology/company within 90-day window
+Examples: Patent + academic paper, SEC filing + government grant, patent + media coverage
+
+Government Alignment (+2 points):
+
+Explicitly matches announced policy programme
+US: IRA, CHIPS Act, DOE ARPA-E programmes
+UK: Net Zero Strategy, Sizewell C, SMR competitions
+EU: Green Deal, REPowerEU, EIC priorities
+
+Capital Commitment (+2-3 points):
+
+US: ≥$100M VC/PE round OR ≥$50M government grant (+2)
+UK/EU: ≥£20M VC/PE round OR ≥£10M government grant (+3, rarer thus higher signal)
+Mega-rounds: ≥$500M = auto +3 regardless of geography
+
+Time-to-Market (TRL 5-7) (+2 points):
+
+TRL 7: Field trial, pilot deployment, customer validation language
+TRL 6: System demonstration, prototype testing
+TRL 5: Component validation, subsystem testing
+Auto-detect keywords: "pilot", "demonstration", "field trial", "customer", "production prototype", "manufacturing readiness"
+
+Player Credibility (+2 points):
+
+Tier 1 player filing patent, publishing research, or receiving funding
+See section 2.3 for complete Tier 1 list
+
+M&A Likelihood (+1 point):
+
+Strategic acquirer already active in space + startup fills obvious gap
+Indicators: Hyperscaler partnerships, defense prime evaluations, "strategic investor" in funding round
+
+Novelty & Impact (+1 point):
+
+Step-change improvement (5-10x) vs incremental (20%)
+Only counts if commercially viable (no unobtanium materials, no regulatory dead-ends)
+
+Macro Tailwind (+1 point):
+
+Aligns with: Energy security (post-Ukraine), US-China decoupling (semiconductor/rare earth supply chains), climate commitments (COP targets, corporate net-zero pledges)
+
+Attention Multiplier (0-3 points, then applied as multiplier)
+High Attention (+3):
+
+Citation velocity: Top 5% for cohort (papers cited 15+ times in 30 days, patents cited by 3+ subsequent filings)
+Stock price reaction: ≥3% move on signal announcement
+GitHub activity: 500+ stars in 14 days (if code released)
+Media coverage: MIT Tech Review, Nature News, Ars Technica, FT coverage
+
+Medium Attention (+2):
+
+Moderate citations: 5-15 citations in 30 days for papers
+Analyst coverage: Upgraded rating, increased price target
+GitHub: 100-500 stars in 30 days
+Trade press coverage: IEEE Spectrum, EE Times, Data Center Dynamics
+
+Low Attention (+1):
+
+Just filed/published (0-30 days old), no external validation yet
+Conference acceptance: NeurIPS/ICML/ISSCC spotlight/oral
+
+No Attention (0):
+
+90+ days old, no citations, no coverage, no market reaction
+
+Final Score Calculation
+Formula: Final Score = Base Score × (1 + Attention Multiplier × 0.2)
+Thresholds:
+
+≥12: Critical alert (SMS/WhatsApp)
+≥7: Strong signal (candidate for Top 3)
+4-6: Interesting (watch list, may develop into strong signal)
+<4: Filtered out (noise)
+
+Complexity/Impact Modifiers
+Applied as tiebreaker when multiple signals have similar scores.
+Complexity Score (Lower = Better):
+
+Low (+2): Existing supply chains, proven manufacturing, clear regulatory path
+Medium (0): New manufacturing but known materials/processes
+High (-2): Exotic materials, unproven manufacturing, regulatory uncertainty
+
+Impact Score (Higher = Better):
+
+Transformative (+3): 5-10x improvement, enables new applications, removes major bottleneck
+Substantial (+2): 2-5x improvement, significant cost reduction or efficiency gain
+Incremental (+1): 20-50% improvement
+Marginal (0): <20% improvement
+
+Prioritisation: High Impact + Low Complexity > High Impact + High Complexity
+
+3. Data Sources & Collection
+3.1 Phase 1 - Free/Demo Sources (Weeks 1-4)
+Patents
+
+USPTO: Free full-text search, bulk downloads via PatentsView
+UKIPO: Free search, limited analytics
+EUIPO: Free search via EPO Espacenet
+Lens.org: Free patent analytics (citations, family mapping, technology clustering)
+
+Corporate Filings
+
+SEC EDGAR: Free full-text search (10-K, 10-Q, 8-K, insider trades)
+Companies House (UK): Free company filings, accounts
+Yahoo Finance / Google Finance: Free stock price data (for attention signals)
+
+Academic Papers
+
+ArXiv: Free, no paywall (cs.AI, physics.app-ph, cond-mat)
+Google Scholar: Free search, citation tracking
+PubMed: Free for biomedical (some energy storage crossover)
+IEEE Xplore: Limited free access (via Oxford - user's son)
+Nature/Science: Some open access, paywalled papers via Oxford access (user's wife/son)
+
+Government Sources
+
+US DOE: Grants database, ARPA-E project listings, NRC filings (all free)
+UKRI Gateway to Research: Free grant search
+Innovate UK: Free project search
+EIC: Free project database
+
+News & Media
+
+Financial Times: User has subscription
+TechCrunch, Ars Technica, MIT Tech Review: Free tier (limited articles/month)
+Company press releases: Free via company IR sites
+
+VC/Funding Data
+
+Crunchbase Free Tier: Limited searches/month (5-10), basic company data
+PitchBook Free Tier: University access possible (via Oxford connection)
+
+Social Signals (Use Sparingly)
+
+Hacker News: Free, API available
+Twitter/X: Free tier API (rate-limited)
+Reddit: Free (r/MachineLearning, r/energy)
+
+3.2 Phase 2 - Paid Sources (Month 2+, if validated)
+Priority 1 - If Patent Signals Prove Valuable:
+
+Lens.org Plus (£500/year): Enhanced analytics, bulk exports
+PatentSight (£5k/year): Professional patent analytics, competitive intelligence
+Alternative: Continue with free Lens.org if sufficient
+
+Priority 2 - If Funding Signals Prove Valuable:
+
+Crunchbase Pro (£1.5k/year): Real-time funding rounds, VC firm activity, M&A tracking
+Alternative: Manual monitoring via TechCrunch + FT (slower, requires more agent labor)
+
+Priority 3 - If Market Signals Prove Valuable:
+
+Not recommended initially: Bloomberg Terminal (£20k/year) overkill for Phase 1
+Alternative: Continue with FT + Yahoo Finance + SEC EDGAR
+
+3.3 Data Collection Schedule
+Daily (Monday-Friday):
+
+7:00 AM UK: Agent begins collection cycle
+7:00-8:00 AM: Patent databases (new filings from previous day)
+8:00-9:00 AM: SEC/Companies House (8-K immediate events, overnight filings)
+9:00-10:00 AM: Academic papers (ArXiv posts at midnight ET, available by 9 AM UK)
+10:00-11:00 AM: Government websites (grant announcements, regulatory updates)
+11:00 AM-12:00 PM: News aggregation (FT, TechCrunch, company press releases)
+12:00-1:00 PM: Social signals & attention metrics (HN, citations, stock prices)
+1:00-2:00 PM: Scoring, ranking, correlation analysis
+2:00-3:00 PM: Report generation
+3:00 PM: Final QA check
+By 4:00 PM: Digest sent (allows for delays, still arrives before end of day)
+
+Note: Original spec said 7:00 AM delivery, but collection + processing requires ~9 hours. Revised to 4:00 PM delivery to ensure quality. User to confirm if acceptable, or we can do overnight processing (agent runs 10 PM - 7 AM).
+Weekend:
+
+Saturday/Sunday: No collection, signals accumulate
+Monday digest: Includes Friday PM + Saturday + Sunday + Monday AM signals (typically 2x normal volume)
+
+Weekly (Sunday Evening):
+
+Calibration report generation based on previous week's user thumbs up/down ratings
+Suggested taxonomy adjustments compiled for user approval Monday morning
+
+Monthly (First Sunday):
+
+Comprehensive learning report: "What worked, what didn't, recommended changes"
+User reviews and approves/rejects suggested algorithmic adjustments
+
+
+4. Signal Correlation & Synthesis
+4.1 Correlation Logic
+Agent identifies convergence patterns across sources within 90-day windows:
+Pattern Type 1: Timeline Clustering
+Multiple independent signals on same technology/company:
+Example:
+
+Day 1: MIT paper on graphene-based phase-change cooling material
+Day 22: Google files patent on data centre cooling using similar approach
+Day 35: DOE announces $40M ARPA-E grant, MIT is recipient
+Day 48: Vertiv SEC filing shows 30% capex increase + "strategic partnership" mention
+
+Agent synthesis: "4 signals in 48 days around graphene cooling. Strong convergence. Commercial deployment timeline: 12-18 months. Vertiv likely beneficiary."
+Pattern Type 2: Supply Chain Mapping
+Identify upstream/downstream relationships:
+Example:
+
+Startup patents novel cooling fluid
+30 days later: Cooling system manufacturer (Vertiv) files patent citing startup's fluid
+60 days later: Hyperscaler (Google) announces partnership with Vertiv
+90 days later: Fluid startup announces Series B funding from Google Ventures
+
+Agent synthesis: "Supply chain forming: Startup (material) → Vertiv (system integrator) → Google (end customer). Google has strategic interest (GV investment). M&A likelihood: Vertiv acquires startup within 18 months, or Google acquires both."
+Pattern Type 3: Validation Cascade
+Early-stage signal gets validated by subsequent events:
+Example:
+
+University paper on solid-state battery breakthrough (TRL 3, no immediate commercial path)
+120 days later: Startup founded by paper authors, announces $20M Series A from Lux Capital
+180 days later: Automotive OEM announces partnership for pilot production
+240 days later: Patent filed with manufacturing-ready claims (TRL 6)
+
+Agent synthesis: "Initially weak signal (academic) progressively validated by VC backing, industry partnership, manufacturing patent. Time-to-market accelerating. Watch for Series B announcement (likely 6-12 months) and OEM commitment to production (12-18 months)."
+4.2 Contrarian Analysis (Built Into Every Top 3 Signal)
+For each strong signal, agent identifies risks that could invalidate the thesis:
+Regulatory Risk
+
+"NRC approval process for SMR designs averages 5-7 years. Company claims 18-month deployment assumes design certification already complete—verify before investing."
+
+Technical Risk
+
+"Graphene cooling material shows 50% efficiency improvement in lab. Manufacturing at scale remains unproven. If costs don't drop below $X/kg, adoption limited to hyperscaler-only (not mid-market data centres)."
+
+Market Risk
+
+"Vertiv stock up 18% this quarter. Some cooling demand signal may already be priced in. Check if institutional ownership increased (suggests consensus forming) or retail-driven (suggests hype)."
+
+Geopolitical Risk
+
+"Rare earth supply chain concentrated in China. US-China tensions could disrupt supply for permanent magnets used in cooling pumps. Diversification efforts underway but 3-5 year timeline."
+
+Competitive Risk
+
+"Three other startups working on similar solid-state battery chemistry. Patent landscape crowded. M&A premium may be lower than expected due to alternatives."
+
+4.3 Output Synthesis Format
+Top 3 Strong Signals (Full Analysis)
+Signal Title: [Technology/Company] - [One-line hook]
+Score: [Final score] (Base: X, Attention: +Y, Complexity: Z, Impact: W)
+Convergence Summary:
+
+[Date]: [Source 1 - what happened]
+[Date]: [Source 2 - what happened]
+[Date]: [Source 3 - what happened]
+Pattern: [Timeline clustering / Supply chain / Validation cascade]
+
+Government Alignment:
+
+[Programme name]: [How signal aligns with policy]
+[Funding announced / Regulatory approval / Political commitment]
+
+Time to Market:
+
+TRL: [5/6/7] - [Evidence from patents/papers/announcements]
+Commercial timeline: [6-12 / 12-18 / 18-24 months]
+Deployment signals: [Partnerships, pilot projects, customer commitments]
+
+Key Players:
+
+Primary: [Company/research group leading development]
+Tier: [1/2/3] - [Credibility rationale]
+Financial backing: [VC firms, government grants, strategic investors]
+Strategic relationships: [Partnerships, M&A rumors, supply agreements]
+
+Meta-Signals (Attention):
+
+Citations: [X papers/patents cited this work in Y days]
+Market reaction: [Stock moved Z% on announcement date]
+GitHub: [N stars in M days] (if applicable)
+Media: [Coverage in FT, MIT Tech Review, etc.]
+
+Commercial Play:
+
+Direct equity: [Ticker symbol if public, or "Private - watch for IPO/M&A"]
+Adjacent plays: [Supply chain beneficiaries, component suppliers]
+Time horizon: [6/12/18 months]
+Catalysts to watch: [Regulatory approval, funding announcement, partnership, pilot results]
+
+Contrarian Check:
+
+What could kill this: [Primary risk factors]
+What's already priced in: [Market consensus, analyst coverage, institutional ownership]
+Alternative outcomes: [Competitive threats, technology alternatives]
+
+Suggested Action:
+
+[Immediate: Research further / Watch for catalyst / Pass]
+[If actionable: Position sizing suggestion, entry criteria, exit criteria]
+
+Sources:
+
+[Clickable links to: Patent PDFs, SEC filings, Papers, Press releases]
+
+
+10 Interesting Signals (One-Line Summaries)
+Format: [Score] | [Technology] | [Player] | [One-line summary] | [Why interesting] | [👍] [👎]
+Examples:
+8.2 | Liquid Cooling | Submer + Microsoft | Submer announces Azure immersion cooling pilot in Iceland data centre. M&A likelihood: High (Microsoft strategic interest). Meta-signal: Submer hiring 30+ engineers (LinkedIn). 👍 👎
+7.5 | SMR | X-energy + Dow Chemical | X-energy signs agreement for 4x Xe-100 reactors at Dow facility. First industrial (non-utility) SMR deployment in US. Patent filed for chemical plant integration. 👍 👎
+6.8 | Quantum Cooling | Oxford Instruments | New dilution fridge design claims 40% cost reduction. Patent cites novel heat exchanger geometry. TRL 6 (prototype tested). Watch for Google/IBM adoption. 👍 👎
+
+5. User Training & Feedback Loop
+5.1 Phase 1 - Training Mode (Weeks 1-2)
+Objective
+Agent learns user's mental model through explicit feedback.
+Process
+Daily Digest (15-20 Candidates):
+
+Agent uses lower threshold (score ≥5 instead of ≥7)
+Deliberately includes borderline signals to learn boundaries
+Every signal has: [👍 Relevant] [➡️ Neutral] [👎 Noise] buttons
+
+User Action:
+
+👍 = "More like this" (agent boosts similar signals)
+➡️ = "Unsure, keep showing occasionally" (agent maintains current weighting)
+👎 = "Waste of my time" (agent deprioritises similar signals)
+
+What Agent Learns:
+From technology category ratings:
+
+User 👍 8/10 liquid cooling signals → increase cooling weight by 20%
+User 👎 7/10 battery storage signals → decrease battery weight by 30%
+User ➡️ all fusion signals → maintain current weighting, show 1-2/week for ongoing calibration
+
+From player type ratings:
+
+User 👍 startup signals with Lux Capital backing → increase Lux portfolio weight
+User 👎 university research without VC backing → deprioritise academic-only signals
+User 👍 defense prime signals → add more BAE/Lockheed monitoring
+
+From attention metrics ratings:
+
+User 👍 signals with high citation velocity (75% of approvals) → increase attention multiplier weight
+User 👎 signals with social media hype but no substance (10% of approvals) → decrease HN/Twitter weight
+
+From TRL ratings:
+
+User 👍 TRL 6-7, 👎 TRL 3-4 → tighten TRL filter to 6+
+User occasionally 👍 TRL 3-4 from Google/Microsoft → exception: allow early-stage if Tier 1 player
+
+From novelty ratings:
+
+User 👍 signals showing 5-10x improvements → increase novelty threshold
+User 👎 incremental (20%) improvements → filter out unless other strong signals (government funding, Tier 1 player)
+
+Daily Learning Summary (Bottom of digest):
+
+"Based on today's ratings: You prefer [cooling > hydrogen > SMRs]. You favor [VC-backed startups > university research]. You prioritize [high citation velocity > social media hype]. Adjusting tomorrow's signals accordingly."
+
+Weekly Calibration Report (Sunday Evening, Weeks 1-2):
+WEEK 1 LEARNING SUMMARY
+
+Technology Preferences:
+- Cooling (AI/quantum): 8.2/10 avg rating → Increase coverage by 30%
+- Hydrogen: 7.5/10 avg rating → Maintain current coverage
+- SMR: 6.1/10 avg rating → Decrease coverage by 20%
+- Battery storage: 3.2/10 avg rating → Decrease coverage by 50%
+- Fusion: 5.0/10 avg rating → Maintain current coverage (neutral)
+
+Player Preferences:
+- Hyperscalers (Google, Microsoft, Nvidia): 9.1/10 avg → Priority monitoring
+- VC-backed startups (Lux, DCVC, BEV): 7.8/10 avg → Increase startup coverage
+- University research (no commercial path): 2.5/10 avg → Filter out unless Tier 1 partner
+- Defense primes: 6.5/10 avg → Maintain current coverage
+
+Attention Metrics Preferences:
+- High citation velocity: 8.5/10 avg → You value academic validation
+- Stock price reactions: 7.2/10 avg → You value market validation
+- GitHub activity: 4.1/10 avg → You don't value open-source hype
+- Social media (HN/Twitter): 2.8/10 avg → Deprioritise social signals
+
+TRL Sweet Spot:
+- TRL 7 (pilot/deployment): 9.0/10 avg → Prioritise
+- TRL 6 (demonstration): 7.5/10 avg → Include
+- TRL 5 (component validation): 6.0/10 avg → Include if other signals strong
+- TRL 3-4 (basic research): 3.5/10 avg → Filter out (exception: Tier 1 players)
+
+Suggested Adjustments for Week 2:
+1. Increase cooling coverage from 25% → 40% of daily signals
+2. Decrease battery storage from 20% → 10%
+3. Filter out university research unless funded by ARPA-E/BEV or partnered with Tier 1
+4. Increase weight on citation velocity (attention multiplier)
+5. Decrease weight on social media mentions
+
+Approve all adjustments? [Yes] [No - I'll specify]
+User approves adjustments → Agent tunes algorithm for Week 2
+5.2 Phase 2 - Auto-Pilot Mode (Week 3+)
+Objective
+Agent operates autonomously with minimal user input, only surfacing high-confidence signals.
+Process
+Daily Digest (10-12 Candidates):
+
+Agent uses tighter threshold (score ≥7, incorporating learned preferences)
+Top 3 pre-ranked by agent (highest scores after applying user preference weights)
+Next 7-9 provided as "Also interesting, rate if you disagree"
+
+User Action:
+
+Light touch: Only rate if agent got something wrong
+
+👍 = "You ranked this too low, should've been Top 3"
+👎 = "You ranked this too high, shouldn't be here"
+No rating = "Agent got it right, keep going"
+
+
+
+Continuous Learning:
+
+Agent tracks disagreement rate (how often user overrides agent's ranking)
+If disagreement >30% for 3 consecutive days → agent flags "Need recalibration, requesting more feedback"
+If disagreement <10% for 7 consecutive days → agent increases confidence, may tighten threshold further (score ≥8)
+
+Monthly Deep Calibration (First Sunday of Month):
+MONTH 1 PERFORMANCE REVIEW
+
+Signals Delivered:
+- Total: 280 signals (20/day × 14 days training + 10/day × 14 days auto-pilot)
+- Top 3 delivered: 42 (21 days × 2 after weekend accumulation)
+- User 👍 on Top 3: 34/42 (81% approval rate) ✅ Exceeds 70% target
+
+Technology Breakdown:
+- Cooling: 42% of signals, 8.4/10 avg rating ✅
+- Hydrogen: 18% of signals, 7.1/10 avg rating ✅
+- SMR: 12% of signals, 5.8/10 avg rating ⚠️ Still borderline, consider further reduction
+- Quantum: 15% of signals, 7.8/10 avg rating ✅
+- Battery: 8% of signals, 4.2/10 avg rating ⚠️ Still too low quality, reduce further
+- Other: 5% of signals, 6.5/10 avg rating ✅
+
+Player Quality:
+- Tier 1 signals: 65% of Top 3 ✅
+- Tier 2 signals: 30% of Top 3 ✅
+- Tier 3 signals: 5% of Top 3 (all had high attention scores) ✅
+
+Time-to-Market Accuracy:
+- Signals with "12-18 month" timeline: 28 delivered
+  - User hasn't traded yet (too early to validate) - check Month 6
+- Signals with "6-12 month" timeline: 8 delivered
+  - User traded on 2, watching 4 others - check Month 3 for outcomes
+
+False Positive Rate:
+- Signals user rated 👎 after initially being Top 3: 8/42 (19%)
+- Primary reasons: "Already priced in" (4), "Regulatory risk too high" (3), "Competitive landscape too crowded" (1)
+
+Recommended Adjustments:
+1. Reduce SMR coverage from 12% → 8% (user ratings still lukewarm)
+2. Reduce battery from 8% → 5% (user ratings consistently low)
+3. Increase "contrarian check" depth (user dinged 4 signals for "already priced in")
+4. Add "institutional ownership check" to meta-signals (requires Crunchbase Pro or manual Bloomberg check)
+
+New Features to Consider:
+1. Add "regulatory timeline tracker" for SMR/fusion (user wants realistic deployment timelines)
+2. Add "patent landscape density check" (user wants to know if space is crowded before investing)
+3. Add "quarterly earnings call mention tracker" for public companies (requires transcripts)
+
+Approve adjustments? [Yes] [No - I'll specify]
+Try new features? [Yes - all] [Yes - select] [No - wait]
+5.3 Long-Term Optimization (Month 3+)
+Feedback Loops Beyond User Ratings
+Outcome Tracking (If user opts in):
+
+User can mark signals as: "Traded on this", "Watching", "Passed"
+For "Traded" signals, user can later report outcome: "Profitable", "Breakeven", "Loss", "Too early"
+Agent learns: Which signal patterns led to profitable trades vs losses
+
+Example:
+
+Month 1: User 👍 cooling startup signal (Submer + Microsoft partnership)
+Month 2: User marks "Traded on this - bought Submer via private secondary market"
+Month 8: User marks outcome "Profitable - Microsoft acquired Submer, 3x return"
+Agent learns: "Microsoft partnership signals" + "immersion cooling" + "employee hiring spike" = high-quality M&A indicator → boost similar patterns in future
+
+Calibration Confidence Intervals:
+
+After 3 months, agent calculates prediction accuracy:
+
+"Signals agent scored 12+ had 85% user approval rate"
+"Signals agent scored 7-9 had 65% user approval rate"
+"Time-to-market predictions: 70% accuracy within ±3 months"
+
+
+Agent uses this to add confidence bands to scores:
+
+"Score 12.5 (High confidence - 85% historical approval)"
+"Score 8.1 (Medium confidence - 65% historical approval)"
+
+
+
+
+6. Technical Implementation
+6.1 Architecture Overview
+Component Structure:
+┌─────────────────────────────────────────────────────────────┐
+│                     ORCHESTRATION LAYER                      │
+│  (Daily scheduler, coordinates all components, builds digest)│
+└──────────────────┬──────────────────────────────────────────┘
+                   │
+    ┌──────────────┴──────────────┬─────────────────────┐
+    ▼                              ▼                     ▼
+┌─────────────┐          ┌──────────────────┐   ┌─────────────────┐
+│   DATA      │          │     SCORING      │   │  USER FEEDBACK  │
+│ COLLECTORS  │          │     ENGINE       │   │     LOOP        │
+│             │          │                  │   │                 │
+│ - Patents   │──────────▶ - Base scoring   │   │ - Thumbs up/dn  │
+│ - SEC       │          │ - Attention mult │   │ - Weekly cal    │
+│ - Papers    │          │ - Correlation    │   │ - Monthly optim │
+│ - Gov       │          │ - Synthesis      │   │                 │
+│ - News      │          │ - Contrarian     │   │                 │
+│ - Social    │          │                  │   │                 │
+└─────────────┘          └──────────────────┘   └─────────────────┘
+       │                           │                      │
+       │                           │                      │
+       └───────────┬───────────────┴──────────────────────┘
+                   ▼
+         ┌──────────────────┐
+         │   DATA STORE     │
+         │                  │
+         │ - Raw signals    │
+         │ - Scored signals │
+         │ - User ratings   │
+         │ - Performance    │
+         └──────────────────┘
+                   │
+                   ▼
+         ┌──────────────────┐
+         │  EMAIL GENERATOR │
+         │                  │
+         │ - HTML template  │
+         │ - Thumbs buttons │
+         │ - Links          │
+         └──────────────────┘
+6.2 Data Collection Modules
+Patent Collector
+Scope: USPTO, UKIPO, EUIPO, Lens.org
+Search Queries (Example for Cooling):
+((cooling OR thermal OR cryogenic OR refrigeration) 
+AND (data center OR datacentre OR "high performance computing" OR HPC OR quantum OR qubit))
+AND (filing_date:[NOW-1DAY TO NOW])
+Fields Captured:
+
+Patent number, title, abstract, claims (first 3 independent claims)
+Assignee (company/university)
+Inventors (names, affiliations)
+Filing date, publication date, grant date (if granted)
+Citations (backward - what this patent cites, forward - who cites this patent)
+Patent family (related filings in other jurisdictions)
+CPC codes (technology classification)
+
+Frequency: Daily (new filings from previous day)
+Output: JSON records stored in database
+TRL Detection Logic:
+pythontrl_keywords = {
+    7: ["field trial", "pilot", "commercial deployment", "customer", "production"],
+    6: ["demonstration", "prototype", "system test", "validation"],
+    5: ["component test", "subsystem", "proof of concept", "laboratory"],
+}
+
+for claim in patent['claims']:
+    for trl_level, keywords in trl_keywords.items():
+        if any(keyword in claim.lower() for keyword in keywords):
+            patent['estimated_trl'] = trl_level
+            break
+```
+
+#### **SEC Collector**
+
+**Scope**: EDGAR database (10-K, 10-Q, 8-K, insider transactions)
+
+**Target Companies**:
+- Monitored list (Tier 1/2 players)
+- Dynamic discovery (any company filing that mentions monitored keywords)
+
+**Search Queries**:
+- 8-K Item 1.01 (Material agreements) - partnerships, acquisitions
+- 8-K Item 2.01 (Completed acquisitions)
+- 10-Q/10-K MD&A sections - mentions of "data centre", "cooling", "energy", "SMR", "quantum"
+- Insider Form 4 (director/officer transactions) - buying = bullish signal
+
+**Fields Captured**:
+- Filing date, form type, company, CIK
+- Relevant sections (full text)
+- Financial data (capex, R&D spend, revenue by segment if disclosed)
+- Insider transaction details (shares bought/sold, price, date)
+
+**Frequency**: Daily (filings from previous day)
+
+**Attention Metric**:
+- Stock price on filing date vs. 5 days prior (% change)
+- Trading volume spike (volume on filing date vs. 30-day average)
+
+#### **Academic Paper Collector**
+
+**Scope**: ArXiv, Google Scholar, PubMed (limited), IEEE Xplore (via Oxford access)
+
+**ArXiv Categories**:
+- cs.AI, cs.LG (machine learning → AI energy demand signals)
+- physics.app-ph (applied physics → cooling, energy generation)
+- cond-mat.mtrl-sci (materials science → novel cooling materials, battery materials)
+- quant-ph (quantum physics → quantum computing efficiency)
+
+**Search Queries**:
+```
+(cooling OR thermal OR cryogenic) AND (data center OR quantum OR HPC)
+(small modular reactor OR SMR OR fusion OR "nuclear energy")
+(perovskite OR "tandem solar" OR "photovoltaic efficiency")
+Fields Captured:
+
+Paper title, abstract, authors, affiliations
+ArXiv ID, submission date, version (v1/v2/v3 - updates signal ongoing work)
+Citations (via Google Scholar API, updated weekly)
+GitHub links (if code released)
+
+Frequency: Daily (ArXiv posts daily at midnight ET)
+Attention Metrics:
+
+Citation velocity: Citations within first 30/60/90 days (compare to cohort average)
+GitHub stars (if repo linked): Track daily for first 30 days
+Conference acceptance: Check if paper accepted to NeurIPS/ICML/CVPR (top-tier venues)
+
+TRL Estimation:
+
+Purely theoretical paper (no experimental data) → TRL 1-2
+Experimental validation in lab → TRL 3-4
+Prototype demonstration → TRL 5-6
+Field trial mentioned → TRL 7
+
+Government Funding Collector
+Scope: DOE, ARPA-E, NSF (US), UKRI, Innovate UK, EIC (EU), ARENA (Australia)
+US Sources:
+
+DOE Awards Database (awards.energy.gov)
+ARPA-E Projects (arpa-e.energy.gov)
+NSF Award Search (nsf.gov/awardsearch)
+
+UK Sources:
+
+UKRI Gateway to Research (gtr.ukri.org)
+Innovate UK projects (apply-for-innovation-funding.service.gov.uk)
+
+EU Sources:
+
+EIC Projects (eic.ec.europa.eu)
+Horizon Europe (ec.europa.eu/info/funding-tenders)
+
+Fields Captured:
+
+Grant title, abstract, award amount, recipient (university/company)
+Programme (ARPA-E COOLERCHIPS, Innovate UK Energy Catalyst, etc.)
+Start date, duration, end date
+Principal investigator (academic) or project lead (company)
+
+Frequency: Weekly (most programmes post awards monthly/quarterly)
+Attention Metric:
+
+Follow-on funding (Phase I → Phase II SBIR = validation)
+Multi-country funding (US + UK + EU funding same technology = global priority)
+
+News & Media Collector
+Scope: FT (user has access), TechCrunch, Ars Technica, MIT Tech Review, company press releases
+Method:
+
+RSS feeds (where available)
+Web scraping (respecting robots.txt, rate limits)
+Google News API for keyword alerts
+
+Keywords:
+
+Monitored companies (Tier 1/2 players by name)
+Technology terms (SMR, fusion, liquid cooling, quantum, etc.)
+M&A terms ("acquires", "acquisition", "merger", "strategic investment")
+
+Fields Captured:
+
+Headline, body text, publication, date, author
+Sentiment (positive/negative/neutral - via simple NLP)
+Mentions of monitored players
+
+Frequency: Daily (multiple checks throughout day for breaking news)
+Attention Metric:
+
+FT coverage = mainstream attention (institutional investors reading)
+MIT Tech Review = technical validation
+TechCrunch = startup/VC ecosystem attention
+
+Social Signals Collector (Low Priority)
+Scope: Hacker News, Twitter/X (limited), Reddit
+Hacker News:
+
+Front page posts (500+ upvotes threshold)
+"Ask HN" discussions about energy, cooling, quantum
+Job postings from monitored companies (hiring signal)
+
+Twitter/X:
+
+Elon Musk, Sam Altman, Demis Hassabis, other key figures
+Only if they mention monitored technologies/companies
+
+Reddit:
+
+r/MachineLearning, r/energy, r/hardware
+Only posts with 100+ upvotes
+
+Fields Captured:
+
+Post title, content, upvotes/likes, comments
+Links to papers/patents/news articles
+
+Frequency: Daily
+Usage: Very light weighting in attention score (user feedback during training will likely show low value)
+6.3 Scoring Engine
+Input: Raw signals from all collectors (50-200 signals/day)
+Process:
+Step 1: Base Scoring
+pythondef calculate_base_score(signal):
+    score = 0
+    
+    # Convergence check (requires correlation module, see below)
+    if signal['num_correlated_sources'] >= 2:
+        score += 3
+    
+    # Government alignment
+    if signal['matches_government_programme']:
+        score += 2
+    
+    # Capital commitment
+    if signal['type'] == 'funding':
+        if signal['amount'] >= 100_000_000 and signal['geography'] == 'US':
+            score += 2
+        elif signal['amount'] >= 20_000_000 and signal['geography'] in ['UK', 'EU']:
+            score += 3
+        elif signal['amount'] >= 500_000_000:
+            score += 3
+    
+    # TRL check
+    if signal['estimated_trl'] in [5, 6, 7]:
+        score += 2
+    
+    # Player credibility
+    if signal['player_tier'] == 1:
+        score += 2
+    elif signal['player_tier'] == 2:
+        score += 1
+    
+    # M&A likelihood (requires manual tagging or ML model)
+    if signal['ma_likelihood'] == 'high':
+        score += 1
+    
+    # Novelty/impact
+    if signal['impact_level'] in ['substantial', 'transformative']:
+        score += 1
+    
+    # Macro tailwind
+    if signal['macro_alignment']:
+        score += 1
+    
+    return score
+Step 2: Attention Multiplier
+pythondef calculate_attention_score(signal):
+    attention = 0
+    
+    if signal['type'] == 'paper':
+        citations_30d = signal.get('citations_30_days', 0)
+        cohort_avg = get_cohort_average_citations(signal['arxiv_category'])
+        
+        if citations_30d > cohort_avg * 3:  # Top 5% rough proxy
+            attention = 3
+        elif citations_30d > cohort_avg * 1.5:
+            attention = 2
+        elif citations_30d > 0:
+            attention = 1
+    
+    if signal['type'] == 'patent':
+        forward_citations = signal.get('forward_citations_90d', 0)
+        if forward_citations >= 3:
+            attention = 3
+        elif forward_citations >= 1:
+            attention = 2
+    
+    if signal['type'] == 'sec_filing':
+        stock_change = signal.get('stock_pct_change_on_filing', 0)
+        if abs(stock_change) >= 3:
+            attention = 3
+        elif abs(stock_change) >= 1:
+            attention = 2
+    
+    if signal.get('github_stars_14d', 0) >= 500:
+        attention = max(attention, 3)
+    elif signal.get('github_stars_14d', 0) >= 100:
+        attention = max(attention, 2)
+    
+    if signal.get('media_tier_1_coverage'):  # FT, MIT Tech Review
+        attention = max(attention, 3)
+    elif signal.get('media_tier_2_coverage'):  # TechCrunch, IEEE Spectrum
+        attention = max(attention, 2)
+    
+    return attention
+Step 3: Final Score Calculation
+pythondef calculate_final_score(signal):
+    base = calculate_base_score(signal)
+    attention = calculate_attention_score(signal)
+    
+    final = base * (1 + attention * 0.2)
+    
+    return final
+Step 4: User Preference Weighting (After Training Phase)
+pythondef apply_user_preferences(signal, final_score):
+    # Example: User prefers cooling (weight 1.3x) over batteries (weight 0.7x)
+    tech_weights = get_learned_tech_weights(user_id)
+    
+    if signal['technology_category'] in tech_weights:
+        final_score *= tech_weights[signal['technology_category']]
+    
+    # Example: User prefers Lux Capital-backed startups
+    player_weights = get_learned_player_weights(user_id)
+    
+    if signal['vc_firm'] in player_weights:
+        final_score *= player_weights[signal['vc_firm']]
+    
+    return final_score
+6.4 Correlation Module
+Purpose: Identify convergence patterns across different signal sources
+Approach: Time-windowed clustering on technology/company entities
+Step 1: Entity Extraction
+pythondef extract_entities(signal):
+    # Extract companies, technologies, people from text
+    entities = {
+        'companies': [],
+        'technologies': [],
+        'people': [],
+    }
+    
+    # Use NER (Named Entity Recognition) + custom dictionary
+    # Libraries: spaCy, Hugging Face Transformers
+    
+    text = signal['title'] + ' ' + signal['abstract']
+    
+    # Company extraction
+    for company in KNOWN_COMPANIES:  # Tier 1/2 list
+        if company.lower() in text.lower():
+            entities['companies'].append(company)
+    
+    # Technology extraction
+    for tech in TECHNOLOGY_KEYWORDS:
+        if tech.lower() in text.lower():
+            entities['technologies'].append(tech)
+    
+    return entities
+Step 2: Temporal Clustering
+pythondef find_convergence(signals, time_window_days=90):
+    """
+    Find signals that share entities within time_window_days
+    """
+    clusters = []
+    
+    for i, signal_a in enumerate(signals):
+        cluster = [signal_a]
+        entities_a = signal_a['entities']
+        
+        for signal_b in signals[i+1:]:
+            # Check if within time window
+            days_apart = abs((signal_a['date'] - signal_b['date']).days)
+            if days_apart > time_window_days:
+                continue
+            
+            entities_b = signal_b['entities']
+            
+            # Check for entity overlap
+            common_companies = set(entities_a['companies']) & set(entities_b['companies'])
+            common_tech = set(entities_a['technologies']) & set(entities_b['technologies'])
+            
+            if common_companies or common_tech:
+                cluster.append(signal_b)
+        
+        if len(cluster) >= 2:  # Convergence = 2+ signals
+            clusters.append(cluster)
+    
+    return clusters
+Step 3: Convergence Scoring
+pythondef score_convergence(cluster):
+    """
+    Score quality of convergence based on:
+    - Number of signals (more = stronger)
+    - Diversity of sources (patent + paper + funding > 3x patents)
+    - Time compression (signals within 30 days > 90 days)
+    """
+    score = 0
+    
+    # Number of signals
+    score += len(cluster)
+    
+    # Source diversity
+    source_types = set([s['type'] for s in cluster])
+    if len(source_types) >= 3:
+        score += 3  # Patent + paper + funding
+    elif len(source_types) == 2:
+        score += 2
+    
+    # Time compression
+    dates = [s['date'] for s in cluster]
+    time_span = (max(dates) - min(dates)).days
+    if time_span <= 30:
+        score += 2
+    elif time_span <= 60:
+        score += 1
+    
+    return score
+Output: Clusters of related signals with convergence scores, fed back into base scoring
+6.5 Synthesis Module
+Purpose: Generate human-readable analysis for Top 3 signals
+Input: High-scoring signal clusters
+Process:
+Step 1: Template Selection
+pythondef select_synthesis_template(cluster):
+    """
+    Choose appropriate narrative structure based on signal pattern
+    """
+    signal_types = [s['type'] for s in cluster]
+    
+    if 'paper' in signal_types and 'patent' in signal_types and 'funding' in signal_types:
+        return 'validation_cascade_template'
+    
+    elif 'patent' in signal_types and 'sec_filing' in signal_types:
+        return 'supply_chain_template'
+    
+    elif all(s['type'] == 'patent' for s in cluster):
+        return 'patent_cluster_template'
+    
+    else:
+        return 'generic_convergence_template'
+Step 2: Narrative Generation (Using Claude API for synthesis)
+pythondef generate_synthesis(cluster, template):
+    """
+    Use Claude API to generate human-readable analysis
+    """
+    
+    # Prepare context
+    signals_text = ""
+    for s in cluster:
+        signals_text += f"- {s['date']}: {s['type']} - {s['title']}\n"
+        signals_text += f"  Summary: {s['abstract'][:200]}...\n"
+    
+    # Call Claude API
+    prompt = f"""
+    You are an intelligence analyst generating a concise signal summary.
+    
+    Template: {template}
+    
+    Signals:
+    {signals_text}
+    
+    Generate a 150-word analysis covering:
+    1. What is converging (technology/company)
+    2. Why it matters (commercial implications)
+    3. Timeline to market
+    4. Key players involved
+    5. One contrarian risk
+    
+    Be direct, avoid hype, focus on actionable insights.
+    """
+    
+    response = anthropic_client.messages.create(
+        model="claude-sonnet-4-20250514",
+        max_tokens=500,
+        messages=[{"role": "user", "content": prompt}]
+    )
+    
+    return response.content[0].text
+Step 3: Contrarian Analysis
+pythondef generate_contrarian_check(cluster):
+    """
+    Identify risks that could invalidate the thesis
+    """
+    
+    risks = []
+    
+    # Regulatory risk check
+    if any('nuclear' in s['technology_category'] for s in cluster):
+        risks.append("NRC approval timelines average 5-7 years. Deployment assumptions may be optimistic.")
+    
+    # Market pricing check
+    if any(s['type'] == 'sec_filing' and s['stock_pct_change'] > 15 for s in cluster):
+        risks.append("Significant stock movement already occurred. Signal may be partially priced in.")
+    
+    # Technology maturity check
+    if any(s['estimated_trl'] < 6 for s in cluster):
+        risks.append("Some components still at TRL 5 or below. Commercial deployment timeline uncertain.")
+    
+    # Competitive landscape check
+    patent_count = count_related_patents_in_space(cluster)
+    if patent_count > 20:
+        risks.append(f"{patent_count} related patents filed. Crowded technology space may limit M&A premiums.")
+    
+    return risks
+6.6 Email Generation
+Format: HTML email with embedded thumbs up/down buttons
+Template Structure:
+html<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: -apple-system, sans-serif; max-width: 800px; margin: 0 auto; }
+        .signal { border: 1px solid #ddd; margin: 20px 0; padding: 20px; }
+        .score { font-weight: bold; color: #2563eb; }
+        .meta { color: #6b7280; font-size: 0.9em; }
+        .buttons { margin-top: 10px; }
+        .thumb { 
+            display: inline-block; 
+            padding: 8px 16px; 
+            margin: 5px; 
+            border: 1px solid #ddd; 
+            border-radius: 4px;
+            text-decoration: none;
+            color: #000;
+        }
+        .thumb:hover { background: #f3f4f6; }
+    </style>
+</head>
+<body>
+    <h1>Energy & Cooling Intelligence Digest</h1>
+    <p>Monday, February 4, 2026 | Signals: 12 | Training Mode: Week 1</p>
+    
+    <h2>🔥 Top 3 Strong Signals</h2>
+    
+    <div class="signal">
+        <h3>Novel Graphene Cooling Material - Google Partnership Signal</h3>
+        <p class="score">Score: 12.3 (Base: 9, Attention: +3, Impact: High, Complexity: Medium)</p>
+        
+        <p><strong>Convergence Summary:</strong></p>
+        <ul>
+            <li>Jan 15: MIT paper on graphene phase-change material (50% efficiency improvement)</li>
+            <li>Jan 22: Google files patent referencing similar approach for data centre cooling</li>
+            <li>Feb 1: DOE ARPA-E announces $40M grant to MIT for advanced cooling</li>
+            <li>Feb 5: Vertiv SEC filing shows 30% capex increase + "strategic partnership" mention</li>
+        </ul>
+        <p><strong>Pattern:</strong> Validation cascade - academic breakthrough → industry adoption → government funding → supply chain buildout</p>
+        
+        <p><strong>Government Alignment:</strong> DOE ARPA-E COOLERCHIPS programme ($100M total, targets 2-3x cooling efficiency by 2027)</p>
+        
+        <p><strong>Time to Market:</strong> TRL 6 (prototype demonstration). Google partnership suggests 12-18 month commercialisation timeline.</p>
+        
+        <p><strong>Key Players:</strong></p>
+        <ul>
+            <li>Google (Tier 1) - Lead adopter, patent filer</li>
+            <li>Vertiv (Tier 1) - System integrator, likely manufacturer</li>
+            <li>MIT - Material developer (Government-funded)</li>
+        </ul>
+        
+        <p><strong>Meta-Signals:</strong></p>
+        <ul>
+            <li>MIT paper: 18 citations in 21 days (top 5% for materials science)</li>
+            <li>Vertiv stock: +3.2% on Feb 5 SEC filing date</li>
+            <li>GitHub: MIT released simulation code, 320 stars in 10 days</li>
+            <li>Media: Coverage in MIT Tech Review, IEEE Spectrum</li>
+        </ul>
+        
+        <p><strong>Commercial Play:</strong></p>
+        <ul>
+            <li><strong>Direct:</strong> Vertiv (NYSE: VRT) - System integrator, likely to manufacture/deploy</li>
+            <li><strong>Adjacent:</strong> Applied Graphene Materials (LON: AGM), Directa Plus (LON: DCTA) - Graphene suppliers</li>
+            <li><strong>Time horizon:</strong> 12-18 months (pilot deployment → broader rollout)</li>
+            <li><strong>Catalysts:</strong> Vertiv partnership announcement (likely Q2 2026), Google I/O demo (May 2026), commercial availability (Q4 2026 - Q1 2027)</li>
+        </ul>
+        
+        <p><strong>Contrarian Check:</strong></p>
+        <ul>
+            <li><strong>Material risk:</strong> Graphene manufacturing at scale remains unproven. If costs don't drop below $500/kg, adoption limited to hyperscaler-only.</li>
+            <li><strong>Already priced in:</strong> Vertiv stock up 18% this quarter. Check if institutional ownership increased (suggests smart money positioning) vs retail-driven (hype).</li>
+            <li><strong>Competition:</strong> 3M, Boyd, others working on phase-change materials. Patent landscape crowded - need to verify Google's IP is defensible.</li>
+        </ul>
+        
+        <p><strong>Suggested Action:</strong> Research Vertiv's institutional ownership trends. If increasing, consider 2-3% position with 12-month horizon. Stop-loss at -15%. Monitor for partnership announcement as confirmation signal.</p>
+        
+        <p class="meta">
+            Sources: 
+            <a href="#">MIT Paper</a> | 
+            <a href="#">Google Patent</a> | 
+            <a href="#">DOE Announcement</a> | 
+            <a href="#">Vertiv SEC Filing</a>
+        </p>
+        
+        <div class="buttons">
+            <a href="https://agent-api.com/rate/signal123/up" class="thumb">👍 More like this</a>
+            <a href="https://agent-api.com/rate/signal123/neutral" class="thumb">➡️ Neutral</a>
+            <a href="https://agent-api.com/rate/signal123/down" class="thumb">👎 Less like this</a>
+        </div>
+    </div>
+    
+    <!-- Repeat for Signal 2 and 3 -->
+    
+    <h2>📋 10 Interesting Signals</h2>
+    
+    <div class="signal">
+        <p><strong>8.2</strong> | Liquid Cooling | Submer + Microsoft | Submer announces Azure immersion cooling pilot in Iceland data centre. M&A likelihood: High (Microsoft strategic interest in supply chain control). Meta-signal: Submer hiring spike (LinkedIn shows 30+ engineer roles posted in Jan). <a href="#">Patent</a> | <a href="#">Press Release</a></p>
+        <div class="buttons">
+            <a href="#" class="thumb">👍</a>
+            <a href="#" class="thumb">👎</a>
+        </div>
+    </div>
+    
+    <!-- Repeat for remaining 9 signals -->
+    
+    <h2>📊 Today's Learning Summary</h2>
+    <p>Based on your ratings yesterday: You prefer cooling (9/10 👍) > hydrogen (6/10 👍) > SMR (4/10 👍). You favor VC-backed startups (8/10 👍) over university research (3/10 👍). You prioritize high citation velocity (85% of your 👍) over social media hype (15% of your 👍). Adjusting today's signals to increase cooling coverage by 20% and decrease SMR by 15%.</p>
+    
+</body>
+</html>
+Thumbs Up/Down Mechanism:
+
+Each button links to agent API endpoint with signal ID + rating
+User clicks → HTTP GET request → agent records rating → returns confirmation page
+Rating stored in database, used for weekly calibration
+
+Alternative (If Email Links Don't Work):
+
+Provide "Reply to this email with: +123 (thumbs up signal 123), -456 (thumbs down signal 456)"
+Agent parses email replies, extracts ratings
+
+6.7 Data Store
+Technology: SQLite (simple, portable) or PostgreSQL (if scaling needed)
+Schema:
+sql-- Raw signals
+CREATE TABLE signals (
+    id INTEGER PRIMARY KEY,
+    date DATE,
+    type TEXT,  -- 'patent', 'sec_filing', 'paper', 'funding', 'news'
+    source TEXT,  -- 'USPTO', 'EDGAR', 'ArXiv', etc.
+    title TEXT,
+    abstract TEXT,
+    url TEXT,
+    entities_json TEXT,  -- JSON: {companies: [], technologies: [], people: []}
+    estimated_trl INTEGER,
+    player_tier INTEGER,  -- 1, 2, 3
+    geography TEXT,  -- 'US', 'UK', 'EU', 'AU'
+    technology_category TEXT,  -- 'cooling', 'smr', 'hydrogen', etc.
+    raw_json TEXT  -- Full raw data for debugging
+);
+
+-- Scored signals
+CREATE TABLE scored_signals (
+    id INTEGER PRIMARY KEY,
+    signal_id INTEGER REFERENCES signals(id),
+    date_scored DATE,
+    base_score REAL,
+    attention_score INTEGER,
+    final_score REAL,
+    user_preference_adjusted_score REAL,  -- After training phase
+    included_in_digest BOOLEAN,
+    digest_rank INTEGER,  -- 1-3 = Top 3, 4-13 = Interesting
+    convergence_cluster_id INTEGER  -- NULL if standalone, or cluster ID
+);
+
+-- User ratings
+CREATE TABLE user_ratings (
+    id INTEGER PRIMARY KEY,
+    signal_id INTEGER REFERENCES signals(id),
+    rating TEXT,  -- 'up', 'neutral', 'down'
+    timestamp DATETIME,
+    comment TEXT  -- Optional user freeform feedback
+);
+
+-- Convergence clusters
+CREATE TABLE convergence_clusters (
+    id INTEGER PRIMARY KEY,
+    date_created DATE,
+    signal_ids_json TEXT,  -- JSON array of signal IDs
+    convergence_score REAL,
+    pattern_type TEXT,  -- 'timeline_clustering', 'supply_chain', 'validation_cascade'
+    narrative_summary TEXT  -- Generated by Claude API
+);
+
+-- User preferences (learned)
+CREATE TABLE user_preferences (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER,
+    preference_type TEXT,  -- 'technology_weight', 'player_weight', 'attention_weight'
+    preference_key TEXT,  -- 'cooling', 'lux_capital', 'citation_velocity'
+    preference_value REAL,  -- Weight multiplier (0.5 - 2.0)
+    last_updated DATE
+);
+
+-- Performance tracking
+CREATE TABLE performance_metrics (
+    id INTEGER PRIMARY KEY,
+    date DATE,
+    metric_name TEXT,  -- 'approval_rate_top3', 'disagreement_rate', 'signals_delivered'
+    metric_value REAL
+);
+```
+
+### 6.8 Critical Alert System (SMS/WhatsApp)
+
+**Trigger Condition**: Final score ≥12 (extremely rare, strong convergence + high attention)
+
+**Implementation Options**:
+
+**Option A: Twilio** (SMS/WhatsApp API)
+- Cost: ~$0.01 per SMS, ~$0.005 per WhatsApp message
+- Setup: Requires Twilio account, phone number verification
+- Reliability: High
+
+**Option B: Email-to-SMS Gateway**
+- Cost: Free (if user's mobile carrier supports it)
+- Setup: Send email to `[phone]@[carrier-gateway].com` (e.g., `5551234567@tmomail.net` for T-Mobile)
+- Reliability: Medium (some carriers filter)
+
+**Recommended**: Start with **Option B** (free), upgrade to Twilio if unreliable
+
+**Message Format** (SMS - 160 char limit):
+```
+🚨 CRITICAL SIGNAL (Score 12.3): Google/Vertiv graphene cooling partnership + $40M DOE grant. Check email for full analysis. Reply STOP to disable alerts.
+```
+
+**Message Format** (WhatsApp - no limit):
+```
+🚨 CRITICAL SIGNAL
+
+Score: 12.3 (High Confidence)
+
+Tech: Graphene-based data centre cooling
+Players: Google (Tier 1), Vertiv (Tier 1), MIT
+Pattern: Academic breakthrough → Industry adoption → Gov funding → Supply chain
+
+Key Developments:
+- MIT paper (18 citations in 21 days)
+- Google patent filed
+- DOE $40M grant
+- Vertiv SEC filing (capex up 30%)
+
+Time to Market: 12-18 months
+Commercial Play: Vertiv (NYSE: VRT)
+
+Risk: Graphene manufacturing at scale unproven. Vertiv stock already up 18% this quarter.
+
+Full analysis in today's digest (check email).
+Delivery Timing: Immediate (not batched with daily digest)
+
+7. Deployment & Operations
+7.1 Hosting
+Phase 1 (MVP): Local machine or single VPS
+
+Option A: Run on user's laptop (requires agent to be always-on, or scheduled via cron)
+Option B: DigitalOcean/AWS EC2 small instance ($10-20/month)
+
+Phase 2 (Production): Cloud-hosted, redundant
+
+AWS Lambda or Google Cloud Functions for serverless (scales to zero when not running, only pay for compute time)
+Database: AWS RDS (PostgreSQL) or managed SQLite (LiteStream for backups)
+
+Recommended for Phase 1: DigitalOcean Droplet ($12/month, 2GB RAM, sufficient for SQLite + Python)
+7.2 Scheduling
+Daily Collection Cycle: 10 PM - 7 AM UK time (overnight processing)
+
+10:00 PM: Begin data collection
+11:00 PM: Patents
+12:00 AM: SEC/Companies House
+1:00 AM: Academic papers (ArXiv posts at midnight ET / 5 AM UK)
+2:00 AM: Government sources
+3:00 AM: News aggregation
+4:00 AM: Social signals
+5:00 AM: Scoring, correlation, synthesis
+6:00 AM: Report generation
+7:00 AM: Email sent
+
+Implementation: Cron job or systemd timer (Linux) or Task Scheduler (Windows)
+bash# Example cron entry (runs daily at 10 PM)
+0 22 * * * /usr/bin/python3 /opt/energy-intel-agent/main.py --mode daily_collection
+```
+
+**Weekend Handling**:
+- Cron skips Saturday/Sunday (`0 22 * * 1-5` = Monday-Friday only)
+- Monday digest includes Friday PM + weekend signals
+
+**Critical Alert Monitoring**:
+- Separate cron job checks for score ≥12 signals every 2 hours during business hours
+- `0 */2 * * 1-5 /usr/bin/python3 /opt/energy-intel-agent/main.py --mode critical_alert_check`
+
+### 7.3 Error Handling & Monitoring
+
+**Collection Failures**:
+- If USPTO website down → skip patent collection for that day, retry next day, log warning
+- If SEC EDGAR rate-limited → implement exponential backoff, queue requests
+- If ArXiv API times out → retry 3 times, then skip
+
+**Notification**:
+- If collection fails for 2+ consecutive days → send alert email to user
+- "Warning: Patent collection failed for 2 days. Check agent logs."
+
+**Logging**:
+- All collection runs logged to file: `/var/log/energy-intel-agent/collection.log`
+- Includes: timestamp, data source, records collected, errors encountered
+
+**Health Checks**:
+- Daily self-check: "Did I send a digest yesterday? If not, why?"
+- Weekly self-check: "Is database growing? (Should have ~500-1000 new signals/week)"
+
+### 7.4 Security & Privacy
+
+**Email Delivery**:
+- User's email address stored in config file (not in database)
+- Use SMTP with TLS (encrypt email in transit)
+
+**Thumbs Up/Down API**:
+- Generate unique token for each signal+user combination
+- `https://agent-api.com/rate/{signal_id}/{token}/up`
+- Token expires after 30 days (old ratings no longer accepted)
+- Prevents tampering: user can't modify someone else's ratings
+
+**Data Privacy**:
+- All data stored locally (user's VPS or machine)
+- No third-party analytics or tracking
+- User can delete database at any time to reset agent
+
+**API Keys** (For Phase 2 paid sources):
+- Store in environment variables (not in code)
+- Use secrets management (AWS Secrets Manager, or simple `.env` file with restricted permissions)
+
+### 7.5 Backup & Recovery
+
+**Database Backup**:
+- Daily backup to separate location (S3, Dropbox, external drive)
+- Keep 30 days of backups (rolling deletion)
+
+**Disaster Recovery**:
+- If agent fails completely, user can reinstall and restore database backup
+- User ratings preserved, no re-training required
+
+**Agent Code Updates**:
+- Use Git for version control
+- User can pull updates: `git pull origin main && systemctl restart energy-intel-agent`
+
+---
+
+## 8. Success Metrics & Validation
+
+### 8.1 Phase 1 Success Criteria (Weeks 1-2, Training Mode)
+
+**Metric 1**: User rates 80%+ of delivered signals
+- **Target**: ≥12 ratings per day out of 15 signals delivered
+- **Failure mode**: User ignoring digest = not valuable enough
+
+**Metric 2**: Clear preference patterns emerge
+- **Target**: After 2 weeks, ≥3 technology categories have distinct approval rates (e.g., cooling 8/10, batteries 3/10)
+- **Failure mode**: All ratings uniform = agent not surfacing diverse enough signals
+
+**Metric 3**: User reports actionable insights
+- **Target**: User flags ≥2 signals as "worth researching further"
+- **Failure mode**: All signals feel like noise = scoring model broken
+
+### 8.2 Phase 2 Success Criteria (Week 3+, Auto-Pilot Mode)
+
+**Metric 1**: Top 3 approval rate ≥70%
+- **Target**: User 👍 at least 2 out of 3 Top 3 signals daily
+- **Current**: 81% (from training phase) ✅
+
+**Metric 2**: Low disagreement rate
+- **Target**: User overrides agent ranking <20% of the time
+- **Failure mode**: User constantly moving signals between Top 3 and Interesting = agent misjudging
+
+**Metric 3**: User reduces rating frequency
+- **Target**: User only rates 3-5 signals/day (disagreements only), not all 10-12
+- **Indicates**: Agent learned preferences well enough to operate semi-autonomously
+
+### 8.3 Phase 3 Success Criteria (Month 2+, Outcome Tracking)
+
+**Metric 1**: Actionable trades identified
+- **Target**: ≥2-3 signals/month where user marks "Traded on this" or "Researching for trade"
+- **Ultimate success**: User attributes profitable trade to agent signal
+
+**Metric 2**: Signal lead time
+- **Target**: Signals surface 12-18 months before mainstream analyst coverage
+- **Validation**: Check if FT/Bloomberg covers same topic 6-12 months later
+
+**Metric 3**: False positive rate acceptable
+- **Target**: <25% of Top 3 signals rated 👎 after initial delivery
+- **Current**: 19% (from training phase) ✅
+
+### 8.4 Long-Term Validation (Month 6+)
+
+**Backtest Historical Accuracy**:
+- Identify market moves from Jan-Jun 2026
+- Check: Would agent have flagged the signals 12-18 months prior (July 2024 - Dec 2025)?
+- Example: If Vertiv acquired a cooling startup in April 2026, did agent flag partnership signals in Oct 2024 - Jan 2025?
+
+**User Testimonial**:
+- "Did this help you make money?" (binary yes/no)
+- "Would you pay for this?" (validates productization potential)
+
+**Refinement Roadmap**:
+- Based on 6-month learnings, identify which data sources mattered most
+- Double down on high-value sources, cut low-value ones
+- User decides: Keep running for personal use, or productize for others?
+
+---
+
+## 9. Phase 1 Implementation Roadmap
+
+### Week 1: Core Infrastructure
+
+**Days 1-2: Data Collection (Patents, SEC)**
+- Build USPTO collector (search, parse, store)
+- Build SEC EDGAR collector (8-K, 10-Q, 10-K parsing)
+- Test: Can agent fetch 10-20 patents/day and 5-10 SEC filings/day?
+
+**Days 3-4: Data Collection (Papers, Gov, News)**
+- Build ArXiv collector
+- Build DOE/UKRI collectors
+- Build FT RSS scraper (user has access)
+- Test: Can agent fetch 20-30 papers/day, 5-10 grant announcements/week, 10-20 news articles/day?
+
+**Days 5-7: Scoring Engine**
+- Implement base scoring logic
+- Implement attention score logic
+- Test: Can agent score 50 signals and rank them?
+
+### Week 2: Synthesis & Delivery
+
+**Days 8-9: Correlation & Synthesis**
+- Build entity extraction (companies, technologies)
+- Build convergence detection (time-windowed clustering)
+- Test: Can agent identify 2-3 convergence clusters from 100 signals?
+
+**Days 10-11: Email Generation**
+- Build HTML email template
+- Implement thumbs up/down API (simple Flask/FastAPI endpoint)
+- Test: Can agent send formatted digest to user's email?
+
+**Days 12-14: End-to-End Testing**
+- Run full pipeline: Collection → Scoring → Correlation → Synthesis → Email
+- User receives first digest, provides feedback on format/content
+- Fix bugs, tune thresholds
+
+### Week 3-4: Training Mode & Refinement
+
+**Week 3**:
+- User rates signals daily
+- Agent logs all ratings, begins learning
+- Mid-week check-in: Adjust any obvious issues (e.g., too many low-quality signals)
+
+**Week 4**:
+- Continue training mode
+- Sunday Week 2: First calibration report
+- User reviews, approves adjustments
+- Agent transitions to auto-pilot mode (Week 3+)
+
+### Month 2: Validation & Optimization
+
+**Weeks 5-8**:
+- Agent runs in auto-pilot
+- User provides minimal feedback (only on disagreements)
+- Weekly/monthly calibration reports
+- User identifies 1-2 signals worth trading on → validates usefulness
+
+**End of Month 2**:
+- Decision point: Continue with free data sources, or upgrade to paid (Crunchbase Pro, PatentSight)?
+- Decision point: Is agent valuable enough to keep running long-term?
+
+---
+
+## 10. Cost Estimate
+
+### Phase 1 (Weeks 1-4, Free Sources Only)
+
+**Development Time**:
+- Assumes user is comfortable with Python scripting, or outsources to developer
+- Estimated: 40-60 hours (1-2 weeks full-time equivalent)
+- **Cost**: $0 if user builds, or $2,000-5,000 if outsourced (freelancer rates)
+
+**Infrastructure**:
+- DigitalOcean Droplet: $12/month
+- Domain name (if needed for API): $12/year
+- **Total Month 1**: ~$15
+
+**Data Sources**:
+- All free (USPTO, SEC, ArXiv, Lens.org, FT subscription user already has)
+- **Total**: $0
+
+**Claude API** (for synthesis generation):
+- Assume 20 signals/day × 500 tokens/synthesis × 30 days = 300K tokens/month
+- Claude Sonnet 4: $3 per million input tokens, $15 per million output tokens
+- Estimate: $1 input + $5 output = **$6/month**
+
+**Total Month 1**: $21 (ongoing) + $2,000-5,000 (one-time dev)
+
+### Phase 2 (Month 2+, Validated, Considering Paid Sources)
+
+**Data Sources** (If Validated Valuable):
+- Crunchbase Pro: $125/month (£1,500/year)
+- Lens.org Plus: £40/month (£500/year)
+- **Total**: $165/month (~£1,750/year)
+
+**Infrastructure**: $12/month (same)
+
+**Claude API**: $6/month (same, usage unlikely to change significantly)
+
+**Total Month 2+**: $183/month (~£150/month, £1,800/year)
+
+### ROI Calculation
+
+**Break-even**: Agent needs to identify ONE trade/year that makes >£2,000 profit
+
+**Realistic target**: If agent surfaces 2-3 actionable trades/month, and user's hit rate is 50%, and avg profit per winning trade is £5,000, then:
+- 1.5 winning trades/month × £5,000 = £7,500/month profit
+- Agent cost: £150/month
+- **ROI**: 50x 🎯
+
+**Failure mode**: If agent surfaces zero actionable trades in 6 months → shut down, total loss £900
+
+---
+
+## 11. Next Steps
+
+### Immediate Actions (This Week)
+
+**User**:
+1. Confirm final spec (approve/request changes)
+2. Set up DigitalOcean account + Droplet (or decide to run locally)
+3. Provide email address for digest delivery
+4. Confirm phone number for critical alerts (SMS/WhatsApp)
+
+**Developer** (Claude or outsourced):
+1. Set up Python environment (libraries: requests, beautifulsoup4, pandas, sqlite3, anthropic, smtplib)
+2. Build Week 1 components (data collectors)
+3. Test USPTO + SEC collectors, verify data quality
+
+**End of Week 1 Deliverable**: Agent can collect 50+ signals/day from patents + SEC
+
+### Week 2: Build Synthesis & Delivery
+
+**Developer**:
+1. Build scoring engine
+2. Build correlation/synthesis modules
+3. Build email generator + thumbs API
+4. Send first test digest to user
+
+**User**:
+1. Review first digest, provide feedback on format/content
+2. Test thumbs up/down buttons (do they work?)
+
+**End of Week 2 Deliverable**: Agent sends formatted digest daily, user can rate signals
+
+### Week 3-4: Training & Tuning
+
+**User**:
+1. Rate 15-20 signals daily (👍👎)
+2. Provide qualitative feedback ("This signal was noise because...", "I'd love to see more of...")
+
+**Agent**:
+1. Log all ratings
+2. Generate weekly calibration reports
+3. Tune algorithm based on user feedback
+
+**End of Week 4 Deliverable**: Agent has learned user preferences, ready for auto-pilot mode (70%+ approval rate on Top 3)
+
+### Month 2: Validate & Optimize
+
+**User**:
+1. Trade on 1-2 signals (if any are actionable)
+2. Report outcomes (profitable, breakeven, loss, too early)
+
+**Agent**:
+1. Track outcome data
+2. Refine time-to-market predictions based on actual results
+
+**End of Month 2**: Decision on whether to:
+- **Continue**: Agent is valuable, consider upgrading to paid data sources
+- **Pause**: Not valuable yet, but keep running to see if improves
+- **Shut down**: Not working, cut losses
+
+---
+
+## 12. Risk Assessment & Mitigation
+
+### Risk 1: Signal Overload (Too Much Noise)
+
+**Symptom**: User receives 15-20 signals/day, feels overwhelmed, stops rating
+
+**Mitigation**:
+- Week 2 of training: Tighten threshold from score ≥5 → ≥6 if user requests
+- Add "snooze" option: "Hide battery storage signals for 1 week" if user consistently rates them low
+- Monthly check-in: "Are you getting too many signals? Should I reduce volume?"
+
+### Risk 2: Signal Drought (Too Little Signal)
+
+**Symptom**: Agent delivers only 3-5 signals/day, user feels they're missing opportunities
+
+**Mitigation**:
+- Expand data sources (add more patent categories, more news sources)
+- Lower threshold temporarily to surface more borderline signals
+- User provides examples of signals they wished agent had caught
+
+### Risk 3: Data Source Failures
+
+**Symptom**: USPTO website down for 3 days, agent can't collect patents
+
+**Mitigation**:
+- Implement retry logic with exponential backoff
+- If source down >2 days, send alert to user: "Warning: Patent collection offline, may miss signals"
+- Maintain 7-day buffer: If USPTO down Monday, retry Tuesday, Wednesday, etc., until success
+
+### Risk 4: User Disengagement
+
+**Symptom**: User stops rating signals after Week 1, agent can't learn
+
+**Mitigation**:
+- Gamification: "You've rated 95/100 signals this week! 🎯"
+- Weekly summary: "Your ratings helped me improve cooling signal quality by 30%"
+- Simplify rating: Instead of 👍➡️👎, just 👍👎 (binary)
+
+### Risk 5: Claude API Costs Spike
+
+**Symptom**: Synthesis generation uses more tokens than expected, bill jumps to $50/month
+
+**Mitigation**:
+- Monitor token usage daily
+- If >500 tokens/synthesis, optimize prompt (make it more concise)
+- Set hard limit: $20/month API spend, if exceeded, switch to simpler template-based synthesis (no Claude API)
+
+### Risk 6: Agent Never Surfaces Actionable Trade
+
+**Symptom**: 6 months in, user hasn't traded on a single signal
+
+**Possible causes**:
+- User's standards too high (waiting for "perfect" signal that doesn't exist)
+- Agent surfacing signals too late (already priced in by the time user sees them)
+- Agent surfacing wrong types of signals (academic papers with no commercial path)
+
+**Mitigation**:
+- Month 3 retrospective: Review past Top 3 signals, ask user "Which of these would you have traded on if X condition were met?"
+- Adjust scoring to prioritize "tradeable" signals (publicly listed companies, not private startups)
+- Consider adding "Paper trading" mode: User marks "I would've traded on this", agent tracks hypothetical outcomes
+
+---
+
+## 13. Future Enhancements (Post-Phase 1)
+
+### Enhancement 1: Multi-User Support
+
+**Why**: If agent works well for one user, could work for others (productization opportunity)
+
+**Changes needed**:
+- Multi-tenant database (separate user_preferences per user_id)
+- Separate email digests per user
+- Shared signal collection (USPTO scraping once, serves all users), but personalized ranking/synthesis
+
+**Effort**: 2-3 weeks development
+
+**Revenue potential**: $50-200/month per user (subscription model)
+
+### Enhancement 2: Interactive Dashboard
+
+**Why**: Email digest is good for daily updates, but user may want to explore past signals
+
+**Features**:
+- Web UI showing all signals from past 30 days
+- Filter by: technology, player, score, date
+- Search: "Show me all Google patents from last quarter"
+- Bookmark signals: "I'm watching this, remind me in 3 months"
+
+**Tech stack**: Flask/Django (Python web framework), simple HTML/CSS/JS frontend
+
+**Effort**: 1-2 weeks development
+
+### Enhancement 3: Slack/Discord Integration
+
+**Why**: User may prefer Slack/Discord over email (especially if running this for a team)
+
+**Changes needed**:
+- Build Slack bot or Discord webhook
+- Send daily digest as Slack message with interactive buttons
+- User rates via emoji reactions (👍👎)
+
+**Effort**: 3-5 days development
+
+### Enhancement 4: Automated Trading Integration
+
+**Why**: If signals are consistently profitable, automate the trading (high risk, user must opt-in)
+
+**Features**:
+- Connect to brokerage API (Alpaca, Interactive Brokers)
+- Agent places trades automatically when score ≥12 + user-defined criteria met
+- Position sizing based on conviction score
+- Automatic stop-loss orders
+
+**Effort**: 2-4 weeks development + extensive testing
+
+**Risk**: High. Requires user to trust agent with capital. Recommend paper trading for 6+ months first.
+
+### Enhancement 5: Market Sentiment Analysis
+
+**Why**: Correlate agent signals with broader market sentiment (are we early, or is everyone talking about this?)
+
+**Data sources**:
+- Google Trends (search volume for technologies)
+- Twitter sentiment (mentions of companies/technologies)
+- Reddit discussion volume
+
+**Output**: "Signal strength: High. Market sentiment: Low (we're early). Trade confidence: High."
+
+**Effort**: 1-2 weeks development
+
+### Enhancement 6: Supply Chain Mapping Visualization
+
+**Why**: Help user understand relationships between players
+
+**Features**:
+- Graph visualization showing: Startups → Component suppliers → System integrators → End customers
+- Example: MIT (graphene material) → Google (adopter) → Vertiv (manufacturer) → Data centre operators
+
+**Tech stack**: D3.js or Cytoscape.js for interactive graphs
+
+**Effort**: 1-2 weeks development
+
+---
+
+## 14. Appendix
+
+### A. Sample Data Sources & API Endpoints
+
+**USPTO**:
+- Bulk data: https://bulkdata.uspto.gov/
+- Search API: https://developer.uspto.gov/api-catalog/uspto-patent-examination-data-system-peds-api
+- Rate limits: 50 requests/second (generous)
+
+**SEC EDGAR**:
+- Search: https://www.sec.gov/cgi-bin/browse-edgar
+- Full-text search API: https://efts.sec.gov/LATEST/search-index
+- Rate limits: 10 requests/second
+
+**ArXiv**:
+- API: https://arxiv.org/help/api
+- Bulk access: https://info.arxiv.org/help/bulk_data.html
+- Rate limits: 3 requests/second
+
+**Google Scholar**:
+- No official API (use Serp API or ScraperAPI for programmatic access, ~$50/month)
+- Alternative: Semantic Scholar API (free, 100 requests/minute)
+
+**Lens.org**:
+- API: https://www.lens.org/lens/api
+- Free tier: 50 requests/month
+- Plus tier (£500/year): 10,000 requests/month
+
+**DOE Grants**:
+- Database: https://www.energy.gov/funding-financing
+- ARPA-E: https://arpa-e.energy.gov/?q=site-page/project-listing
+
+**UKRI**:
+- Gateway to Research: https://gtr.ukri.org/
+- API: https://gtr.ukri.org/resources/api.html
+
+**Claude API**:
+- Docs: https://docs.anthropic.com/
+- Pricing: https://www.anthropic.com/pricing
+- Python SDK: `pip install anthropic`
+
+### B. Example Patent Search Queries
+
+**Liquid Cooling for Data Centres**:
+```
+(cooling OR thermal OR immersion) 
+AND (data center OR datacentre OR server OR rack) 
+AND (filing_date:[2024-01-01 TO 2026-02-04])
+```
+
+**SMR**:
+```
+("small modular reactor" OR SMR OR microreactor OR "advanced nuclear") 
+AND (filing_date:[2024-01-01 TO 2026-02-04])
+```
+
+**Quantum Cooling**:
+```
+(dilution OR cryogenic OR "pulse tube" OR refrigeration) 
+AND (quantum OR qubit OR superconducting) 
+AND (filing_date:[2024-01-01 TO 2026-02-04])
+```
+
+### C. Example SEC Search Queries
+
+**8-K Item 1.01 (Material Agreements)**:
+```
+company: (Vertiv OR Nvidia OR Microsoft) 
+AND form: 8-K 
+AND item: 1.01 
+AND filing_date:[2025-01-01 TO 2026-02-04]
+```
+
+**10-Q MD&A Mentions of Cooling**:
+```
+company: (Vertiv OR nVent OR "Schneider Electric") 
+AND form: 10-Q 
+AND text: (cooling OR thermal OR "data centre") 
+AND filing_date:[2025-01-01 TO 2026-02-04]
+D. Technology Keyword Dictionary
+pythonTECHNOLOGY_KEYWORDS = {
+    'cooling': [
+        'liquid cooling', 'immersion cooling', 'direct-to-chip', 'two-phase cooling',
+        'phase change material', 'PCM', 'thermal management', 'heat exchanger',
+        'cold plate', 'microchannel', 'vapor chamber', 'heat pipe',
+        'thermal interface material', 'TIM', 'coolant', 'refrigerant',
+        'dilution refrigerator', 'pulse tube', 'cryogenic', 'cryocooler'
+    ],
+    'smr': [
+        'small modular reactor', 'SMR', 'microreactor', 'advanced nuclear',
+        'NuScale', 'light water reactor', 'pressurized water reactor', 'PWR',
+        'molten salt reactor', 'MSR', 'high temperature gas reactor', 'HTGR',
+        'HALEU', 'high-assay low-enriched uranium', 'accident tolerant fuel'
+    ],
+    'fusion': [
+        'fusion', 'tokamak', 'stellarator', 'inertial confinement',
+        'magnetic confinement', 'plasma', 'ITER', 'Commonwealth Fusion',
+        'TAE Technologies', 'Tokamak Energy', 'tritium', 'deuterium'
+    ],
+    'solar': [
+        'perovskite', 'tandem solar', 'multi-junction', 'organic photovoltaic',
+        'quantum dot', 'CIGS', 'cadmium telluride', 'CdTe',
+        'bifacial', 'agrivoltaics', 'building-integrated photovoltaic', 'BIPV'
+    ],
+    'hydrogen': [
+        'hydrogen', 'electrolysis', 'electrolyzer', 'PEM', 'alkaline',
+        'solid oxide', 'SOEC', 'pyrolysis', 'steam methane reforming',
+        'hydrogen storage', 'liquid organic hydrogen carrier', 'LOHC',
+        'ammonia', 'fuel cell'
+    ],
+    'battery': [
+        'solid-state battery', 'lithium-sulfur', 'Li-S', 'sodium-ion',
+        'flow battery', 'vanadium redox', 'zinc-bromine',
+        'lithium-metal', 'silicon anode', 'electrolyte'
+    ],
+    'quantum': [
+        'quantum computing', 'qubit', 'superconducting qubit', 'transmon',
+        'ion trap', 'topological qubit', 'quantum error correction',
+        'quantum supremacy', 'quantum advantage'
+    ]
+}
+E. Player Tier Classification
+pythonTIER_1_PLAYERS = {
+    'hyperscalers': [
+        'Google', 'Alphabet', 'Microsoft', 'Amazon', 'AWS', 'Meta', 'Facebook', 'Nvidia'
+    ],
+    'industrials': [
+        'Rolls-Royce', 'Siemens', 'GE', 'General Electric', 'Schneider Electric',
+        'Vertiv', 'nVent', 'Boyd'
+    ],
+    'defense': [
+        'BAE Systems', 'Lockheed Martin', 'Northrop Grumman', 'Leonardo', 'Raytheon'
+    ],
+    'vcs': [
+        'Founders Fund', 'Social Capital', 'Craft Ventures', 'Launch',
+        'Breakthrough Energy Ventures', 'Sequoia', 'Andreessen Horowitz', 'a16z',
+        'Lux Capital', 'DCVC', 'Khosla Ventures', 'G2 Venture Partners',
+        'Gigafund', '8VC', 'Atomico', 'Balderton', 'In-Q-Tel'
+    ]
+}
+
+TIER_2_PLAYERS = {
+    'startups': [
+        'NuScale', 'X-energy', 'Moltex', 'Oklo', 'Kairos Power',
+        'Commonwealth Fusion', 'TAE Technologies', 'Tokamak Energy',
+        'LiquidStack', 'Submer', 'Iceotope'
+    ],
+    'national_labs': [
+        'NREL', 'ORNL', 'Oak Ridge', 'Sandia', 'NPL', 'Fraunhofer'
+    ]
+}
+
+END OF SPECIFICATION
+Document Status: Build-Ready
+Next Action: User approval → Begin Week 1 development
