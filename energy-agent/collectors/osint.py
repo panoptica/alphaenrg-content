@@ -92,7 +92,20 @@ class OSINTCollector(BaseCollector):
         for item in news_items:
             signals.append(self._news_to_signal(item))
         
-        print(f"OSINT: {len(reddit_posts)} Reddit + {len(news_items)} news = {len(signals)} signals")
+        # Collect darkweb/private items
+        darkweb_query = f"""
+            SELECT id, source, title, content, url, keywords_matched
+            FROM darkweb_items 
+            WHERE scraped_at > '{cutoff}'
+            ORDER BY scraped_at DESC
+            LIMIT 100
+        """
+        
+        darkweb_items = self._run_kali_query(darkweb_query)
+        for item in darkweb_items:
+            signals.append(self._darkweb_to_signal(item))
+        
+        print(f"OSINT: {len(reddit_posts)} Reddit + {len(news_items)} news + {len(darkweb_items)} darkweb = {len(signals)} signals")
         return signals
     
     def _reddit_to_signal(self, post: dict) -> Dict[str, Any]:
@@ -139,6 +152,34 @@ class OSINTCollector(BaseCollector):
             entities={
                 "keywords": keywords,
                 "feed": feed,
+                "attention_multiplier": weight
+            }
+        )
+    
+    def _darkweb_to_signal(self, item: dict) -> Dict[str, Any]:
+        """Convert darkweb/private item to standardized signal dict"""
+        source = item.get("source", "unknown")
+        keywords = json.loads(item.get("keywords_matched", "[]")) if item.get("keywords_matched") else []
+        
+        # Higher weight for obscure sources (early signals)
+        source_weights = {
+            "github_trending_energy": 1.3,
+            "hn_energy": 1.2,
+            "lobsters_energy": 1.1,
+        }
+        weight = source_weights.get(source, 1.0)
+        
+        return self._standardize_signal(
+            raw_data=item,
+            source_id=f"darkweb_{item.get('id', '')}",
+            title=item.get("title", "")[:200],
+            abstract=item.get("content", "")[:500] if item.get("content") else "",
+            date=datetime.now(),
+            url=item.get("url", ""),
+            entities={
+                "keywords": keywords,
+                "source": source,
+                "via_tor": item.get("via_tor", 0),
                 "attention_multiplier": weight
             }
         )
