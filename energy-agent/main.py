@@ -16,6 +16,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from collectors.uspto import USPTOCollector
 from collectors.arxiv import ArxivCollector
 from collectors.sec import SECCollector
+from collectors.osint import OSINTCollector
 from scoring.engine import ScoringEngine, score_signals
 from data.database import SignalDatabase
 
@@ -69,6 +70,16 @@ def collect_all(date_from: datetime = None, date_to: datetime = None) -> list:
         logger.info(f"Collected {len(filings)} SEC filings")
     except Exception as e:
         logger.error(f"SEC collection failed: {e}")
+    
+    # OSINT (Reddit + News from Kali)
+    logger.info("Collecting OSINT signals from Kali...")
+    try:
+        osint = OSINTCollector()
+        social_signals = osint.collect(days_back=1)
+        all_signals.extend(social_signals)
+        logger.info(f"Collected {len(social_signals)} OSINT signals")
+    except Exception as e:
+        logger.error(f"OSINT collection failed: {e}")
     
     logger.info(f"Total signals collected: {len(all_signals)}")
     return all_signals
