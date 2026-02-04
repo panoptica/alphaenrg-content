@@ -19,7 +19,9 @@ Distributed compute for intelligence operations.
 
 ## Credentials & Access
 - **Email**: oc@cloudmonkey.io (app password in energy-agent/.env)
-- **Mac Mini**: host 192.168.154.44, user macmini, pass in chat history
+- **Mac Mini**: host 192.168.154.44, user macmini, pass `!1Longmore@@`
+- **Kali**: host 192.168.154.193, user oc, pass `Apple24`
+- **Jetson**: host 192.168.154.124, user deepseek, pass `jetson_orin` (cracked via hydra!)
 - **PatentsView**: API key requested (PVS-4987), 1-2 day wait
 - **WhatsApp**: Connected as +447788537939
 
