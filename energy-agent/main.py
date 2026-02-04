@@ -15,6 +15,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from collectors.uspto import USPTOCollector
 from collectors.arxiv import ArxivCollector
+from collectors.sec import SECCollector
 from scoring.engine import ScoringEngine, score_signals
 from data.database import SignalDatabase
 
@@ -58,6 +59,16 @@ def collect_all(date_from: datetime = None, date_to: datetime = None) -> list:
         logger.info(f"Collected {len(papers)} papers")
     except Exception as e:
         logger.error(f"ArXiv collection failed: {e}")
+    
+    # SEC Filings
+    logger.info("Collecting SEC filings...")
+    try:
+        sec = SECCollector()
+        filings = sec.collect(date_from, date_to)
+        all_signals.extend(filings)
+        logger.info(f"Collected {len(filings)} SEC filings")
+    except Exception as e:
+        logger.error(f"SEC collection failed: {e}")
     
     logger.info(f"Total signals collected: {len(all_signals)}")
     return all_signals
