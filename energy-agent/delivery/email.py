@@ -14,6 +14,14 @@ from datetime import datetime
 from typing import List, Dict, Any
 import logging
 import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+try:
+    from synthesis.llm import generate_digest_narrative, analyze_convergence
+    LLM_AVAILABLE = True
+except ImportError:
+    LLM_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
 
@@ -56,8 +64,25 @@ class EmailDelivery:
         
         subject = f"🔋 Energy Intelligence Digest - {datetime.now().strftime('%Y-%m-%d')}"
         
+        # Generate AI narrative if available
+        ai_narrative = None
+        convergence = None
+        if LLM_AVAILABLE:
+            try:
+                all_signals = top_signals + interesting_signals
+                digest_stats = {
+                    'total': stats.get('total_signals', 0) if stats else len(all_signals),
+                    'strong': len([s for s in all_signals if s.get('score', {}).get('final_score', 0) >= 7]),
+                    'critical': len([s for s in all_signals if s.get('score', {}).get('final_score', 0) >= 12])
+                }
+                ai_narrative = generate_digest_narrative(all_signals, digest_stats)
+                convergence = analyze_convergence(all_signals)
+                logger.info("AI narrative generated successfully")
+            except Exception as e:
+                logger.warning(f"Failed to generate AI narrative: {e}")
+        
         # Build HTML email
-        html_content = self._build_html(top_signals, interesting_signals, stats)
+        html_content = self._build_html(top_signals, interesting_signals, stats, ai_narrative, convergence)
         text_content = self._build_text(top_signals, interesting_signals, stats)
         
         # Create message
@@ -149,11 +174,33 @@ class EmailDelivery:
         self, 
         top_signals: List[Dict], 
         interesting: List[Dict],
-        stats: Dict = None
+        stats: Dict = None,
+        ai_narrative: str = None,
+        convergence: str = None
     ) -> str:
         """Build HTML email content."""
         
         today = datetime.now().strftime('%A, %B %d, %Y')
+        
+        # AI Narrative section
+        ai_section = ""
+        if ai_narrative:
+            ai_section = f"""
+            <div style="background: #f0f7ff; padding: 20px; margin: 15px 0; border-radius: 8px; border-left: 4px solid #007bff;">
+                <h3 style="margin: 0 0 10px 0; color: #007bff;">🤖 AI Analysis</h3>
+                <p style="color: #333; line-height: 1.6;">{ai_narrative.replace(chr(10), '<br>')}</p>
+            </div>
+            """
+        
+        # Convergence section
+        convergence_section = ""
+        if convergence:
+            convergence_section = f"""
+            <div style="background: #fff3cd; padding: 15px; margin: 15px 0; border-radius: 8px; border-left: 4px solid #ffc107;">
+                <h4 style="margin: 0 0 10px 0; color: #856404;">📊 Convergence Signals</h4>
+                <p style="color: #856404;">{convergence}</p>
+            </div>
+            """
         
         # Top 3 section
         top_html = ""
@@ -213,6 +260,9 @@ class EmailDelivery:
             </div>
             
             <div style="padding: 20px; border: 1px solid #ddd; border-top: none;">
+                {ai_section}
+                {convergence_section}
+                
                 <h2 style="color: #333; border-bottom: 2px solid #28a745; padding-bottom: 10px;">🎯 Top 3 Signals</h2>
                 {top_html}
                 
