@@ -13,9 +13,9 @@ Automated intelligence system for energy/cooling/quantum investment signals.
 
 ### Hardware Empire (Started 2026-02-04)
 Distributed compute for intelligence operations.
-- **Mac Mini M4** (192.168.154.44): Local LLM (Llama 3 8B downloading)
+- **Mac Mini M4** (192.168.154.44): Llama 3 8B WORKING! API at :11434
+- **Kali box** (192.168.154.193): RDP available, need SSH creds
 - **Jetson Orin**: Satellite imagery CV (pending setup)
-- **Kali box**: Scrapers/social monitoring (pending setup)
 
 ## Credentials & Access
 - **Email**: oc@cloudmonkey.io (app password in energy-agent/.env)
