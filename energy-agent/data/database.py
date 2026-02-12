@@ -17,7 +17,7 @@ class SignalDatabase:
     
     def __init__(self, db_path: str = None):
         if db_path is None:
-            db_path = Path(__file__).parent / "signals.db"
+            db_path = str(Path(__file__).resolve().parent / "signals.db")
         self.db_path = db_path
         self._init_db()
     
@@ -127,11 +127,30 @@ class SignalDatabase:
                 return None
     
     def insert_signals(self, signals: List[Dict[str, Any]]) -> int:
-        """Insert multiple signals. Returns count of new signals inserted."""
+        """Insert multiple signals using a single connection. Returns count of new signals inserted."""
         count = 0
-        for signal in signals:
-            if self.insert_signal(signal):
-                count += 1
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            for signal in signals:
+                try:
+                    cursor.execute("""
+                        INSERT INTO signals (source, source_id, title, abstract, signal_date, url, domain, raw_data, entities)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """, (
+                        signal["source"],
+                        signal["source_id"],
+                        signal.get("title", ""),
+                        signal.get("abstract", ""),
+                        signal.get("date", datetime.now()).strftime("%Y-%m-%d") if signal.get("date") else None,
+                        signal.get("url", ""),
+                        signal.get("domain", ""),
+                        json.dumps(signal.get("raw_data", {})),
+                        json.dumps(signal.get("entities", {}))
+                    ))
+                    count += 1
+                except sqlite3.IntegrityError:
+                    pass
+            conn.commit()
         return count
     
     def get_unscored_signals(self, limit: int = 100) -> List[Dict[str, Any]]:

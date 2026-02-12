@@ -1,50 +1,92 @@
 # MEMORY.md - Long-Term Memory
 
+## Infrastructure
+
+### Mac Mini M4 — PRIMARY 24/7 HUB
+- Tailscale: 100.98.31.10 | User: macmini | Password: see secrets/.credentials
+- OpenClaw Gateway :18789 | Ollama :11434 | Telegram connected
+- Primary model: google/gemini-2.5-flash (1M ctx) | Fallback: claude-sonnet | Heartbeats: llama3.1:8b
+- Ollama binary: /usr/local/bin/ollama | OpenClaw: /opt/homebrew/bin/openclaw
+- 16GB RAM, MPS GPU, needs LaunchDaemon for auto-start
+
+### MacBook Air — Dev/Remote Client
+- Tailscale: 100.89.198.106
+- Primary: anthropic/claude-opus-4-6 | Fallback: ollama/llama3.1-8b
+- This instance — for dev, testing, mobile work
+
+### Kali Y2K — OSINT Node
+- Tailscale: 100.127.194.8 | User: oc | see secrets/.credentials
+- OSINT collectors (Reddit/News/Darkweb) + 4hr cron
+- SSH key setup pending
+
+### Jetson Orin — Pending
+- LAN: 192.168.154.124 (not on Tailscale yet)
+- User: panoptica | Password: see secrets/.credentials
+- Target: satellite imagery CV | Needs reboot + NVMe boot
+
+## Credentials
+All secrets in `secrets/.credentials`. Key refs:
+- Email: oc@cloudmonkey.io (app pass in energy-agent/.env)
+- PatentsView API: in .env
+- X/Twitter OAuth2: in energy-agent/.env | Handle: @AlphaENRG
+- Bybit API: in Mac Mini crypto-scalper/.env
+- WhatsApp: +447788537939 (disabled, Telegram primary)
+
 ## Active Projects
 
-### Energy Intelligence Agent (Started 2026-02-04)
-Automated intelligence system for energy/cooling/quantum investment signals.
-- Spec: `specs/energy-intelligence-agent-spec.md`
-- Code: `energy-agent/`
-- Target: 2-3 actionable trades/month, 12-18 month horizon
-- **Status**: MVP working! Daily 7am digests to oc@cloudmonkey.io
-- Collectors: ArXiv ✅, SEC ✅, USPTO ⏳ (waiting API key)
-- See daily notes for progress
+### Energy Agent — MVP Running
+- Code: `energy-agent/` | Spec: `specs/energy-intelligence-agent-spec.md`
+- Daily 7am digest to oc@cloudmonkey.io
+- Collectors: ArXiv ✅, SEC ✅, USPTO ✅ (key: PATENTSVIEW_API_KEY in .env)
+- Email may be broken (Gmail app password issue Feb 9)
 
-### Hardware Empire (Started 2026-02-04)
-Distributed compute for intelligence operations.
-- **Mac Mini M4** (192.168.154.44): Llama 3 8B WORKING! API at :11434
-- **Kali box** (192.168.154.193): RDP available, need SSH creds
-- **Jetson Orin**: Satellite imagery CV (pending setup)
+### Crypto Scalper — Paper Trading
+- Mac Mini: ~/crypto-scalper | $126 virtual capital
+- Bybit live data, paper mode | BTC/ETH/SOL | 10x leverage
+- Daily P&L cron 8am GMT → Telegram
+- Target: 1-3% daily before going live
 
-## Credentials & Access
-- **Email**: oc@cloudmonkey.io (app password in energy-agent/.env)
-- **Mac Mini**: host 192.168.154.44, user macmini, pass `!1Longmore@@`
-- **Kali**: host 192.168.154.193, user oc, pass `Apple24`
-- **Jetson**: host 192.168.154.124, user deepseek, pass `jetson_orin` (cracked via hydra!)
-- **PatentsView**: API key requested (PVS-4987), 1-2 day wait
-- **WhatsApp**: Connected as +447788537939
+### AlphaEnergy / @AlphaENRG
+- ~1,100 followers | Substack: alphaenergy.substack.com
+- Auto-publisher needs Substack cookies from Matt
+- Editorial: UK English, no m-dashes, no emoji, lowercase subtitles, WHY not HOW
 
-## Matt's Preferences
-- Prefers files over chat pastes for specs
-- Wants to watch and learn (not hands-on coding)
-- Impatient — get to the point, show progress
-- Excited about hardware/empire building
+### Companion App — Specced
+- Spec: specs/companion-app-spec.md | Brand shortlist: Ember, Muse, Reverie, Velvet, Bloom
+- Revenue: free/£9.99/£19.99 + virtual gifts
+- Status: needs brand decision + MVP build
 
-## Lessons Learned
-- **2026-02-04**: Lost entire conversation context because I didn't write memory files. Never again. Write it down immediately.
-- **2026-02-04**: PatentsView old API deprecated May 2025 - need new API key for USPTO
-- **2026-02-04**: Ollama binds to localhost by default - need `OLLAMA_HOST=0.0.0.0` for network access
-- **2026-02-04**: Nitter instances unreliable - Twitter scraping needs official API or alternative
+### Polymarket Bot — Scoped
+- Cross-ref AlphaEnergy signals with Polymarket odds
+- Needs Polygon wallet + USDC from Matt
 
-## Empire Status (as of 2026-02-04 22:35 GMT)
-- **Mac Mini M4**: OpenClaw + WhatsApp + Llama 3 + auto-start ✅
-- **Kali Y2K**: OSINT stack (Reddit/News/Darkweb) + 4hr cron ✅
-- **Jetson Orin**: Password cracked (`deepseek`/`jetson_orin`), needs reboot
-- **Energy Agent**: MVP working, daily 7am digest with AI narrative
+## GitHub
+- Repo: https://github.com/panoptica/empire (private)
+- gh CLI, HTTPS, panoptica account
+- Branches: main → dev → agent/* / infra/* / feat/* / exp/*
+- Worktrees: ~/.openclaw/trees/{dev,energy,lfc,experiments}
+
+## Matt
+- Prefers files over chat pastes
+- Wants to watch, not hands-on code
+- Impatient — show progress fast
+- HL portfolio — PRIVATE, never share in groups
+- Target: £50k+ this year
+- Earnings crons set (VRT, CVX, MU, TSLA, INTC, PLTR)
+
+## Lessons (Hard-Won)
+- ALWAYS use Tailscale IPs, never LAN
+- 8B models too weak for OpenClaw agent — use 2.5 Flash / Sonnet minimum
+- Write memory immediately — "mental notes" don't survive sessions
+- Custom Ollama providers need "apiKey": "ollama" dummy value
+- Mac Mini paths: export PATH when SSHing
+- Two independent configs (MacBook Air + Mac Mini) — don't confuse them
 
 ## Next Priorities
-1. Help Matt set up payments (Coinbase Commerce → UK Ltd → Stripe)
-2. Recover Jetson for satellite imagery CV
-3. Add USPTO when API key arrives (PVS-4987)
-4. Wire local Llama 3 for real-time synthesis (not just digest)
+1. Get Substack cookies → test auto-publisher
+2. Monitor crypto scalper → go live when 1-3% daily target met
+3. Jetson Orin: NVMe boot, Tailscale, OpenClaw
+4. Polymarket bot (needs wallet from Matt)
+5. Companion app: brand decision → MVP
+6. Fix energy agent email (Gmail app password)
+7. ~~web_search~~ DONE — Perplexity Sonar Pro wired into both instances

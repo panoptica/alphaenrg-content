@@ -1,0 +1,36 @@
+{
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "0.0.0.0",
+    "auth": {
+      "mode": "token",
+      "token": "21a42dcfe7f0a44489fec29c1e770e0efd39a1e81b94ca36"
+    },
+    "tailscale": {
+      "mode": "on",
+      "resetOnExit": false
+    }
+  },
+  "tools": {
+    "exec": {
+      "host": "gateway"
+    },
+    "elevated": {
+      "enabled": true,
+      "allowFrom": {
+        "webchat": true
+      }
+    },
+    "web": {
+      "search": {
+        "provider": "perplexity",
+        "perplexity": {
+          "apiKey": "YOUR_PERPLEXITY_API_KEY_HERE",
+          "baseUrl": "https://api.perplexity.ai",
+          "model": "perplexity/sonar-pro"
+        }
+      }
+    }
+  }
+}

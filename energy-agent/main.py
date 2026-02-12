@@ -17,6 +17,7 @@ from collectors.uspto import USPTOCollector
 from collectors.arxiv import ArxivCollector
 from collectors.sec import SECCollector
 from collectors.osint import OSINTCollector
+from collectors.lens import LensPatentCollector, LensScholarCollector
 from scoring.engine import ScoringEngine, score_signals
 from data.database import SignalDatabase
 
@@ -70,6 +71,26 @@ def collect_all(date_from: datetime = None, date_to: datetime = None) -> list:
         logger.info(f"Collected {len(filings)} SEC filings")
     except Exception as e:
         logger.error(f"SEC collection failed: {e}")
+    
+    # Lens.org Patents
+    logger.info("Collecting Lens.org patents...")
+    try:
+        lens_pat = LensPatentCollector()
+        lens_patents = lens_pat.collect(date_from, date_to)
+        all_signals.extend(lens_patents)
+        logger.info(f"Collected {len(lens_patents)} Lens patents")
+    except Exception as e:
+        logger.error(f"Lens patent collection failed: {e}")
+    
+    # Lens.org Scholarly Articles
+    logger.info("Collecting Lens.org scholarly articles...")
+    try:
+        lens_sch = LensScholarCollector()
+        lens_papers = lens_sch.collect(date_from, date_to)
+        all_signals.extend(lens_papers)
+        logger.info(f"Collected {len(lens_papers)} Lens scholarly articles")
+    except Exception as e:
+        logger.error(f"Lens scholar collection failed: {e}")
     
     # OSINT (Reddit + News from Kali)
     logger.info("Collecting OSINT signals from Kali...")

@@ -35,6 +35,16 @@ Things like:
 
 Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
 
+### Image Generation
+- **Grok Imagine** (xAI Pro sub) — primary
+- **Gemini Imagen** (Google Pro sub) — secondary
+- **NO local image gen** — ComfyUI was evaluated and rejected (too heavy for 16GB Mac Mini)
+- Cloud APIs only. This is a locked decision.
+
 ---
 
 Add whatever helps you do your job. This is your cheat sheet.
+
+## Last Synced
+<!-- Updated automatically by scripts/sync-workspace-to-macmini.sh or heartbeat -->
+**2026-02-12 06:00 GMT** — MacBook Air → Mac Mini

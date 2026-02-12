@@ -1,3 +1,4 @@
 #!/bin/bash
-cd /Users/mattmcconnon/.openclaw/workspace/energy-agent
-/opt/homebrew/bin/python3 run_digest.py >> /Users/mattmcconnon/.openclaw/workspace/energy-agent/logs/cron.log 2>&1
+cd /Users/macmini/.openclaw/workspace/energy-agent
+source venv/bin/activate
+python3 run_digest.py >> /Users/macmini/.openclaw/workspace/energy-agent/logs/cron.log 2>&1

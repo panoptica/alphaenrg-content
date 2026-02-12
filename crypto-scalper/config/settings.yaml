@@ -1,0 +1,90 @@
+# Trading Configuration
+trading:
+  paper_trading: true
+  starting_capital: 126.0
+  base_currency: "USDT"
+  
+  # Risk Management
+  risk:
+    max_position_size_percent: 25  # Aggressive - 25% per trade
+    max_leverage: 10
+    daily_loss_limit_percent: 10  # Higher tolerance for demo
+    max_concurrent_positions: 3
+    cooldown_after_losses: 10  # minutes after 3 consecutive losses
+  
+  # Signal Requirements
+  signals:
+    min_confirming_signals: 2  # Lower threshold = more trades
+    
+    # RSI Settings
+    rsi:
+      period: 14
+      oversold_threshold: 35
+      overbought_threshold: 65
+    
+    # MACD Settings
+    macd:
+      fast_period: 12
+      slow_period: 26
+      signal_period: 9
+    
+    # EMA Crossover
+    ema:
+      fast_period: 9
+      slow_period: 21
+    
+    # Bollinger Bands
+    bb:
+      period: 20
+      std_dev: 2
+    
+    # Volume Spike
+    volume:
+      spike_multiplier: 1.5
+      lookback_periods: 20
+  
+  # Exit Rules
+  exit:
+    take_profit_percent: 2.0  # Target profit %
+    stop_loss_percent: 1.0   # Max loss %
+    time_stop_minutes: 15     # Exit if no significant move
+    trailing_stop_percent: 0.5  # Move to breakeven after this profit
+  
+  # Data Settings
+  data:
+    timeframes: ["1m", "5m", "15m"]
+    candle_limit: 100
+    update_interval: 60  # seconds
+
+# Exchange Settings
+exchanges:
+  primary: "bybit"
+  backup: "binance"
+  
+  bybit:
+    sandbox: false
+    rate_limit: 20
+  
+  binance:
+    sandbox: false
+    rate_limit: 10
+
+# Notifications
+notifications:
+  telegram:
+    enabled: false
+    daily_report_time: "18:00"
+  
+  alerts:
+    new_signals: true
+    trade_entries: true
+    trade_exits: true
+    risk_breaches: true
+
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file_rotation: true
+  max_file_size: "10MB"
+  backup_count: 5

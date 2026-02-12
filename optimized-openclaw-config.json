@@ -1,0 +1,172 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.2.1",
+    "lastTouchedAt": "2026-02-06T04:05:00.000Z"
+  },
+  "auth": {
+    "profiles": {
+      "google:default": {
+        "provider": "google",
+        "mode": "api_key"
+      },
+      "anthropic:default": {
+        "provider": "anthropic",
+        "mode": "api_key"
+      },
+      "anthropic:mmoc-2026": {
+        "provider": "anthropic",
+        "mode": "token"
+      },
+      "bedrock:default": {
+        "provider": "aws",
+        "mode": "api_key"
+      },
+      "perplexity:default": {
+        "provider": "perplexity",
+        "mode": "api_key"
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "anthropic/claude-sonnet-4-20250514",
+        "fallback": "local/llama3:8b",
+        "routing": {
+          "bulk_analysis": "local/llama3:8b",
+          "code_generation": "local/llama3:8b", 
+          "research_synthesis": "perplexity/sonar-pro",
+          "creative_writing": "google/gemini-pro",
+          "web_analysis": "perplexity/sonar-pro",
+          "complex_reasoning": "anthropic/claude-sonnet-4-20250514"
+        }
+      },
+      "models": {
+        "anthropic/claude-3-haiku-20240307": {
+          "cost_tier": "low"
+        },
+        "anthropic/claude-opus-4-5": {
+          "alias": "opus",
+          "cost_tier": "high"
+        },
+        "anthropic/claude-sonnet-4-20250514": {
+          "alias": "sonnet",
+          "cost_tier": "medium"
+        },
+        "local/llama3:8b": {
+          "alias": "llama3",
+          "provider": "ollama",
+          "baseUrl": "http://192.168.154.44:11434",
+          "cost_tier": "free"
+        },
+        "local/llama3:70b": {
+          "alias": "llama3-large",
+          "provider": "ollama",
+          "baseUrl": "http://192.168.154.44:11434",
+          "cost_tier": "free"
+        },
+        "google/gemini-pro": {
+          "alias": "gemini",
+          "cost_tier": "low"
+        },
+        "google/gemini-pro-vision": {
+          "alias": "gemini-vision",
+          "cost_tier": "low"
+        },
+        "aws/claude-3-sonnet": {
+          "alias": "bedrock-sonnet",
+          "provider": "bedrock",
+          "cost_tier": "medium"
+        },
+        "perplexity/sonar-pro": {
+          "alias": "perplexity-pro",
+          "cost_tier": "low"
+        },
+        "perplexity/llama-3.1-70b-instruct": {
+          "alias": "perplexity-llama",
+          "cost_tier": "low"
+        }
+      },
+      "workspace": "/Users/mattmcconnon/.openclaw/workspace",
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      }
+    }
+  },
+  "tools": {
+    "web": {
+      "search": {
+        "provider": "perplexity",
+        "perplexity": {
+          "apiKey": "YOUR_PERPLEXITY_API_KEY_HERE",
+          "baseUrl": "https://api.perplexity.ai",
+          "model": "perplexity/sonar-pro"
+        }
+      }
+    },
+    "image": {
+      "generation": {
+        "providers": {
+          "local": {
+            "type": "stable_diffusion",
+            "baseUrl": "http://192.168.154.44:7860",
+            "model": "sd_xl_base_1.0"
+          },
+          "openai": {
+            "type": "dalle",
+            "model": "dall-e-3"
+          }
+        },
+        "default": "local"
+      }
+    }
+  },
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto"
+  },
+  "channels": {
+    "whatsapp": {
+      "dmPolicy": "allowlist",
+      "selfChatMode": true,
+      "allowFrom": [
+        "+447788537939"
+      ],
+      "groupPolicy": "allowlist",
+      "mediaMaxMb": 50,
+      "debounceMs": 0
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "21a42dcfe7f0a44489fec29c1e770e0efd39a1e81b94ca36"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    }
+  },
+  "skills": {
+    "install": {
+      "nodeManager": "pnpm"
+    }
+  },
+  "plugins": {
+    "entries": {
+      "whatsapp": {
+        "enabled": true
+      }
+    }
+  }
+}

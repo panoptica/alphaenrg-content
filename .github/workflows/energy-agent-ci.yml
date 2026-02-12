@@ -1,0 +1,121 @@
+name: Energy Agent CI/CD
+
+on:
+  push:
+    branches: [ master, main ]
+    paths:
+      - 'energy-agent/**'
+      - 'specs/**'
+      - '*.md'
+  pull_request:
+    branches: [ master, main ]
+  schedule:
+    # Daily at 7:30 AM GMT (after digest runs)
+    - cron: '30 7 * * *'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.11]
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: |
+        cd energy-agent
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest pytest-cov flake8
+    
+    - name: Lint with flake8
+      run: |
+        cd energy-agent
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    
+    - name: Test collectors
+      run: |
+        cd energy-agent
+        python -m pytest collectors/ -v --cov=collectors --cov-report=xml
+    
+    - name: Test scoring engine
+      run: |
+        cd energy-agent
+        python -m pytest scoring/ -v --cov=scoring --cov-report=xml
+    
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./energy-agent/coverage.xml
+        flags: unittests
+
+  deploy-docs:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+    needs: test
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Update documentation
+      run: |
+        # Auto-generate API docs
+        cd energy-agent
+        python -m pip install pydoc-markdown
+        pydoc-markdown > ../docs/API.md
+        
+        # Update README with latest stats
+        cd ..
+        echo "# OpenClaw Intelligence Workspace" > README.md
+        echo "" >> README.md
+        echo "Last updated: $(date)" >> README.md
+        echo "" >> README.md
+        echo "## Projects" >> README.md
+        echo "- **Energy Intelligence Agent**: Daily energy/tech signal collection and scoring" >> README.md
+        echo "- **Empire Infrastructure**: Distributed compute across Mac Mini, Kali, Jetson" >> README.md
+        echo "- **Claw AI**: Local Llama 3 + Qwen 2.5 + Claude hierarchy" >> README.md
+        echo "" >> README.md
+        echo "## Recent Activity" >> README.md
+        git log --oneline -10 >> README.md
+    
+    - name: Commit documentation
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add README.md docs/ || true
+        git diff --staged --quiet || git commit -m "Auto-update docs $(date)"
+        git push || true
+
+  notify-telegram:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [test, deploy-docs]
+    
+    steps:
+    - name: Notify Telegram
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      run: |
+        if [ "${{ needs.test.result }}" = "success" ]; then
+          MESSAGE="✅ Energy Agent CI passed! Tests green, docs updated."
+        else
+          MESSAGE="❌ Energy Agent CI failed. Check the logs."
+        fi
+        
+        curl -s -X POST https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage \
+          -d chat_id=${TELEGRAM_CHAT_ID} \
+          -d text="${MESSAGE}"

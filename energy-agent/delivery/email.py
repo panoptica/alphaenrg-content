@@ -23,6 +23,24 @@ try:
 except ImportError:
     LLM_AVAILABLE = False
 
+try:
+    from config.tickers import find_tickers_in_text
+    TICKERS_AVAILABLE = True
+except ImportError:
+    TICKERS_AVAILABLE = False
+    def find_tickers_in_text(text):
+        return []
+
+try:
+    from config.tickers import find_tickers_in_text
+    TICKERS_AVAILABLE = True
+except ImportError:
+    TICKERS_AVAILABLE = False
+    def find_tickers_in_text(text):
+        return []
+
+FEEDBACK_EMAIL = "oc@cloudmonkey.io"
+
 logger = logging.getLogger(__name__)
 
 
@@ -170,6 +188,43 @@ class EmailDelivery:
             logger.error(f"Failed to send critical alert: {e}")
             return False
     
+    def _ticker_html(self, sig: Dict) -> str:
+        """Build ticker badges for a signal."""
+        text = f"{sig.get('title', '')} {sig.get('abstract', '')}"
+        tickers = find_tickers_in_text(text)
+        if not tickers:
+            return ''
+        badges = ' '.join(
+            f'<span style="display:inline-block;background:#e8f5e9;color:#2e7d32;padding:2px 8px;border-radius:12px;font-size:12px;font-weight:bold;margin:2px;">${t}</span>'
+            for _, t in tickers[:5]
+        )
+        return f'<p style="margin:5px 0;">{badges}</p>'
+    
+    def _ticker_inline(self, sig: Dict) -> str:
+        """Inline ticker tags for interesting signals table."""
+        text = f"{sig.get('title', '')} {sig.get('abstract', '')}"
+        tickers = find_tickers_in_text(text)
+        if not tickers:
+            return ''
+        return ' ' + ' '.join(
+            f'<span style="color:#2e7d32;font-size:11px;font-weight:bold;">${t}</span>'
+            for _, t in tickers[:3]
+        )
+    
+    def _feedback_html(self, sig: Dict, idx: int) -> str:
+        """Build thumbs up/down mailto links for a signal."""
+        from urllib.parse import quote
+        sig_id = sig.get('source_id', f'signal_{idx}')
+        subject = quote(f'Signal Feedback #{idx}')
+        up_body = quote(f'{sig_id}:thumbsup')
+        down_body = quote(f'{sig_id}:thumbsdown')
+        return (
+            f'<a href="mailto:{FEEDBACK_EMAIL}?subject={subject}&body={up_body}" '
+            f'style="text-decoration:none;font-size:18px;" title="Good signal">👍</a> '
+            f'<a href="mailto:{FEEDBACK_EMAIL}?subject={subject}&body={down_body}" '
+            f'style="text-decoration:none;font-size:18px;" title="Not useful">👎</a>'
+        )
+    
     def _build_html(
         self, 
         top_signals: List[Dict], 
@@ -185,10 +240,17 @@ class EmailDelivery:
         # AI Narrative section
         ai_section = ""
         if ai_narrative:
+            # Find tickers mentioned across all signals for the narrative
+            all_text = " ".join(s.get('title', '') + ' ' + s.get('abstract', '') for s in top_signals + interesting)
+            narrative_tickers = find_tickers_in_text(all_text + ' ' + ai_narrative)
+            ticker_badge = ""
+            if narrative_tickers:
+                ticker_badge = f'<p style="margin:8px 0 0 0;"><strong style="color:#007bff;">📈 Key tickers: {", ".join(f"${t}" for _, t in narrative_tickers)}</strong></p>'
             ai_section = f"""
             <div style="background: #f0f7ff; padding: 20px; margin: 15px 0; border-radius: 8px; border-left: 4px solid #007bff;">
                 <h3 style="margin: 0 0 10px 0; color: #007bff;">🤖 AI Analysis</h3>
                 <p style="color: #333; line-height: 1.6;">{ai_narrative.replace(chr(10), '<br>')}</p>
+                {ticker_badge}
             </div>
             """
         
@@ -211,6 +273,7 @@ class EmailDelivery:
                 <h3 style="margin: 0 0 10px 0; color: #333;">
                     #{i} [{score.get('final_score', 0):.1f}] {sig.get('title', 'Unknown')[:80]}...
                 </h3>
+                {self._ticker_html(sig)}
                 <p style="color: #666; margin: 5px 0;">
                     <strong>Domain:</strong> {sig.get('domain', 'N/A')} | 
                     <strong>Source:</strong> {sig.get('source', 'N/A')} |
@@ -219,6 +282,7 @@ class EmailDelivery:
                 <p style="color: #333;">{sig.get('abstract', '')[:300]}...</p>
                 <p>
                     <a href="{sig.get('url', '#')}" style="color: #007bff;">View Source →</a>
+                    &nbsp;&nbsp;{self._feedback_html(sig, i)}
                 </p>
                 <p style="font-size: 12px; color: #999;">
                     Score breakdown: {score.get('breakdown', {})}
@@ -228,13 +292,17 @@ class EmailDelivery:
         
         # Interesting signals section
         interesting_html = "<table style='width: 100%; border-collapse: collapse;'>"
-        for sig in interesting[:10]:
+        for idx, sig in enumerate(interesting[:10], len(top_signals) + 1):
             score = sig.get('score', {})
             interesting_html += f"""
             <tr style="border-bottom: 1px solid #eee;">
                 <td style="padding: 10px; width: 50px; font-weight: bold; color: #28a745;">{score.get('final_score', 0):.1f}</td>
                 <td style="padding: 10px;">{sig.get('domain', 'N/A')}</td>
-                <td style="padding: 10px;"><a href="{sig.get('url', '#')}" style="color: #333;">{sig.get('title', 'Unknown')[:60]}...</a></td>
+                <td style="padding: 10px;">
+                    <a href="{sig.get('url', '#')}" style="color: #333;">{sig.get('title', 'Unknown')[:60]}...</a>
+                    {self._ticker_inline(sig)}
+                </td>
+                <td style="padding: 10px; white-space: nowrap;">{self._feedback_html(sig, idx)}</td>
             </tr>
             """
         interesting_html += "</table>"

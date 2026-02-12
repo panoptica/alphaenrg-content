@@ -1,0 +1,132 @@
+{
+  "date": "2026-02-06",
+  "sources": {
+    "github": {
+      "queries": [
+        {
+          "query": "openclaw",
+          "trending_repos": [],
+          "new_projects": [],
+          "stars_growth": []
+        },
+        {
+          "query": "AI automation browser",
+          "trending_repos": [],
+          "new_projects": [],
+          "stars_growth": []
+        },
+        {
+          "query": "intelligent agents automation",
+          "trending_repos": [],
+          "new_projects": [],
+          "stars_growth": []
+        },
+        {
+          "query": "playwright automation business",
+          "trending_repos": [],
+          "new_projects": [],
+          "stars_growth": []
+        },
+        {
+          "query": "AI web scraping",
+          "trending_repos": [],
+          "new_projects": [],
+          "stars_growth": []
+        }
+      ],
+      "summary": "GitHub research placeholder - implement with actual API calls"
+    },
+    "hn": {
+      "queries": [
+        "openclaw",
+        "AI automation",
+        "browser agents",
+        "web automation"
+      ],
+      "discussions": [],
+      "summary": "HN research placeholder - implement with Algolia API"
+    },
+    "reddit": {
+      "subreddits": [
+        "r/MachineLearning",
+        "r/automation",
+        "r/webdev",
+        "r/entrepreneur"
+      ],
+      "posts": [],
+      "summary": "Reddit research placeholder"
+    },
+    "twitter": {
+      "mentions": [],
+      "hashtags": [
+        "#AIAutomation",
+        "#WebAutomation",
+        "#BusinessAutomation"
+      ],
+      "summary": "Twitter research placeholder"
+    },
+    "web": {
+      "searches": [],
+      "business_opportunities": [],
+      "summary": "Web search placeholder - integrate with web_search tool"
+    }
+  },
+  "opportunities": [
+    {
+      "title": "Enterprise Browser Automation",
+      "description": "Large enterprises need reliable web automation for data extraction and testing",
+      "revenue_potential": "High ($10K-100K+ per enterprise client)",
+      "innovation_level": "Medium",
+      "implementation": "OpenClaw as SaaS for enterprise browser automation"
+    },
+    {
+      "title": "AI-Powered Testing Services",
+      "description": "Automated testing with intelligent agents that understand web UIs",
+      "revenue_potential": "Medium ($1K-10K+ per client)",
+      "innovation_level": "High",
+      "implementation": "Testing-as-a-Service using OpenClaw intelligent agents"
+    },
+    {
+      "title": "AI Agent Marketplace",
+      "description": "Growing demand for pre-built AI agents and automation workflows",
+      "revenue_potential": "Very High ($500K-5M+ marketplace revenue)",
+      "innovation_level": "High",
+      "implementation": "OpenClaw Agent Store with revenue sharing"
+    },
+    {
+      "title": "Enterprise RPA Replacement",
+      "description": "Companies seeking intelligent alternatives to traditional RPA tools",
+      "revenue_potential": "High ($50K-500K+ per enterprise)",
+      "innovation_level": "Medium",
+      "implementation": "OpenClaw Enterprise Edition with AI-powered process mining"
+    }
+  ],
+  "trends": [
+    {
+      "trend": "AI Agent Automation Growth",
+      "description": "Increasing demand for intelligent web automation",
+      "market_size": "Growing rapidly",
+      "openclaw_angle": "Position as premium AI-first automation platform"
+    },
+    {
+      "trend": "No-Code AI Automation Boom",
+      "description": "Massive growth in demand for accessible AI automation tools",
+      "market_size": "$8.2B+ by 2025",
+      "openclaw_angle": "Position as most powerful no-code AI automation platform"
+    }
+  ],
+  "competitive_intel": [
+    {
+      "competitor": "Zapier",
+      "strength": "Easy no-code automation",
+      "weakness": "Limited browser automation, not AI-native",
+      "openclaw_advantage": "Deep browser control + AI intelligence"
+    },
+    {
+      "competitor": "Playwright",
+      "strength": "Powerful browser automation",
+      "weakness": "Requires coding, no AI layer",
+      "openclaw_advantage": "AI-powered automation with natural language"
+    }
+  ]
+}

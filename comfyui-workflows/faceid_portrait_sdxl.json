@@ -1,0 +1,101 @@
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "sd_xl_base_1.0.safetensors"
+    }
+  },
+  "2": {
+    "class_type": "IPAdapterModelLoader",
+    "inputs": {
+      "ipadapter_file": "ip-adapter-faceid-portrait_sdxl.bin"
+    }
+  },
+  "3": {
+    "class_type": "IPAdapterInsightFaceLoader",
+    "inputs": {
+      "provider": "CPU",
+      "model_name": "antelopev2"
+    }
+  },
+  "4": {
+    "class_type": "CLIPVisionLoader",
+    "inputs": {
+      "clip_name": "CLIP-ViT-bigG-14-laion2B-39B-b160k.safetensors"
+    }
+  },
+  "5": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "demis_ref.jpg"
+    }
+  },
+  "6": {
+    "class_type": "IPAdapterFaceID",
+    "inputs": {
+      "model": ["1", 0],
+      "ipadapter": ["2", 0],
+      "image": ["5", 0],
+      "insightface": ["3", 0],
+      "clip_vision": ["4", 0],
+      "weight": 0.7,
+      "weight_faceidv2": 0.5,
+      "weight_type": "linear",
+      "combine_embeds": "concat",
+      "start_at": 0.0,
+      "end_at": 1.0,
+      "embeds_scaling": "V only"
+    }
+  },
+  "7": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": ["1", 1],
+      "text": "cinematic photo of a middle-aged man standing in a dramatic red-lit football stadium, Anfield Kop stand with passionate crowd and red flags waving in background, crimson atmospheric lighting, wearing smart dark suit, professional editorial portrait, The Athletic magazine cover style, golden hour lens flare, neural network data visualization subtly overlaid, 8k, sharp focus"
+    }
+  },
+  "8": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": ["1", 1],
+      "text": "ugly, blurry, low quality, distorted face, cartoon, anime, painting, amateur, oversaturated, watermark, text"
+    }
+  },
+  "9": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "height": 1024,
+      "width": 1024
+    }
+  },
+  "10": {
+    "class_type": "KSampler",
+    "inputs": {
+      "cfg": 7.5,
+      "denoise": 1,
+      "latent_image": ["9", 0],
+      "model": ["6", 0],
+      "negative": ["8", 0],
+      "positive": ["7", 0],
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "seed": 55555,
+      "steps": 35
+    }
+  },
+  "11": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": ["10", 0],
+      "vae": ["1", 2]
+    }
+  },
+  "12": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "demis_faceid_v2",
+      "images": ["11", 0]
+    }
+  }
+}

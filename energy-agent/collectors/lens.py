@@ -84,7 +84,7 @@ class LensPatentCollector(BaseCollector):
                         {
                             "query_string": {
                                 "query": keyword_query,
-                                "fields": ["title", "abstract", "claims.claim_text"]
+                                "fields": ["title", "abstract"]
                             }
                         },
                         {
@@ -102,16 +102,12 @@ class LensPatentCollector(BaseCollector):
             "sort": [{"date_published": "desc"}],
             "include": [
                 "lens_id",
-                "title",
+                "biblio",
                 "abstract",
                 "date_published",
                 "jurisdiction",
                 "kind",
-                "applicants",
-                "inventors",
-                "classifications_cpc",
-                "cited_by_count",
-                "families.simple_family.size"
+                "doc_number"
             ]
         }
         
@@ -139,12 +135,32 @@ class LensPatentCollector(BaseCollector):
         for patent in results:
             entities = self._extract_entities(patent, domain)
             lens_id = patent.get('lens_id', '')
+            biblio = patent.get('biblio', {})
+            
+            # Title is nested under biblio.invention_title
+            title = ''
+            for t in biblio.get('invention_title', []):
+                if t.get('lang') == 'en':
+                    title = t.get('text', '')
+                    break
+            if not title:
+                titles = biblio.get('invention_title', [])
+                title = titles[0].get('text', '') if titles else ''
+            
+            # Abstract
+            abstract = ''
+            for a in patent.get('abstract', biblio.get('abstract', [])) if isinstance(patent.get('abstract', biblio.get('abstract', [])), list) else []:
+                if isinstance(a, dict) and a.get('lang') == 'en':
+                    abstract = a.get('text', '')
+                    break
+            if not abstract and isinstance(patent.get('abstract'), str):
+                abstract = patent.get('abstract', '')
             
             signal = self._standardize_signal(
                 raw_data=patent,
                 source_id=lens_id,
-                title=patent.get('title', ''),
-                abstract=patent.get('abstract', ''),
+                title=title,
+                abstract=abstract,
                 date=self._parse_date(patent.get('date_published')),
                 url=f"https://www.lens.org/lens/patent/{lens_id}",
                 entities=entities
@@ -164,10 +180,13 @@ class LensPatentCollector(BaseCollector):
             'technologies': [domain]
         }
         
-        # Extract applicants (companies)
-        for applicant in patent.get('applicants', []):
+        # Extract applicants from biblio.parties.applicants
+        parties = patent.get('biblio', {}).get('parties', {})
+        for applicant in parties.get('applicants', []):
+            name = ''
             if isinstance(applicant, dict):
-                name = applicant.get('name', '')
+                extracted = applicant.get('extracted_name', {})
+                name = extracted.get('value', '') if isinstance(extracted, dict) else str(extracted)
             else:
                 name = str(applicant)
             if name:
@@ -237,7 +256,7 @@ class LensScholarCollector(BaseCollector):
             },
             "size": 50,
             "sort": [{"date_published": "desc"}],
-            "include": ["lens_id", "title", "abstract", "date_published", "authors", "source", "citations_count", "doi"]
+            "include": ["lens_id", "title", "abstract", "date_published", "authors", "source", "scholarly_citations_count", "external_ids"]
         }
         
         headers = {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
@@ -253,7 +272,12 @@ class LensScholarCollector(BaseCollector):
         signals = []
         for paper in data.get('data', []):
             lens_id = paper.get('lens_id', '')
-            doi = paper.get('doi', '')
+            ext_ids = paper.get('external_ids', [])
+            doi = ''
+            for eid in (ext_ids if isinstance(ext_ids, list) else []):
+                if isinstance(eid, dict) and eid.get('type') == 'doi':
+                    doi = eid.get('value', '')
+                    break
             url = f"https://doi.org/{doi}" if doi else f"https://www.lens.org/lens/scholar/{lens_id}"
             
             signal = self._standardize_signal(
@@ -266,7 +290,7 @@ class LensScholarCollector(BaseCollector):
                 entities={'technologies': [domain], 'companies': []}
             )
             signal['domain'] = domain
-            signal['citations'] = paper.get('citations_count', 0)
+            signal['citations'] = paper.get('scholarly_citations_count', 0)
             signals.append(signal)
         
         return signals

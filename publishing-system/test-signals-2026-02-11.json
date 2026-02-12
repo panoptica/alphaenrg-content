@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Nanovortex-driven optical diffusion breakthrough",
+    "score": 10.0,
+    "domain": "SMR/Nuclear",
+    "summary": "Revolutionary optical technique increases small modular reactor efficiency by 40% through quantum field manipulation",
+    "created_at": "2026-02-11"
+  },
+  {
+    "title": "Topological quantum error correction via braiding",
+    "score": 9.2,
+    "domain": "Quantum Computing",
+    "summary": "IBM achieves fault-tolerant quantum computing milestone, making commercial quantum systems viable by 2027",
+    "created_at": "2026-02-11"
+  },
+  {
+    "title": "Perovskite-silicon tandem solar breakthrough",
+    "score": 8.8,
+    "domain": "Solar Energy",
+    "summary": "New tandem design achieves 35% efficiency, could slash solar LCOE by 60% within 3 years",
+    "created_at": "2026-02-11"
+  }
+]

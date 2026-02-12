@@ -11,9 +11,13 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from collectors.arxiv import ArxivCollector
 from collectors.sec import SECCollector
+from collectors.osint import OSINTCollector
+from collectors.uspto import USPTOCollector
+from collectors.lens import LensPatentCollector, LensScholarCollector
 from scoring.engine import ScoringEngine
 from data.database import SignalDatabase
 from delivery.email import EmailDelivery
+from x_integration import AlphaENRGPoster
 
 # Load environment variables
 from dotenv import load_dotenv
@@ -58,6 +62,46 @@ def run_full_digest():
         logger.info(f"   → {len(filings)} filings")
     except Exception as e:
         logger.error(f"   ✗ SEC failed: {e}")
+    
+    # Collect OSINT from Kali (Reddit, news, darkweb)
+    logger.info("\n🕵️ Collecting OSINT signals...")
+    try:
+        osint = OSINTCollector()
+        osint_signals = osint.collect(days_back=7)
+        all_signals.extend(osint_signals)
+        logger.info(f"   → {len(osint_signals)} OSINT signals")
+    except Exception as e:
+        logger.error(f"   ✗ OSINT failed: {e}")
+    
+    # Collect patents from Lens.org
+    logger.info("\n🔬 Collecting Lens.org patents...")
+    try:
+        lens_pat = LensPatentCollector()
+        lens_patents = lens_pat.collect(date_from, date_to)
+        all_signals.extend(lens_patents)
+        logger.info(f"   → {len(lens_patents)} Lens patents")
+    except Exception as e:
+        logger.error(f"   ✗ Lens patents failed: {e}")
+    
+    # Collect scholarly articles from Lens.org
+    logger.info("\n📖 Collecting Lens.org scholarly articles...")
+    try:
+        lens_sch = LensScholarCollector()
+        lens_papers = lens_sch.collect(date_from, date_to)
+        all_signals.extend(lens_papers)
+        logger.info(f"   → {len(lens_papers)} Lens scholarly articles")
+    except Exception as e:
+        logger.error(f"   ✗ Lens scholarly failed: {e}")
+    
+    # Collect patents from USPTO/PatentsView
+    logger.info("\n📜 Collecting USPTO patents...")
+    try:
+        uspto = USPTOCollector()
+        patents = uspto.collect(date_from, date_to)
+        all_signals.extend(patents)
+        logger.info(f"   → {len(patents)} patents")
+    except Exception as e:
+        logger.error(f"   ✗ USPTO failed: {e}")
     
     logger.info(f"\n📦 Total signals collected: {len(all_signals)}")
     
@@ -138,6 +182,40 @@ def run_full_digest():
     for sig in critical:
         logger.info(f"\n🚨 Sending critical alert for: {sig['title'][:40]}...")
         delivery.send_critical_alert(sig)
+    
+    # Post daily intelligence to X (AlphaENRG)
+    logger.info("\n🐦 Posting to X (AlphaENRG)...")
+    try:
+        x_poster = AlphaENRGPoster()
+        
+        # Create intelligence summary for X
+        if top_3:
+            top_signal = top_3[0]
+            intelligence_text = f"""🎯 Top Energy Signal: {top_signal['title'][:80]}
+📊 Score: {top_signal['score']['final_score']:.1f}/20
+🔬 Domain: {top_signal.get('domain', 'Energy')}
+📈 {len(critical)} critical signals detected this cycle"""
+        else:
+            intelligence_text = f"""📊 Energy Market Analysis Complete
+🔬 {len(all_signals)} signals processed
+📈 {len(strong)} strong opportunities identified  
+🎯 AlphaENRG intelligence synthesis active"""
+        
+        x_success = x_poster.post_daily_intelligence(intelligence_text)
+        
+        if x_success:
+            logger.info("   ✅ Posted to X successfully!")
+        else:
+            logger.error("   ✗ Failed to post to X")
+            
+        # Also post critical alerts to X
+        for sig in critical[:2]:  # Max 2 critical alerts to avoid spam
+            alert_text = f"{sig['title'][:100]} (Score: {sig['score']['final_score']:.1f})"
+            x_poster.post_breaking_alert(alert_text)
+            logger.info(f"   🚨 Critical alert posted to X")
+            
+    except Exception as e:
+        logger.error(f"   ✗ X posting failed: {e}")
     
     logger.info("\n" + "=" * 60)
     logger.info("✅ DIGEST RUN COMPLETE")

@@ -1,0 +1,38 @@
+# Trading Pairs Configuration
+pairs:
+  BTC/USDT:
+    enabled: true
+    min_volume_24h: 1000000000  # $1B minimum daily volume
+    tick_size: 0.1
+    min_order_size: 0.001
+    leverage: 5
+    priority: 1  # Higher priority pairs checked first
+    
+  ETH/USDT:
+    enabled: true
+    min_volume_24h: 500000000   # $500M minimum daily volume
+    tick_size: 0.01
+    min_order_size: 0.01
+    leverage: 5
+    priority: 2
+    
+  SOL/USDT:
+    enabled: true
+    min_volume_24h: 100000000   # $100M minimum daily volume
+    tick_size: 0.001
+    min_order_size: 0.1
+    leverage: 5
+    priority: 3
+
+# Market Hours (UTC)
+market_hours:
+  enabled: false  # Crypto trades 24/7
+  start_time: "00:00"
+  end_time: "23:59"
+  
+# Pair-specific overrides
+overrides:
+  # Example: Different settings for specific pairs
+  # BTC/USDT:
+  #   max_position_size_percent: 15
+  #   take_profit_percent: 2.0
