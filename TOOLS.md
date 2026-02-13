@@ -41,10 +41,15 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 - **NO local image gen** — ComfyUI was evaluated and rejected (too heavy for 16GB Mac Mini)
 - Cloud APIs only. This is a locked decision.
 
+### X/Twitter API
+- Bearer token + full OAuth 1.0a creds in Mac Mini's energy-agent/.env
+- Use bearer token for search, OAuth for posting (@AlphaENRG)
+- X API v2 endpoints — DON'T scrape x.com, use the API
+
 ---
 
 Add whatever helps you do your job. This is your cheat sheet.
 
 ## Last Synced
 <!-- Updated automatically by scripts/sync-workspace-to-macmini.sh or heartbeat -->
-**2026-02-12 06:00 GMT** — MacBook Air → Mac Mini
+**2026-02-12 22:40 GMT** — MacBook Air → Mac Mini

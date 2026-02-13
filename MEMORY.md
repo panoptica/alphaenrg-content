@@ -11,7 +11,7 @@
 
 ### MacBook Air — Dev/Remote Client
 - Tailscale: 100.89.198.106
-- Primary: anthropic/claude-opus-4-6 | Fallback: ollama/llama3.1-8b
+- Primary: anthropic/claude-sonnet-4-20250514 | Fallback: google/gemini-2.5-flash
 - This instance — for dev, testing, mobile work
 
 ### Kali Y2K — OSINT Node
@@ -40,16 +40,19 @@ All secrets in `secrets/.credentials`. Key refs:
 - Collectors: ArXiv ✅, SEC ✅, USPTO ✅ (key: PATENTSVIEW_API_KEY in .env)
 - Email may be broken (Gmail app password issue Feb 9)
 
-### Crypto Scalper — Paper Trading
-- Mac Mini: ~/crypto-scalper | $126 virtual capital
-- Bybit live data, paper mode | BTC/ETH/SOL | 10x leverage
-- Daily P&L cron 8am GMT → Telegram
-- Target: 1-3% daily before going live
+### Crypto Scalper — BINNED 2026-02-12
+- Project cancelled (going nowhere). Process stopped and disabled on Mac Mini.
+- Virtual capital remains unspent. Strategy failed to prove 1-3% daily target.
+
+### LFC Social Agent — BINNED 2026-02-12
+- Project cancelled. Not producing results.
+- 7 scheduled LaunchAgents disabled on Mac Mini.
+- Code archived to ~/binned/lfc-agent.
 
 ### AlphaEnergy / @AlphaENRG
 - ~1,100 followers | Substack: alphaenergy.substack.com
 - Auto-publisher needs Substack cookies from Matt
-- Editorial: UK English, no m-dashes, no emoji, lowercase subtitles, WHY not HOW
+- Editorial: UK English, no m-dashes, no emoji, lowercase subtitles (NEVER Title Case), WHY not HOW, sound human not AI
 
 ### Companion App — Specced
 - Spec: specs/companion-app-spec.md | Brand shortlist: Ember, Muse, Reverie, Velvet, Bloom
@@ -81,12 +84,12 @@ All secrets in `secrets/.credentials`. Key refs:
 - Custom Ollama providers need "apiKey": "ollama" dummy value
 - Mac Mini paths: export PATH when SSHing
 - Two independent configs (MacBook Air + Mac Mini) — don't confuse them
+- ALWAYS grep .env files + secrets/.credentials before claiming something is missing — Matt has given creds multiple times
+- Use X API (bearer token), don't scrape x.com
 
 ## Next Priorities
 1. Get Substack cookies → test auto-publisher
-2. Monitor crypto scalper → go live when 1-3% daily target met
-3. Jetson Orin: NVMe boot, Tailscale, OpenClaw
-4. Polymarket bot (needs wallet from Matt)
-5. Companion app: brand decision → MVP
-6. Fix energy agent email (Gmail app password)
-7. ~~web_search~~ DONE — Perplexity Sonar Pro wired into both instances
+2. Jetson Orin: NVMe boot, Tailscale, OpenClaw
+3. Build Polymarket bot (needs wallet from Matt)
+4. Companion app: brand decision → MVP
+5. Fix energy agent email (Gmail app password)
