@@ -86,6 +86,10 @@ All secrets in `secrets/.credentials`. Key refs:
 - Two independent configs (MacBook Air + Mac Mini) — don't confuse them
 - ALWAYS grep .env files + secrets/.credentials before claiming something is missing — Matt has given creds multiple times
 - Use X API (bearer token), don't scrape x.com
+- **CRITICAL: Service reliability is core competency** — Working solutions must not rot (Feb 13, 2026)
+- **State maintenance failure pattern** — Matt's feedback: "You simply cannot maintain state" and "It's poor and won't scale"
+- OpenClaw services crash frequently on Mac Mini — investigate LaunchDaemon setup for auto-restart
+- USPTO API changed from api.patentsview.org to search.patentsview.org — only supports exact equality matches
 
 ## Next Priorities
 1. Get Substack cookies → test auto-publisher
