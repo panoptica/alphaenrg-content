@@ -3,7 +3,7 @@
 ## Infrastructure
 
 ### Mac Mini M4 — PRIMARY 24/7 HUB
-- Tailscale: 100.98.31.10 | User: macmini | Password: see secrets/.credentials
+- Tailscale: 100.98.31.10 (hostname: MCMINI-M4) | User: macmini | Password: see secrets/.credentials
 - OpenClaw Gateway :18789 | Ollama :11434 | Telegram connected
 - Primary model: google/gemini-2.5-flash (1M ctx) | Fallback: claude-sonnet | Heartbeats: llama3.1:8b
 - Ollama binary: /usr/local/bin/ollama | OpenClaw: /opt/homebrew/bin/openclaw
