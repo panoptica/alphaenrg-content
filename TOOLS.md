@@ -52,4 +52,4 @@ Add whatever helps you do your job. This is your cheat sheet.
 
 ## Last Synced
 <!-- Updated automatically by scripts/sync-workspace-to-macmini.sh or heartbeat -->
-**2026-02-12 22:40 GMT** — MacBook Air → Mac Mini
+**2026-02-13 09:31 GMT** — MacBook Air → Mac Mini

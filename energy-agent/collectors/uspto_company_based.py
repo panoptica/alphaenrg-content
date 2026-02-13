@@ -1,8 +1,8 @@
 """
-USPTO Patent Collector - Simple Exact Matches Only.
+USPTO Patent Collector - Company-Based Approach.
 
-Since the API only supports exact equality, this version searches 
-for exact organization matches without date filtering.
+Since text searches are failing, this version searches for patents 
+from major energy companies instead of keywords.
 """
 import requests
 import json
@@ -19,26 +19,21 @@ logger = logging.getLogger(__name__)
 
 
 class USPTOCollector(BaseCollector):
-    """Simplified USPTO patent collector - exact matches only."""
+    """Company-based USPTO patent collector."""
     
     def __init__(self, api_key: str = None):
         super().__init__("uspto")
         self.base_url = "https://search.patentsview.org/api/v1/patent"
         self.api_key = api_key or os.getenv("PATENTSVIEW_API_KEY", "")
-        self.rate_limit_delay = 2.0
+        self.rate_limit_delay = 2.0  # Stay under 45 req/min
         
-        # Exact company names (must match exactly in API)
-        self.exact_companies = [
-            "Tesla, Inc.",
-            "General Electric Company", 
-            "Microsoft Corporation",
-            "Apple Inc.",
-            "Samsung Electronics Co., Ltd.",
-            "Toyota Motor Corporation",
-            "Ford Motor Company",
-            "General Motors LLC",
-            "Panasonic Corporation",
-            "LG Energy Solution, Ltd."
+        # Major energy companies to search for
+        self.energy_companies = [
+            "Tesla", "General Electric", "Siemens", "Microsoft", "Google",
+            "Apple", "Samsung", "Toyota", "Ford", "GM", "Volkswagen",
+            "BYD", "CATL", "Panasonic", "LG Energy", "SK Innovation",
+            "Vestas", "Orsted", "NextEra", "Enel", "EDF", "Shell",
+            "BP", "ExxonMobil", "TotalEnergies", "Chevron"
         ]
         
         if not self.api_key:
@@ -46,29 +41,34 @@ class USPTOCollector(BaseCollector):
     
     def collect(self, date_from: datetime = None, date_to: datetime = None) -> List[Dict[str, Any]]:
         """
-        Collect patents from major companies.
-        Note: Date filtering not supported, gets recent patents from these companies.
+        Collect patents from major energy companies.
+        Uses 2023 data since recent patents aren\""t published yet.
         """
         if not self.api_key:
             logger.error("No API key - cannot collect from USPTO")
             return []
         
+        # Use 2023 data (patents take time to publish)
+        logger.info("Using 2023 data (recent patents not yet published)")
+        date_from = datetime(2023, 1, 1)
+        date_to = datetime(2023, 12, 31)
+        
         all_signals = []
         
-        # Search each company (limit to first few to avoid rate limits)
-        for company in self.exact_companies[:5]:
+        # Search for each company
+        for company in self.energy_companies:
             try:
-                signals = self._collect_by_exact_company(company)
+                signals = self._collect_by_company(company, date_from, date_to)
                 all_signals.extend(signals)
-                time.sleep(self.rate_limit_delay)
+                time.sleep(self.rate_limit_delay)  # Rate limiting
                 
-                if len(all_signals) >= 30:  # Limit total
+                if len(all_signals) >= 50:  # Limit total results
                     break
                     
             except Exception as e:
                 logger.error(f"Error collecting {company} patents: {e}")
         
-        # Deduplicate 
+        # Deduplicate by patent number
         seen = set()
         unique_signals = []
         for sig in all_signals:
@@ -79,12 +79,27 @@ class USPTOCollector(BaseCollector):
         logger.info(f"Collected {len(unique_signals)} unique patents")
         return unique_signals
     
-    def _collect_by_exact_company(self, company: str) -> List[Dict[str, Any]]:
-        """Collect patents from exact company name match."""
+    def _collect_by_company(
+        self, 
+        company: str,
+        date_from: datetime, 
+        date_to: datetime
+    ) -> List[Dict[str, Any]]:
+        """Collect patents from a specific company."""
         
-        # Simple exact match query (known to work)
-        query = {"assignees.assignee_organization": company}
+        date_from_str = date_from.strftime("%Y-%m-%d")
+        date_to_str = date_to.strftime("%Y-%m-%d")
         
+        # Company + date query (known to work)
+        query = {
+            "_and": [
+                {"patent_date": {"_gte": date_from_str}},
+                {"patent_date": {"_lte": date_to_str}},
+                {"assignees.assignee_organization": {"_contains": company}}
+            ]
+        }
+        
+        # Fields to retrieve
         fields = [
             "patent_id",
             "patent_title", 
@@ -101,7 +116,7 @@ class USPTOCollector(BaseCollector):
         payload = {
             "q": query,
             "f": fields,
-            "o": {"per_page": 10}  # Small batches
+            "o": {"per_page": 20}  # Limit per company
         }
         
         try:
@@ -117,7 +132,7 @@ class USPTOCollector(BaseCollector):
             logger.error(f"USPTO API request failed for {company}: {e}")
             return []
         except ValueError as e:
-            logger.error(f"Failed to parse response for {company}: {e}")
+            logger.error(f"Failed to parse USPTO response for {company}: {e}")
             return []
         
         if data.get("error"):
@@ -132,10 +147,7 @@ class USPTOCollector(BaseCollector):
                 continue
                 
             # Extract entities
-            entities = {
-                "companies": [company],
-                "technologies": [self._classify_domain(patent)]
-            }
+            entities = self._extract_entities(patent, company)
             
             # Build URL
             patent_id = patent.get("patent_id", "")
@@ -151,31 +163,63 @@ class USPTOCollector(BaseCollector):
                 entities=entities
             )
             
+            # Add domain tag based on content
             signal["domain"] = self._classify_domain(patent)
             signals.append(signal)
         
         logger.info(f"Found {len(signals)} patents for {company}")
         return signals
     
+    def _extract_entities(self, patent: Dict, company: str) -> Dict[str, List[str]]:
+        """Extract companies and technologies from patent data."""
+        entities = {
+            "companies": [company],
+            "technologies": []
+        }
+        
+        # Extract all assignees
+        assignees = patent.get("assignees", [])
+        for assignee in assignees:
+            if assignee and isinstance(assignee, dict):
+                org = assignee.get("assignee_organization", "")
+                if org and org not in entities["companies"]:
+                    entities["companies"].append(org)
+                    
+                # Check tier
+                for t1 in TIER_1_COMPANIES:
+                    if t1.lower() in org.lower():
+                        entities["tier"] = 1
+                        break
+                for t2 in TIER_2_COMPANIES:
+                    if t2.lower() in org.lower():
+                        entities["tier"] = entities.get("tier", 2)
+        
+        return entities
+    
     def _classify_domain(self, patent: Dict) -> str:
-        """Classify patent into technology domain."""
+        """Classify patent into technology domain based on title/abstract."""
         title = patent.get("patent_title", "")
         abstract = patent.get("patent_abstract", "")
         text = (title + " " + abstract).lower()
-        
-        if any(kw in text for kw in ["battery", "lithium", "cell"]):
+        abstract = patent.get("patent_abstract", "")
+        text = f"{title} {abstract}".lower()
+        if any(kw in text for kw in ["battery", "lithium", "cell", "energy storage"]):
             return "battery"
-        elif any(kw in text for kw in ["solar", "photovoltaic"]):
+        elif any(kw in text for kw in ["solar", "photovoltaic", "pv"]):
             return "solar"
         elif any(kw in text for kw in ["wind", "turbine"]):
             return "wind"
-        elif any(kw in text for kw in ["hydrogen", "fuel cell"]):
+        elif any(kw in text for kw in ["hydrogen", "fuel cell", "electrolysis"]):
             return "hydrogen"
+        elif any(kw in text for kw in ["nuclear", "reactor", "uranium"]):
+            return "nuclear"
+        elif any(kw in text for kw in ["cooling", "thermal", "heat"]):
+            return "cooling"
         else:
             return "energy"
     
     def _parse_date(self, date_str: Optional[str]) -> datetime:
-        """Parse date string."""
+        """Parse date string from USPTO."""
         if not date_str:
             return datetime.now()
         try:
