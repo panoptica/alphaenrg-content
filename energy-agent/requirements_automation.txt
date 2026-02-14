@@ -1,0 +1,22 @@
+# AlphaENRG Multi-Platform Automation Requirements
+# Core dependencies for X/Twitter, Facebook, and Substack publishing
+
+# Existing dependencies (already in main requirements)
+tweepy>=4.14.0
+python-dotenv>=1.0.0
+requests>=2.31.0
+
+# Facebook Graph API
+facebook-sdk>=3.1.0
+
+# Web automation for Substack (no direct API)
+selenium>=4.15.0
+
+# Chrome WebDriver (for headless browser automation)
+# Note: You'll also need to install chromedriver separately
+# On macOS: brew install --cask chromedriver
+# On Linux: apt-get install chromium-chromedriver
+
+# Additional utilities
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
