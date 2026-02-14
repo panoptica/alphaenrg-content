@@ -51,7 +51,8 @@ All secrets in `secrets/.credentials`. Key refs:
 
 ### AlphaEnergy / @AlphaENRG
 - ~1,100 followers | Substack: alphaenergy.substack.com
-- Auto-publisher needs Substack cookies from Matt
+- ✅ Multi-platform automation built (X/Twitter, Facebook, Substack)
+- Auto-publisher ready - needs platform credentials configuration
 - Editorial: UK English, no m-dashes, no emoji, lowercase subtitles (NEVER Title Case), WHY not HOW, sound human not AI
 
 ### Companion App — Specced
@@ -90,10 +91,18 @@ All secrets in `secrets/.credentials`. Key refs:
 - **State maintenance failure pattern** — Matt's feedback: "You simply cannot maintain state" and "It's poor and won't scale"
 - OpenClaw services crash frequently on Mac Mini — investigate LaunchDaemon setup for auto-restart
 - USPTO API changed from api.patentsview.org to search.patentsview.org — only supports exact equality matches
+- SSH authentication with Mac Mini is a critical infrastructure dependency.
+- Hostname `macmini` requires SSH config or `/etc/hosts` entry.
+- SSH public key management is critical for distributed OpenClaw operations.
+- Heartbeat system working correctly but blocked by authentication layer.
 
 ## Next Priorities
-1. Get Substack cookies → test auto-publisher
-2. Jetson Orin: NVMe boot, Tailscale, OpenClaw
-3. Build Polymarket bot (needs wallet from Matt)
-4. Companion app: brand decision → MVP
-5. Fix energy agent email (Gmail app password)
+1. ✅ COMPLETED: Built multi-platform automation (X/Twitter, Facebook, Substack)
+2. Configure Facebook & Substack API credentials for automation
+3. Test and deploy daily automated publishing pipeline
+4. Jetson Orin: NVMe boot, Tailscale, OpenClaw
+5. Build Polymarket bot (needs wallet from Matt)
+6. Companion app: brand decision → MVP
+7. CRITICAL: Resolve SSH key authorization to Mac Mini for infrastructure sync
+8. Investigate USPTO/Lens.org API authentication issues
+9. Fix energy agent email (Gmail app password)
