@@ -38,7 +38,7 @@ All secrets in `secrets/.credentials`. Key refs:
 - Code: `energy-agent/` | Spec: `specs/energy-intelligence-agent-spec.md`
 - Daily 7am digest to oc@cloudmonkey.io
 - Collectors: ArXiv ✅, SEC ✅, USPTO ✅ (key: PATENTSVIEW_API_KEY in .env)
-- Email may be broken (Gmail app password issue Feb 9)
+- ✅ Email digest working (486 signals on Feb 14, 2026)
 
 ### Crypto Scalper — BINNED 2026-02-12
 - Project cancelled (going nowhere). Process stopped and disabled on Mac Mini.
