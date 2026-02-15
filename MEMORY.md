@@ -60,7 +60,12 @@ All secrets in `secrets/.credentials`. Key refs:
 - Revenue: free/£9.99/£19.99 + virtual gifts
 - Status: needs brand decision + MVP build
 
-### Polymarket Bot — Scoped
+
+### Daily OpenClaw Intelligence Brief
+- Status: New automated research service initiated on Feb 14, 2026
+- Focus: Market opportunity research and trend analysis
+- Delivery: oc@cloudmonkey.io
+
 - Cross-ref AlphaEnergy signals with Polymarket odds
 - Needs Polygon wallet + USDC from Matt
 
@@ -103,6 +108,6 @@ All secrets in `secrets/.credentials`. Key refs:
 4. Jetson Orin: NVMe boot, Tailscale, OpenClaw
 5. Build Polymarket bot (needs wallet from Matt)
 6. Companion app: brand decision → MVP
-7. CRITICAL: Resolve SSH key authorization to Mac Mini for infrastructure sync
+7. ✅ COMPLETED: Resolved SSH key authorization to Mac Mini for infrastructure sync (using direct IP)
 8. Investigate USPTO/Lens.org API authentication issues
 9. Fix energy agent email (Gmail app password)
