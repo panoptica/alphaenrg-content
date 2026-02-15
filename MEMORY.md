@@ -78,7 +78,7 @@ All secrets in `secrets/.credentials`. Key refs:
 - Earnings crons set (VRT, CVX, MU, TSLA, INTC, PLTR)
 
 ## Lessons (Hard-Won)
-- ALWAYS use Tailscale IPs, never LAN
+- ALWAYS use Netbird IPs, never LAN (migrated from Tailscale Feb 15, 2026)
 - 8B models too weak for OpenClaw agent — use 2.5 Flash / Sonnet minimum
 - Write memory immediately — "mental notes" don't survive sessions
 - Custom Ollama providers need "apiKey": "ollama" dummy value
