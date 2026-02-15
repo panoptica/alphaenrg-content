@@ -1,0 +1,29 @@
+---
+all:
+  children:
+    openclaw_masters:
+      hosts:
+        mac-mini:
+          ansible_host: 100.87.48.20
+          ansible_user: oc
+          ansible_ssh_private_key_file: ~/.ssh/id_ed25519
+          
+    openclaw_osint:
+      hosts:
+        kali-y2k:
+          ansible_host: 100.87.231.197
+          ansible_user: oc
+          ansible_ssh_private_key_file: ~/.ssh/id_ed25519
+          
+    openclaw_ai:
+      hosts:
+        jetson-orin:
+          ansible_host: 100.87.171.38
+          ansible_user: oc
+          ansible_ssh_private_key_file: ~/.ssh/id_ed25519
+          
+    openclaw_all:
+      children:
+        - openclaw_masters
+        - openclaw_osint  
+        - openclaw_ai

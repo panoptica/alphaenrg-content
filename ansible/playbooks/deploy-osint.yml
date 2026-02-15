@@ -1,0 +1,49 @@
+---
+- name: Deploy OpenClaw OSINT Agent (Kali Y2K)
+  hosts: openclaw_osint
+  become: true
+  vars_files:
+    - ../vault.yml
+    
+  roles:
+    - common
+    - netbird
+    - openclaw-core
+    - openclaw-osint
+    - kali-tools
+    - monitoring
+    
+  tasks:
+    - name: Ensure OpenClaw OSINT services are running
+      systemd:
+        name: "{{ item }}"
+        state: started  
+        enabled: true
+      loop:
+        - openclaw-osint
+        - reddit-collector
+        - news-collector
+        
+    - name: Configure OSINT collection cron jobs
+      cron:
+        name: "{{ item.name }}"
+        minute: "{{ item.minute | default('0') }}"
+        hour: "{{ item.hour }}"
+        job: "{{ item.job }}"
+      loop:
+        - name: "Reddit Collection"
+          hour: "*/4"
+          job: "/opt/openclaw/scripts/collect-reddit.sh"
+        - name: "News Collection"
+          hour: "*/4" 
+          minute: "15"
+          job: "/opt/openclaw/scripts/collect-news.sh"
+        - name: "Darkweb Scan"
+          hour: "2"
+          job: "/opt/openclaw/scripts/scan-darkweb.sh"
+          
+  handlers:
+    - name: restart openclaw-osint
+      systemd:
+        name: openclaw-osint
+        state: restarted

@@ -1,0 +1,36 @@
+---
+# Jetson Orin - AI/CV Specialist Configuration
+openclaw_role: "ai"
+openclaw_agent_id: "ai-agent"
+
+# AI/CV specific services
+openclaw_services:
+  - image_analysis
+  - video_processing
+  - satellite_cv
+  - model_inference
+  - gpu_monitoring
+
+# AI-optimized models (local inference preferred)
+openclaw_models:
+  primary: "local-ollama/qwen2.5:7b"
+  vision: "local-ollama/llava:7b"  
+  fallback: "google/gemini-2.5-flash"
+
+# Jetson-specific GPU settings
+jetson_gpu_memory: "8192"
+jetson_max_gpu_freq: "max"
+jetson_power_mode: "maxn"
+
+# CV processing settings  
+cv_batch_size: 4
+cv_model_cache: "/opt/models"
+cv_temp_storage: "/tmp/cv"
+
+# Connect to master for coordination
+master_endpoint: "http://100.87.48.20:18789"
+
+# Jetson Orin resource limits (8GB RAM + GPU)
+openclaw_max_memory: "6G" 
+openclaw_max_sessions: 2
+openclaw_gpu_enabled: true

@@ -1,0 +1,35 @@
+---
+- name: Update package cache
+  package:
+    update_cache: true
+    
+- name: Install common packages
+  package:
+    name: "{{ common_packages }}"
+    state: present
+    
+- name: Create openclaw user
+  user:
+    name: "{{ openclaw_user }}"
+    group: "{{ openclaw_group }}"
+    home: "{{ openclaw_home }}"
+    shell: /bin/bash
+    create_home: true
+    
+- name: Create openclaw directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ openclaw_user }}"
+    group: "{{ openclaw_group }}"
+    mode: '0755'
+  loop:
+    - "{{ openclaw_install_dir }}"
+    - "{{ openclaw_config_dir }}"
+    - "{{ openclaw_log_dir }}"
+    - "{{ openclaw_data_dir }}"
+    
+- name: Configure SSH for openclaw user
+  authorized_key:
+    user: "{{ openclaw_user }}"
+    key: "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}"

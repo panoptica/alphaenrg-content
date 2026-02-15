@@ -1,0 +1,52 @@
+---
+- name: Deploy OpenClaw AI Agent (Jetson Orin)
+  hosts: openclaw_ai
+  become: true
+  vars_files:
+    - ../vault.yml
+    
+  roles:
+    - common
+    - netbird
+    - openclaw-core  
+    - openclaw-ai
+    - jetson-optimization
+    - cuda-toolkit
+    - monitoring
+    
+  tasks:
+    - name: Optimize Jetson power settings
+      shell: |
+        sudo nvpmodel -m 0  # Max performance mode
+        sudo jetson_clocks   # Max clocks
+      
+    - name: Ensure OpenClaw AI services are running
+      systemd:
+        name: "{{ item }}"
+        state: started
+        enabled: true  
+      loop:
+        - openclaw-ai
+        - gpu-monitor
+        
+    - name: Create model cache directory
+      file:
+        path: "{{ cv_model_cache }}"
+        state: directory
+        owner: "{{ openclaw_user }}"
+        group: "{{ openclaw_group }}"
+        mode: '0755'
+        
+    - name: Download common AI models
+      get_url:
+        url: "{{ item.url }}"
+        dest: "{{ cv_model_cache }}/{{ item.name }}"
+      loop:
+        - name: "yolo11n.pt"
+          url: "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolo11n.pt"
+          
+  handlers:
+    - name: restart openclaw-ai
+      systemd:
+        name: openclaw-ai
+        state: restarted

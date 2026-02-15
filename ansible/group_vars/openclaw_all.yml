@@ -1,0 +1,41 @@
+---
+# Common configuration for all OpenClaw instances
+openclaw_version: "latest"
+openclaw_user: "oc"
+openclaw_group: "oc" 
+openclaw_home: "/home/oc"
+openclaw_install_dir: "/opt/openclaw"
+openclaw_config_dir: "/etc/openclaw"
+openclaw_log_dir: "/var/log/openclaw"
+openclaw_data_dir: "/var/lib/openclaw"
+
+# Common environment
+common_packages:
+  - git
+  - curl
+  - wget
+  - htop
+  - vim
+  - tmux
+  - netbird
+  
+# SSH configuration
+ssh_key_type: "ed25519"
+ssh_authorized_keys_exclusive: false
+
+# Netbird mesh network
+netbird_setup_key: "{{ vault_netbird_setup_key }}"
+netbird_management_url: "https://api.netbird.io"
+
+# Security settings
+fail2ban_enabled: true
+ufw_enabled: true
+auto_updates_enabled: true
+
+# Monitoring
+monitoring_enabled: true
+log_retention_days: 30
+
+# Git repository for deployments
+openclaw_repo: "https://github.com/panoptica/empire.git"
+openclaw_branch: "main"

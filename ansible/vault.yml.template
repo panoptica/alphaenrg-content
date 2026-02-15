@@ -1,0 +1,22 @@
+# Template for encrypted secrets (vault.yml)
+# Copy this file and encrypt with: ansible-vault create vault.yml
+
+---
+# Netbird mesh network
+vault_netbird_setup_key: "your-netbird-setup-key-here"
+
+# OpenClaw API tokens
+vault_openclaw_telegram_token: "your-telegram-bot-token"
+vault_openclaw_github_token: "your-github-pat"
+
+# External API keys
+vault_patentsview_api_key: "your-patentsview-key"
+vault_twitter_bearer_token: "your-x-api-bearer-token"
+vault_openai_api_key: "your-openai-key"  
+vault_anthropic_api_key: "your-anthropic-key"
+
+# Email credentials  
+vault_gmail_app_password: "your-gmail-app-password"
+
+# Database credentials (if needed)
+vault_db_password: "secure-database-password"

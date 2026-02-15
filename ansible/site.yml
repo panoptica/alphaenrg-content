@@ -1,0 +1,5 @@
+---
+# Main deployment playbook for distributed OpenClaw infrastructure
+- import_playbook: playbooks/deploy-master.yml
+- import_playbook: playbooks/deploy-osint.yml  
+- import_playbook: playbooks/deploy-ai.yml

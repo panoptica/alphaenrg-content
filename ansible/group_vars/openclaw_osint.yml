@@ -1,0 +1,36 @@
+---
+# Kali Y2K - OSINT Specialist Configuration  
+openclaw_role: "osint"
+openclaw_agent_id: "osint-agent"
+
+# OSINT-specific services
+openclaw_services:
+  - reddit_collector
+  - news_collector 
+  - darkweb_collector
+  - patent_scraper
+  - social_monitor
+
+# Lightweight models for OSINT tasks
+openclaw_models:
+  primary: "google/gemini-2.5-flash"
+  fallback: "local-ollama/qwen2.5:7b"
+  
+# OSINT collection intervals
+osint_collection_interval: "4h"
+osint_data_retention: "30d"
+
+# Kali-specific tools
+kali_tools:
+  - nmap
+  - sqlmap
+  - gobuster
+  - subfinder
+  - httpx
+
+# Connect to master for coordination
+master_endpoint: "http://100.87.48.20:18789"
+
+# Resource limits (lighter workload)
+openclaw_max_memory: "4G"
+openclaw_max_sessions: 3

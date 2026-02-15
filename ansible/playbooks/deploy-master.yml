@@ -1,0 +1,47 @@
+---
+- name: Deploy OpenClaw Master (Mac Mini)
+  hosts: openclaw_masters
+  become: true
+  vars_files:
+    - ../vault.yml
+    
+  roles:
+    - common
+    - netbird  
+    - openclaw-core
+    - openclaw-master
+    - ollama
+    - monitoring
+    
+  tasks:
+    - name: Ensure OpenClaw master services are running
+      systemd:
+        name: "{{ item }}"
+        state: started
+        enabled: true
+      loop:
+        - openclaw-gateway
+        - openclaw-telegram
+        - ollama
+        
+    - name: Configure cron jobs for master
+      cron:
+        name: "{{ item.name }}"
+        minute: "{{ item.minute | default('0') }}"
+        hour: "{{ item.hour | default('*') }}"
+        job: "{{ item.job }}"
+      loop:
+        - name: "Energy Digest"
+          minute: "0"
+          hour: "7"
+          job: "/opt/openclaw/scripts/energy-digest.sh"
+        - name: "Security Audit"  
+          minute: "0"
+          hour: "9"
+          job: "/opt/openclaw/scripts/security-audit.sh"
+          
+  handlers:
+    - name: restart openclaw
+      systemd:
+        name: openclaw-gateway
+        state: restarted

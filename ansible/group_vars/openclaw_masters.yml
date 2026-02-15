@@ -1,0 +1,28 @@
+---
+# Mac Mini - Master Coordinator Configuration
+openclaw_role: "master"
+openclaw_agent_id: "main"
+
+# Services this master handles
+openclaw_services:
+  - gateway
+  - telegram_bot
+  - energy_digest
+  - security_audit
+  - heartbeat_monitoring
+
+# Models for master (high-end)
+openclaw_models:
+  primary: "anthropic/claude-sonnet-4-20250514"
+  fallback: "google/gemini-2.5-flash"
+  heartbeat: "llama3.1:8b"
+
+# Master-specific configs
+openclaw_gateway_port: 18789
+openclaw_ollama_port: 11434
+openclaw_enable_ui: true
+openclaw_log_level: "info"
+
+# Resource limits (Mac Mini M4 - 16GB RAM)
+openclaw_max_memory: "12G"
+openclaw_max_sessions: 10
