@@ -3,24 +3,24 @@
 ## Infrastructure
 
 ### Mac Mini M4 — PRIMARY 24/7 HUB
-- Netbird: 100.87.48.20 | User: macmini | Password: see secrets/.credentials
+- Netbird: 100.87.48.20 | User: oc | Password: Q1+?typ
 - OpenClaw Gateway :18789 | Ollama :11434 | Telegram connected
 - Primary model: google/gemini-2.5-flash (1M ctx) | Fallback: claude-sonnet | Heartbeats: llama3.1:8b
 - Ollama binary: /usr/local/bin/ollama | OpenClaw: /opt/homebrew/bin/openclaw
 - 16GB RAM, MPS GPU, needs LaunchDaemon for auto-start
 
-### MacBook Air — Dev/Remote Client
-- Netbird: 100.87.78.214
+### MacBook Air — Dev/Remote Client  
+- Netbird: 100.87.78.214 | User: oc | Password: Q1+?typ
 - Primary: anthropic/claude-sonnet-4-20250514 | Fallback: google/gemini-2.5-flash
 - This instance — for dev, testing, mobile work
 
 ### Kali Y2K — OSINT Node
-- Netbird: 100.87.231.197 | User: panoptica | see secrets/.credentials
+- Netbird: 100.87.231.197 | User: oc | Password: Q1+?typ
 - OSINT collectors (Reddit/News/Darkweb) + 4hr cron
 - SSH key setup pending
 
 ### Jetson Orin — CONNECTED ✅
-- Netbird: 100.87.171.38 | User: panoptica | Password: see secrets/.credentials
+- Netbird: 100.87.171.38 | User: oc | Password: Q1+?typ
 - OS: Ubuntu 22.04 | Target: satellite imagery CV
 - Status: Connected to Netbird mesh network
 

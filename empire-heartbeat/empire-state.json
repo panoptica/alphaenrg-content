@@ -1,5 +1,7 @@
 {
   "devices": {},
-  "last_alerts": {},
+  "last_alerts": {
+    "Compute Empire Alert": 1771193085.832368
+  },
   "uptime_stats": {}
 }
