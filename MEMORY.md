@@ -3,26 +3,26 @@
 ## Infrastructure
 
 ### Mac Mini M4 — PRIMARY 24/7 HUB
-- Tailscale: 100.98.31.10 (hostname: MCMINI-M4) | User: macmini | Password: see secrets/.credentials
+- Netbird: 100.87.48.20 | User: macmini | Password: see secrets/.credentials
 - OpenClaw Gateway :18789 | Ollama :11434 | Telegram connected
 - Primary model: google/gemini-2.5-flash (1M ctx) | Fallback: claude-sonnet | Heartbeats: llama3.1:8b
 - Ollama binary: /usr/local/bin/ollama | OpenClaw: /opt/homebrew/bin/openclaw
 - 16GB RAM, MPS GPU, needs LaunchDaemon for auto-start
 
 ### MacBook Air — Dev/Remote Client
-- Tailscale: 100.89.198.106
+- Netbird: 100.87.78.214
 - Primary: anthropic/claude-sonnet-4-20250514 | Fallback: google/gemini-2.5-flash
 - This instance — for dev, testing, mobile work
 
 ### Kali Y2K — OSINT Node
-- Tailscale: 100.127.194.8 | User: oc | see secrets/.credentials
+- Netbird: 100.87.231.197 | User: panoptica | see secrets/.credentials
 - OSINT collectors (Reddit/News/Darkweb) + 4hr cron
 - SSH key setup pending
 
-### Jetson Orin — Pending
-- LAN: 192.168.154.124 (not on Tailscale yet)
-- User: panoptica | Password: see secrets/.credentials
-- Target: satellite imagery CV | Needs reboot + NVMe boot
+### Jetson Orin — CONNECTED ✅
+- Netbird: 100.87.171.38 | User: panoptica | Password: see secrets/.credentials
+- OS: Ubuntu 22.04 | Target: satellite imagery CV
+- Status: Connected to Netbird mesh network
 
 ## Credentials
 All secrets in `secrets/.credentials`. Key refs:
@@ -37,8 +37,8 @@ All secrets in `secrets/.credentials`. Key refs:
 ### Energy Agent — MVP Running
 - Code: `energy-agent/` | Spec: `specs/energy-intelligence-agent-spec.md`
 - Daily 7am digest to oc@cloudmonkey.io
-- Collectors: ArXiv ✅, SEC ✅, USPTO ✅ (key: PATENTSVIEW_API_KEY in .env)
-- ✅ Email digest working (486 signals on Feb 14, 2026)
+- Collectors: ArXiv ✅, SEC ✅, USPTO ⚠️ (fixed Feb 13 - company-based search only), Lens ⚠️ (needs testing)
+- Email may be broken (Gmail app password issue Feb 9)
 
 ### Crypto Scalper — BINNED 2026-02-12
 - Project cancelled (going nowhere). Process stopped and disabled on Mac Mini.
@@ -51,8 +51,7 @@ All secrets in `secrets/.credentials`. Key refs:
 
 ### AlphaEnergy / @AlphaENRG
 - ~1,100 followers | Substack: alphaenergy.substack.com
-- ✅ Multi-platform automation built (X/Twitter, Facebook, Substack)
-- Auto-publisher ready - needs platform credentials configuration
+- Auto-publisher needs Substack cookies from Matt
 - Editorial: UK English, no m-dashes, no emoji, lowercase subtitles (NEVER Title Case), WHY not HOW, sound human not AI
 
 ### Companion App — Specced
@@ -60,12 +59,7 @@ All secrets in `secrets/.credentials`. Key refs:
 - Revenue: free/£9.99/£19.99 + virtual gifts
 - Status: needs brand decision + MVP build
 
-
-### Daily OpenClaw Intelligence Brief
-- Status: New automated research service initiated on Feb 14, 2026
-- Focus: Market opportunity research and trend analysis
-- Delivery: oc@cloudmonkey.io
-
+### Polymarket Bot — Scoped
 - Cross-ref AlphaEnergy signals with Polymarket odds
 - Needs Polygon wallet + USDC from Matt
 
@@ -96,18 +90,16 @@ All secrets in `secrets/.credentials`. Key refs:
 - **State maintenance failure pattern** — Matt's feedback: "You simply cannot maintain state" and "It's poor and won't scale"
 - OpenClaw services crash frequently on Mac Mini — investigate LaunchDaemon setup for auto-restart
 - USPTO API changed from api.patentsview.org to search.patentsview.org — only supports exact equality matches
-- SSH authentication with Mac Mini is a critical infrastructure dependency.
-- Hostname `macmini` requires SSH config or `/etc/hosts` entry.
-- SSH public key management is critical for distributed OpenClaw operations.
-- Heartbeat system working correctly but blocked by authentication layer.
+- **Netbird Migration Complete (Feb 15, 2026)** — Migrated entire infrastructure from broken Tailscale to reliable Netbird P2P mesh. All SSH and workspace sync now via Netbird IPs only.
+- **Final Netbird IPs**: MacBook Air 100.87.78.214, Mac Mini 100.87.48.20, Y2K 100.87.231.197, Jetson Orin 100.87.171.38
+- **Infrastructure lesson**: Replace unreliable systems entirely rather than fighting with them
+- **AlphaEnergy cron job model errors** — Fixed broken "google/gemini-2.5-flash" model references in isolated session jobs
 
-## Next Priorities
-1. ✅ COMPLETED: Built multi-platform automation (X/Twitter, Facebook, Substack)
-2. Configure Facebook & Substack API credentials for automation
-3. Test and deploy daily automated publishing pipeline
+## Next Priorities  
+1. **Complete SSH key setup** — Fix authentication for workspace sync via Netbird
+2. **Complete Lens API integration** — Test and debug Lens collector hanging issues
+3. Get Substack cookies → test auto-publisher
 4. Jetson Orin: NVMe boot, Tailscale, OpenClaw
 5. Build Polymarket bot (needs wallet from Matt)
 6. Companion app: brand decision → MVP
-7. ✅ COMPLETED: Resolved SSH key authorization to Mac Mini for infrastructure sync (using direct IP)
-8. Investigate USPTO/Lens.org API authentication issues
-9. Fix energy agent email (Gmail app password)
+7. Fix energy agent email (Gmail app password)
