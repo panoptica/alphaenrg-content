@@ -8,21 +8,25 @@
 - Primary model: google/gemini-2.5-flash (1M ctx) | Fallback: claude-sonnet | Heartbeats: llama3.1:8b
 - Ollama binary: /usr/local/bin/ollama | OpenClaw: /opt/homebrew/bin/openclaw
 - 16GB RAM, MPS GPU, needs LaunchDaemon for auto-start
+- **CRITICAL: Firewall OFF, high exposure**
 
 ### MacBook Air — Dev/Remote Client  
 - Netbird: 100.87.78.214 | User: oc | Password: Q1+?typ
 - Primary: anthropic/claude-sonnet-4-20250514 | Fallback: google/gemini-2.5-flash
 - This instance — for dev, testing, mobile work
+- **🔴 Offline / SSH refused (Feb 16)**
 
 ### Kali Y2K — OSINT Node
 - Netbird: 100.87.231.197 | User: oc | Password: Q1+?typ
 - OSINT collectors (Reddit/News/Darkweb) + 4hr cron
 - SSH key setup pending
+- **⚠️ PAM authentication failures detected (Feb 16)**
 
 ### Jetson Orin — REFRESHING 🔄
 - Netbird: 100.87.171.38 | User: oc | Password: Q1+?typ
 - OS: Ubuntu 22.04 | Target: satellite imagery CV
 - Status: Currently undergoing clean refresh, console connected via Y2K.
+- **🔴 Offline / Connection timeout (Feb 16)**
 
 ## Credentials
 All secrets in `secrets/.credentials`. Key refs:
@@ -36,12 +40,13 @@ All secrets in `secrets/.credentials`. Key refs:
 
 ### Energy Agent — MVP Running
 - Code: `energy-agent/` | Spec: `specs/energy-intelligence-agent-spec.md`
-- Daily 7am digest to oc@cloudmonkey.io (✅ Feb 15)
-- Collectors: ArXiv ✅, SEC ✅, USPTO ✅ (company-based search), Lens ⚠️ (still failing 401 errors Feb 15)
-- Email sending ✅ (digest sent Feb 15). Local Ollama connection issues (non-critical).
+- Daily 7am digest to oc@cloudmonkey.io (✅ Feb 16)
+- Collectors: ArXiv ✅, SEC ✅, USPTO ✅ (company-based search), Lens ⚠️ (still failing 401 errors Feb 16)
+- 1,396 total signals collected (99 strong, 489 interesting, 99 new)
+- Email sending ✅ (digest sent Feb 16). Local Ollama connection issues (non-critical).
 
 ### Daily OpenClaw Intelligence Brief — Launched
-- Automated research service initiated Feb 15
+- Automated research service initiated Feb 16
 - Market opportunity research and trend analysis
 - Delivery target: oc@cloudmonkey.io
 
@@ -107,12 +112,20 @@ All secrets in `secrets/.credentials`. Key refs:
 - **AlphaEnergy cron job model errors** — Fixed broken "google/gemini-2.5-flash" model references in isolated session jobs
 - Direct IP addressing is more reliable than hostname resolution (Feb 15, 2026)
 - Heartbeat timestamp management requires careful epoch time calculations (Feb 15, 2026)
+- **Security audit revealed critical vulnerabilities (Mac Mini firewall, prompt injection risk, infrastructure connectivity) requiring immediate remediation (Feb 16, 2026)**
+- Need to prioritize firewall configuration and sandboxing for production security.
+- Infrastructure monitoring reveals connectivity issues requiring investigation.
+- Energy intelligence pipeline resilient despite individual API failures.
 
 ## Next Priorities  
-1. **Complete SSH key setup** — Fix authentication for workspace sync via Netbird
-2. **Complete Lens API integration** — Test and debug Lens collector hanging issues
-3. Get Substack cookies → test auto-publisher
-4. **Jetson Orin: NVMe boot, Netbird, OpenClaw** — Complete refresh and deployment
-5. Build Polymarket bot (needs wallet from Matt)
-6. Companion app: brand decision → MVP
-7. Fix energy agent email (Gmail app password)
+1. **CRITICAL: Enable Mac Mini firewall & OpenClaw sandboxing**
+2. **CRITICAL: Investigate MacBook Air (SSH refused) & Jetson Orin (connection timeout) connectivity**
+3. Configure authentication rate limiting for OpenClaw Gateway
+4. Schedule OpenClaw security update (npm 2026.2.15)
+5. Complete SSH key setup — Fix authentication for workspace sync via Netbird
+6. Complete Lens API integration — Test and debug Lens collector hanging issues
+7. Get Substack cookies → test auto-publisher
+8. Jetson Orin: NVMe boot, Netbird, OpenClaw — Complete refresh and deployment
+9. Build Polymarket bot (needs wallet from Matt)
+10. Companion app: brand decision → MVP
+11. Fix energy agent email (Gmail app password)
