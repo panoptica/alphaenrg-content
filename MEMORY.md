@@ -19,10 +19,10 @@
 - OSINT collectors (Reddit/News/Darkweb) + 4hr cron
 - SSH key setup pending
 
-### Jetson Orin — CONNECTED ✅
+### Jetson Orin — REFRESHING 🔄
 - Netbird: 100.87.171.38 | User: oc | Password: Q1+?typ
 - OS: Ubuntu 22.04 | Target: satellite imagery CV
-- Status: Connected to Netbird mesh network
+- Status: Currently undergoing clean refresh, console connected via Y2K.
 
 ## Credentials
 All secrets in `secrets/.credentials`. Key refs:
@@ -105,7 +105,7 @@ All secrets in `secrets/.credentials`. Key refs:
 1. **Complete SSH key setup** — Fix authentication for workspace sync via Netbird
 2. **Complete Lens API integration** — Test and debug Lens collector hanging issues
 3. Get Substack cookies → test auto-publisher
-4. Jetson Orin: NVMe boot, Tailscale, OpenClaw
+4. **Jetson Orin: NVMe boot, Netbird, OpenClaw** — Complete refresh and deployment
 5. Build Polymarket bot (needs wallet from Matt)
 6. Companion app: brand decision → MVP
 7. Fix energy agent email (Gmail app password)
