@@ -24,6 +24,6 @@ all:
           
     openclaw_all:
       children:
-        - openclaw_masters
-        - openclaw_osint  
-        - openclaw_ai
+        openclaw_masters: {}
+        openclaw_osint: {}
+        openclaw_ai: {}

@@ -1,0 +1,47 @@
+---
+- name: Test Deployment to Kali Y2K  
+  hosts: openclaw_osint
+  become: true
+  vars_files:
+    - ../vault.yml
+    
+  tasks:
+    - name: Test connection
+      ping:
+        
+    - name: Update package cache
+      apt:
+        update_cache: true
+        cache_valid_time: 3600
+        
+    - name: Install basic packages
+      apt:
+        name: 
+          - git
+          - curl  
+          - wget
+          - htop
+          - vim
+          - python3-pip
+        state: present
+        
+    - name: Create OpenClaw directories
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: oc
+        group: oc
+        mode: '0755'
+      loop:
+        - /opt/openclaw
+        - /etc/openclaw
+        - /var/log/openclaw
+        - /var/lib/openclaw
+        
+    - name: Check system info
+      command: uname -a
+      register: uname_result
+      
+    - name: Display system info
+      debug:
+        msg: "System: {{ uname_result.stdout }}"

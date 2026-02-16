@@ -59,6 +59,12 @@ All secrets in `secrets/.credentials`. Key refs:
 - Revenue: free/£9.99/£19.99 + virtual gifts
 - Status: needs brand decision + MVP build
 
+### Ansible Infrastructure (IaC) — Designed & Deployed
+- **Architecture**: Mac Mini (Master), Kali Y2K (OSINT), Jetson Orin (AI/CV)
+- **Components**: Inventory, group_vars, playbooks, roles, Makefile, vault.yml.template
+- **Best Practices**: GitOps, encrypted secrets, role-based config
+- **Git Integration**: Committed and pushed to `alphaenrg-content.git`
+
 ### Polymarket Bot — Scoped
 - Cross-ref AlphaEnergy signals with Polymarket odds
 - Needs Polygon wallet + USDC from Matt
