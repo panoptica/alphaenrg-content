@@ -36,9 +36,14 @@ All secrets in `secrets/.credentials`. Key refs:
 
 ### Energy Agent — MVP Running
 - Code: `energy-agent/` | Spec: `specs/energy-intelligence-agent-spec.md`
-- Daily 7am digest to oc@cloudmonkey.io
-- Collectors: ArXiv ✅, SEC ✅, USPTO ⚠️ (fixed Feb 13 - company-based search only), Lens ⚠️ (needs testing)
-- Email may be broken (Gmail app password issue Feb 9)
+- Daily 7am digest to oc@cloudmonkey.io (✅ Feb 15)
+- Collectors: ArXiv ✅, SEC ✅, USPTO ✅ (company-based search), Lens ⚠️ (still failing 401 errors Feb 15)
+- Email sending ✅ (digest sent Feb 15). Local Ollama connection issues (non-critical).
+
+### Daily OpenClaw Intelligence Brief — Launched
+- Automated research service initiated Feb 15
+- Market opportunity research and trend analysis
+- Delivery target: oc@cloudmonkey.io
 
 ### Crypto Scalper — BINNED 2026-02-12
 - Project cancelled (going nowhere). Process stopped and disabled on Mac Mini.
@@ -93,13 +98,15 @@ All secrets in `secrets/.credentials`. Key refs:
 - ALWAYS grep .env files + secrets/.credentials before claiming something is missing — Matt has given creds multiple times
 - Use X API (bearer token), don't scrape x.com
 - **CRITICAL: Service reliability is core competency** — Working solutions must not rot (Feb 13, 2026)
-- **State maintenance failure pattern** — Matt's feedback: "You simply cannot maintain state" and "It's poor and won't scale"
+- **State maintenance failure pattern** — Matt's feedback: "You simply cannot maintain state" and "It's poor and won't scale" (Root Cause: OpenClaw running on Mac Mini but believed it was on MacBook Air, attempting to SSH to itself, Feb 15, 2026)
 - OpenClaw services crash frequently on Mac Mini — investigate LaunchDaemon setup for auto-restart
 - USPTO API changed from api.patentsview.org to search.patentsview.org — only supports exact equality matches
 - **Netbird Migration Complete (Feb 15, 2026)** — Migrated entire infrastructure from broken Tailscale to reliable Netbird P2P mesh. All SSH and workspace sync now via Netbird IPs only.
 - **Final Netbird IPs**: MacBook Air 100.87.78.214, Mac Mini 100.87.48.20, Y2K 100.87.231.197, Jetson Orin 100.87.171.38
-- **Infrastructure lesson**: Replace unreliable systems entirely rather than fighting with them
+- **Infrastructure lesson**: Replace unreliable systems entirely rather than fighting with them; when infrastructure changes, ALL references must be updated immediately (Feb 15, 2026)
 - **AlphaEnergy cron job model errors** — Fixed broken "google/gemini-2.5-flash" model references in isolated session jobs
+- Direct IP addressing is more reliable than hostname resolution (Feb 15, 2026)
+- Heartbeat timestamp management requires careful epoch time calculations (Feb 15, 2026)
 
 ## Next Priorities  
 1. **Complete SSH key setup** — Fix authentication for workspace sync via Netbird
