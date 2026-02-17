@@ -125,6 +125,7 @@ All secrets in `secrets/.credentials`. Key refs:
 
 - **Mac Mini cannot SSH to its own Netbird IP (100.87.48.20) - network/firewall issue.** (Feb 17, 2026)
 - Ansible `roles_path` fixed by adding `ansible/ansible.cfg` (Feb 17, 2026), but deployment is blocked by Mac Mini's self-SSH connectivity issue.
+- **Repeated Ansible failures due to Mac Mini self-SSH issue highlight a critical infrastructure instability. (Feb 17, 2026)**
 
 ## Next Priorities  
 1. **CRITICAL: Investigate Mac Mini's self-SSH issue (100.87.48.20)** - This is a fundamental networking problem and blocks Ansible deployments.
