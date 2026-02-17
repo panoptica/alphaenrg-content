@@ -20,7 +20,7 @@
 - Netbird: 100.87.231.197 | User: oc | Password: Q1+?typ
 - OSINT collectors (Reddit/News/Darkweb) + 4hr cron
 - SSH key setup pending
-- **⚠️ PAM authentication failures detected (Feb 16)**
+- **🔴 UNREACHABLE (Feb 17)**
 
 ### Jetson Orin — REFRESHING 🔄
 - Netbird: 100.87.171.38 | User: oc | Password: Q1+?typ
@@ -126,6 +126,9 @@ All secrets in `secrets/.credentials`. Key refs:
 - **Mac Mini cannot SSH to its own Netbird IP (100.87.48.20) - network/firewall issue.** (Feb 17, 2026)
 - Ansible `roles_path` fixed by adding `ansible/ansible.cfg` (Feb 17, 2026), but deployment is blocked by Mac Mini's self-SSH connectivity issue.
 - **Repeated Ansible failures due to Mac Mini self-SSH issue highlight a critical infrastructure instability. (Feb 17, 2026)**
+- **Security Posture Compromised**: Firewall disabled and 75% of infrastructure nodes offline creates a significant security exposure. (Feb 17, 2026)
+- **Criticality of Infrastructure Connectivity**: Loss of remote nodes (MacBook Air, Kali Y2K, Jetson Orin) severely limits distributed monitoring and capabilities. (Feb 17, 2026)
+- **Self-SSH issue on Mac Mini** directly blocks automated deployments and self-management, requiring urgent resolution. (Feb 17, 2026)
 
 ## Next Priorities  
 1. **CRITICAL: Investigate Mac Mini's self-SSH issue (100.87.48.20)** - This is a fundamental networking problem and blocks Ansible deployments.
