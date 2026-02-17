@@ -123,6 +123,8 @@ All secrets in `secrets/.credentials`. Key refs:
 - Infrastructure monitoring reveals connectivity issues requiring investigation.
 - Energy intelligence pipeline resilient despite individual API failures.
 
+- **Mac Mini cannot SSH to its own Netbird IP (100.87.48.20) - network/firewall issue.** (Feb 17, 2026)
+
 ## Next Priorities  
 1. **CRITICAL: Enable Mac Mini firewall & OpenClaw sandboxing**
 2. **CRITICAL: Investigate MacBook Air (SSH refused) & Jetson Orin (connection timeout) connectivity**
