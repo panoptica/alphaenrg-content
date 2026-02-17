@@ -28,6 +28,12 @@
 - Status: Currently undergoing clean refresh, console connected via Y2K.
 - **🔴 Offline / Connection timeout (Feb 16)**
 
+### Vultr VM — Cloud Compute
+- Service Account: 31176975065-compute@developer.gserviceaccount.com
+- Key: 0556617a50194c7e6b4672e2ce908271aa328896
+- Project: gen-lang-client-0158970093
+- Status: Available for use
+
 ## Credentials
 All secrets in `secrets/.credentials`. Key refs:
 - Email: oc@cloudmonkey.io (app pass in energy-agent/.env)
