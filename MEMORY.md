@@ -124,16 +124,18 @@ All secrets in `secrets/.credentials`. Key refs:
 - Energy intelligence pipeline resilient despite individual API failures.
 
 - **Mac Mini cannot SSH to its own Netbird IP (100.87.48.20) - network/firewall issue.** (Feb 17, 2026)
+- Ansible `roles_path` fixed by adding `ansible/ansible.cfg` (Feb 17, 2026), but deployment is blocked by Mac Mini's self-SSH connectivity issue.
 
 ## Next Priorities  
-1. **CRITICAL: Enable Mac Mini firewall & OpenClaw sandboxing**
-2. **CRITICAL: Investigate MacBook Air (SSH refused) & Jetson Orin (connection timeout) connectivity**
-3. Configure authentication rate limiting for OpenClaw Gateway
-4. Schedule OpenClaw security update (npm 2026.2.15)
-5. Complete SSH key setup — Fix authentication for workspace sync via Netbird
-6. Complete Lens API integration — Test and debug Lens collector hanging issues
-7. Get Substack cookies → test auto-publisher
-8. Jetson Orin: NVMe boot, Netbird, OpenClaw — Complete refresh and deployment
-9. Build Polymarket bot (needs wallet from Matt)
-10. Companion app: brand decision → MVP
-11. Fix energy agent email (Gmail app password)
+1. **CRITICAL: Investigate Mac Mini's self-SSH issue (100.87.48.20)** - This is a fundamental networking problem and blocks Ansible deployments.
+2. **CRITICAL: Enable Mac Mini firewall & OpenClaw sandboxing** - This is a security priority, potentially related to the SSH issue.
+3. **CRITICAL: Investigate MacBook Air (SSH refused) & Jetson Orin (connection timeout) connectivity** - Other infrastructure nodes are offline.
+4. Configure authentication rate limiting for OpenClaw Gateway
+5. Schedule OpenClaw security update (npm 2026.2.15)
+6. Complete SSH key setup — Fix authentication for workspace sync via Netbird
+7. Complete Lens API integration — Test and debug Lens collector hanging issues
+8. Get Substack cookies → test auto-publisher
+9. Jetson Orin: NVMe boot, Netbird, OpenClaw — Complete refresh and deployment (Dependent on #3)
+10. Build Polymarket bot (needs wallet from Matt)
+11. Companion app: brand decision → MVP
+12. Fix energy agent email (Gmail app password)
