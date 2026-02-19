@@ -48,7 +48,7 @@ All secrets in `secrets/.credentials`. Key refs:
 - Code: `energy-agent/` | Spec: `specs/energy-intelligence-agent-spec.md`
 - Daily 7am digest to oc@cloudmonkey.io (✅ Feb 16)
 - Collectors: ArXiv ✅, SEC ✅, USPTO ✅, Lens ✅ (resolved API issues)
-- **1,435 total signals collected** (106 strong, 464 interesting, 227 new) - **Feb 18**
+- **Latest: 1,408 total signals collected** (102 strong, 464 interesting, 239 new) - **Feb 19 06:51 GMT**
 - Email sending ✅ | X posting ✅ (@AlphaENRG) | All pipelines operational
 
 ### Daily OpenClaw Intelligence Brief — Launched
