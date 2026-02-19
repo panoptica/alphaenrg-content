@@ -5,7 +5,7 @@
 ### Mac Mini M4 — PRIMARY 24/7 HUB
 - Netbird: 100.87.48.20 | User: oc | Password: Q1+?typ
 - OpenClaw Gateway :18789 | Ollama :11434 | Telegram connected
-- Primary model: google/gemini-2.5-flash (1M ctx) | Fallback: claude-sonnet | Heartbeats: llama3.1:8b
+- **Current model: anthropic/claude-sonnet-4-20250514** | Fallback: google/gemini-2.5-flash | Heartbeats: llama3.1:8b
 - Ollama binary: /usr/local/bin/ollama | OpenClaw: /opt/homebrew/bin/openclaw
 - 16GB RAM, MPS GPU, needs LaunchDaemon for auto-start
 - **CRITICAL: Firewall OFF, high exposure**
@@ -47,9 +47,9 @@ All secrets in `secrets/.credentials`. Key refs:
 ### Energy Agent — MVP Running
 - Code: `energy-agent/` | Spec: `specs/energy-intelligence-agent-spec.md`
 - Daily 7am digest to oc@cloudmonkey.io (✅ Feb 16)
-- Collectors: ArXiv ✅, SEC ✅, USPTO ✅ (company-based search), Lens ⚠️ (still failing 401 errors Feb 16)
-- 1,396 total signals collected (99 strong, 489 interesting, 99 new)
-- Email sending ✅ (digest sent Feb 16). Local Ollama connection issues (non-critical).
+- Collectors: ArXiv ✅, SEC ✅, USPTO ✅, Lens ✅ (resolved API issues)
+- **1,435 total signals collected** (106 strong, 464 interesting, 227 new) - **Feb 18**
+- Email sending ✅ | X posting ✅ (@AlphaENRG) | All pipelines operational
 
 ### Daily OpenClaw Intelligence Brief — Launched
 - Automated research service initiated Feb 16
