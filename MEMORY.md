@@ -122,6 +122,7 @@ All secrets in `secrets/.credentials`. Key refs:
 - Need to prioritize firewall configuration and sandboxing for production security.
 - Infrastructure monitoring reveals connectivity issues requiring investigation.
 - Energy intelligence pipeline resilient despite individual API failures.
+- **CRITICAL: Active brute force attack detected (Feb 19, 2026)** — Kali Y2K running Hydra against Jetson Orin for 15+ days. Infrastructure compromised, requires immediate intervention.
 
 - **Mac Mini cannot SSH to its own Netbird IP (100.87.48.20) - network/firewall issue.** (Feb 17, 2026)
 - Ansible `roles_path` fixed by adding `ansible/ansible.cfg` (Feb 17, 2026), but deployment is blocked by Mac Mini's self-SSH connectivity issue.
@@ -131,15 +132,15 @@ All secrets in `secrets/.credentials`. Key refs:
 - **Self-SSH issue on Mac Mini** directly blocks automated deployments and self-management, requiring urgent resolution. (Feb 17, 2026)
 
 ## Next Priorities  
-1. **CRITICAL: Investigate Mac Mini's self-SSH issue (100.87.48.20)** - This is a fundamental networking problem and blocks Ansible deployments.
-2. **CRITICAL: Enable Mac Mini firewall & OpenClaw sandboxing** - This is a security priority, potentially related to the SSH issue.
-3. **CRITICAL: Investigate MacBook Air (SSH refused) & Jetson Orin (connection timeout) connectivity** - Other infrastructure nodes are offline.
-4. Configure authentication rate limiting for OpenClaw Gateway
-5. Schedule OpenClaw security update (npm 2026.2.15)
-6. Complete SSH key setup — Fix authentication for workspace sync via Netbird
-7. Complete Lens API integration — Test and debug Lens collector hanging issues
-8. Get Substack cookies → test auto-publisher
-9. Jetson Orin: NVMe boot, Netbird, OpenClaw — Complete refresh and deployment (Dependent on #3)
-10. Build Polymarket bot (needs wallet from Matt)
-11. Companion app: brand decision → MVP
-12. Fix energy agent email (Gmail app password)
+1. **CRITICAL: STOP BRUTE FORCE ATTACK** - Terminate all Hydra processes on Kali Y2K immediately (Feb 19, 2026)
+2. **CRITICAL: Investigate Y2K compromise** - Determine how unauthorized attack tools were deployed
+3. **CRITICAL: Audit credentials** - Check if Jetson Orin or other systems compromised via 15-day attack
+4. **CRITICAL: Restore offline nodes** - MacBook Air (100.87.78.214) & Jetson Orin (100.87.171.38) unreachable
+5. **CRITICAL: Enable Mac Mini firewall** - Verify and configure firewall settings
+6. **CRITICAL: Investigate Mac Mini's self-SSH issue (100.87.48.20)** - This blocks Ansible deployments
+7. Configure authentication rate limiting for OpenClaw Gateway
+8. Schedule OpenClaw security update (npm 2026.2.15)
+9. Complete SSH key setup — Fix authentication for workspace sync via Netbird
+10. Complete Lens API integration — Test and debug Lens collector hanging issues
+11. Get Substack cookies → test auto-publisher
+12. Build Polymarket bot (needs wallet from Matt)
