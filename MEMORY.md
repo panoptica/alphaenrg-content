@@ -134,10 +134,10 @@ All secrets in `secrets/.credentials`. Key refs:
 
 ## Next Priorities  
 1. ✅ **COMPLETED: STOP BRUTE FORCE ATTACK** - Terminated all Hydra processes on Kali Y2K (Feb 19 18:20 GMT)
-2. **CRITICAL: Investigate Y2K compromise** - Determine how unauthorized attack tools were deployed
-3. **CRITICAL: Audit credentials** - Verify no systems compromised (attack was unsuccessful - no cracked passwords)
-4. **CRITICAL: Restore offline nodes** - MacBook Air (100.87.78.214) & Jetson Orin (100.87.171.38) unreachable
-5. **CRITICAL: Enable Mac Mini firewall** - Verify and configure firewall settings
+2. **🔴 CRITICAL: FIREWALL DISABLED DAY 2** - Mac Mini firewall remains disabled 16+ hours (detected Feb 20 09:02 GMT)
+3. **CRITICAL: Investigate Y2K compromise** - Determine how unauthorized attack tools were deployed
+4. **CRITICAL: Audit credentials** - Verify no systems compromised (attack was unsuccessful - no cracked passwords)
+5. **CRITICAL: Restore offline nodes** - MacBook Air (100.87.78.214) & Jetson Orin (100.87.171.38) unreachable
 6. **CRITICAL: Investigate Mac Mini's self-SSH issue (100.87.48.20)** - This blocks Ansible deployments
 7. Configure authentication rate limiting for OpenClaw Gateway
 8. Schedule OpenClaw security update (npm 2026.2.15)
