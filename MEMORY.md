@@ -22,17 +22,23 @@
 - SSH key setup pending
 - **🔴 UNREACHABLE (Feb 17)**
 
-### Jetson Orin — REFRESHING 🔄
-- Netbird: 100.87.171.38 | User: oc | Password: Q1+?typ
-- OS: Ubuntu 22.04 | Target: satellite imagery CV
-- Status: Currently undergoing clean refresh, console connected via Y2K.
-- **🔴 Offline / Connection timeout (Feb 16)**
+### Jetson Orin — CV/AI WORKSTATION ✅
+- Netbird: 100.87.148.174 | User: oc | Password: Q1+?typ
+- OS: Ubuntu 22.04 | Target: satellite imagery CV  
+- FQDN: orin.netbird.cloud
+- Console: TTY cable connection via Mac Mini (pins 6,8,10)
+- **Status**: Back online on mesh (Feb 22, 2026) - restored from bare metal
 
-### Vultr VM — Cloud Compute
-- Service Account: 31176975065-compute@developer.gserviceaccount.com
-- Key: 0556617a50194c7e6b4672e2ce908271aa328896
-- Project: gen-lang-client-0158970093
-- Status: Available for use
+### Vultr VM — PRIMARY CLOUD GATEWAY 🚀
+- **Public IP**: 192.248.160.207
+- **Netbird IP**: 100.87.106.214 
+- **User**: root | SSH key auth only
+- **SSH Key**: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF6R6dHzj4BRLPvJnQUJX++rlLUdmNg76eXsBRTupw7P root@vultr
+- **Purpose**: Autonomous infrastructure access gateway via SSH keys
+- **Infrastructure Path**: Session → Vultr (192.248.160.207) → SSH key auth → target systems
+- **Design**: Eliminates dependency on MacBook Air's flaky Netbird client
+- **Status**: Active on Netbird mesh (3/4 peers connected)
+- **Autonomous Operations**: Deploy Qwen, update configs, fix workspace sync permanently
 
 ## Credentials
 All secrets in `secrets/.credentials`. Key refs:
